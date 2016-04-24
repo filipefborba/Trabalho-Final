@@ -5,3 +5,72 @@ Created on Sun Apr 24 03:05:05 2016
 @author: Lucanoto
 """
 
+class Interface():
+    
+    def __init__(self):
+        
+        self.window = tk.Tk()
+        self.window.title("Caronas Insper")
+        self.window.geometry("640x800")
+        self.window.configure(background='#E10022')
+        self.window.rowconfigure(0, minsize=100, weight=1)
+        self.window.rowconfigure(1, minsize=100, weight=1)
+        self.window.rowconfigure(2, minsize=100, weight=1)
+        self.window.rowconfigure(3, minsize=200, weight=1)
+        self.window.rowconfigure(4, minsize=100, weight=1)
+        self.window.rowconfigure(5, minsize=100, weight=1)
+        self.window.rowconfigure(6, minsize=200, weight=1)
+        self.window.columnconfigure(0, minsize=20, weight=1)
+        self.window.columnconfigure(1, minsize=200, weight=1)
+        self.window.columnconfigure(2, minsize=200, weight=1)
+        self.window.columnconfigure(3, minsize=200, weight=1)
+        self.window.columnconfigure(4, minsize=20, weight=1)
+        
+        self.caronas = tk.Label(self.window)
+        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        
+        self.Logo = tk.Label(self.window)
+        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+
+        self.Login = tk.Button(self.window)
+        self.Login.grid(row=4, column=2, sticky="ew")
+        self.Login.configure(text="Login", font='Arial 24', command=self.login)
+        
+        self.Cadastro = tk.Button(self.window)
+        self.Cadastro.grid(row=5, column=2, sticky="ew")
+        self.Cadastro.configure(text="Cadastrar-se", font='Arial 24')
+
+        
+
+
+
+
+
+    
+
+    def iniciar(self):
+        self.window.mainloop()
+
+    def login(self):
+        
+        self.Usuário = tk.Label(self.window)
+        self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        self.entrada_usuário = tk.Entry(self.window)
+        self.entrada_usuário.grid(row=4, column=2, sticky="ew")
+        
+        self.Senha = tk.Label(self.window)
+        self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
+        self.Senha.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        self.entrada_senha = tk.Entry(self.window)
+        self.entrada_senha.grid(row=5, column=2, sticky="ew")
+#    def cadastro(self):
+        
+            
+Caronas_Insper = Interface()
+Caronas_Insper.iniciar()
