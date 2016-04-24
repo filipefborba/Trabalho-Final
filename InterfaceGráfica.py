@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 24 03:05:05 2016
+import tkinter as tk
 
-@author: Lucanoto
-"""
 
-class Interface():
+class Tela_inicial():
     
     def __init__(self):
         
@@ -37,40 +33,33 @@ class Interface():
 
         self.Login = tk.Button(self.window)
         self.Login.grid(row=4, column=2, sticky="ew")
-        self.Login.configure(text="Login", font='Arial 24', command=self.login)
+        self.Login.configure(text="Login", font='Arial 24')
         
         self.Cadastro = tk.Button(self.window)
         self.Cadastro.grid(row=5, column=2, sticky="ew")
         self.Cadastro.configure(text="Cadastrar-se", font='Arial 24')
 
-        
-
-
-
-
-
-    
 
     def iniciar(self):
         self.window.mainloop()
 
-    def login(self):
-        
-        self.Usuário = tk.Label(self.window)
-        self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
-        self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
-        
-        self.entrada_usuário = tk.Entry(self.window)
-        self.entrada_usuário.grid(row=4, column=2, sticky="ew")
-        
-        self.Senha = tk.Label(self.window)
-        self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
-        self.Senha.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
-        
-        self.entrada_senha = tk.Entry(self.window)
-        self.entrada_senha.grid(row=5, column=2, sticky="ew")
-#    def cadastro(self):
+class Tela_login():
+        def __init__(self):
+            self.Usuário = tk.Label(self.window)
+            self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
+            self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
+            
+            self.entrada_usuário = tk.Entry(self.window)
+            self.entrada_usuário.grid(row=4, column=2, sticky="ew")
+            
+            self.Senha = tk.Label(self.window)
+            self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
+            self.Senha.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+            
+            self.entrada_senha = tk.Entry(self.window)
+            self.entrada_senha.grid(row=5, column=2, sticky="ew")
+
         
             
-Caronas_Insper = Interface()
+Caronas_Insper = Tela_Inicial()
 Caronas_Insper.iniciar()
