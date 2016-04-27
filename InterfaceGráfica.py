@@ -15,7 +15,8 @@ class Tela_inicial():
         self.window.rowconfigure(3, minsize=200, weight=1)
         self.window.rowconfigure(4, minsize=100, weight=1)
         self.window.rowconfigure(5, minsize=100, weight=1)
-        self.window.rowconfigure(6, minsize=200, weight=1)
+        self.window.rowconfigure(6, minsize=50, weight=1)
+        self.window.rowconfigure(7, minsize=50, weight=1)
         self.window.columnconfigure(0, minsize=20, weight=1)
         self.window.columnconfigure(1, minsize=200, weight=1)
         self.window.columnconfigure(2, minsize=200, weight=1)
@@ -34,17 +35,18 @@ class Tela_inicial():
         self.Login = tk.Button(self.window)
         self.Login.grid(row=4, column=2, sticky="ew")
         self.Login.configure(text="Login", font='Arial 24')
+        self.Login.bind('<1>',self.Tela_login)
         
         self.Cadastro = tk.Button(self.window)
         self.Cadastro.grid(row=5, column=2, sticky="ew")
         self.Cadastro.configure(text="Cadastrar-se", font='Arial 24')
-        self.Cadastro.bind('<1>',self.clicou_cadastro)
+        self.Cadastro.bind('<1>',self.Tela_cadastro)
 
 
-    def iniciar(self):
-        self.window.mainloop()
+   
+    
 
-    def Tela_login(self):
+    def Tela_login(self, event):
         self.Usuário = tk.Label(self.window)
         self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
         self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
@@ -59,17 +61,23 @@ class Tela_inicial():
         self.entrada_senha = tk.Entry(self.window)
         self.entrada_senha.grid(row=5, column=2, sticky="ew")
         
-    def clicou_cadastro(self,event):
-        self.Tela_cadastro()
     
-    def Tela_cadastro(self):
+    def Tela_cadastro(self, event):
         #Cada pessoa deve ser uma chave de um dicionário
         #Por isso criar dicionário no começo dessa função
         #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         self.dic_pessoas = {}
         
+        self.Usuário = tk.Label(self.window)
+        self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
         self.nome_de_usuario = tk.Entry(self.window)
         self.nome_de_usuario.grid(row=4, column=2, sticky="ew")
+        
+        self.Senha = tk.Label(self.window)
+        self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
+        self.Senha.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         self.nova_senha = tk.Entry(self.window)
         self.nova_senha.grid(row=5, column=2, sticky="ew")
@@ -77,7 +85,7 @@ class Tela_inicial():
         self.dic_pessoas[self.nome_de_usuario]=self.nova_senha
         
         self.salvar_novo_cadastro = tk.Button(self.window)
-        self.salvar_novo_cadastro.grid(row=4, column=1,columnspan=1, sticky="ew")
+        self.salvar_novo_cadastro.grid(row=6, column=3,columnspan=1)
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
         
@@ -90,6 +98,9 @@ class Tela_inicial():
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
         self.novo_arquivo.close() #Fechando o arquivo
         self.Tela_login()
+        
+    def iniciar(self):
+        self.window.mainloop()
 
         
             
