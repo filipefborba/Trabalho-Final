@@ -43,23 +43,32 @@ class Tela_inicial():
     def iniciar(self):
         self.window.mainloop()
 
-class Tela_login():
-        def __init__(self):
-            self.Usuário = tk.Label(self.window)
-            self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
-            self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
-            
-            self.entrada_usuário = tk.Entry(self.window)
-            self.entrada_usuário.grid(row=4, column=2, sticky="ew")
-            
-            self.Senha = tk.Label(self.window)
-            self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
-            self.Senha.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
-            
-            self.entrada_senha = tk.Entry(self.window)
-            self.entrada_senha.grid(row=5, column=2, sticky="ew")
+    def Tela_login(self):
+        self.Usuário = tk.Label(self.window)
+        self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        self.entrada_usuário = tk.Entry(self.window)
+        self.entrada_usuário.grid(row=4, column=2, sticky="ew")
+        
+        self.Senha = tk.Label(self.window)
+        self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
+        self.Senha.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        self.entrada_senha = tk.Entry(self.window)
+        self.entrada_senha.grid(row=5, column=2, sticky="ew")
+        
+    def Tela_cadastro(self):
+        #Cada pessoa deve ser uma chave de um dicionário
+        #Por isso criar dicionário no começo dessa função
+        #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
+        self.dic_pessoas = {}
+        self.escrita('Qualquer coisa') #Novo login que será adicionado
+        self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde o arquivo será salvo
+        self.novo_arquivo.write() #Escrevendo o login
+        self.novo_arquivo.close() #Fechando o arquivo
 
         
             
-Caronas_Insper = Tela_Inicial()
+Caronas_Insper = Tela_inicial()
 Caronas_Insper.iniciar()
