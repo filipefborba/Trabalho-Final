@@ -88,11 +88,7 @@ class Tela_inicial():
         self.salvar_novo_cadastro.grid(row=6, column=3,columnspan=1)
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
-        
-#        self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
-#        self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
-#        self.novo_arquivo.close() #Fechando o arquivo
-        
+                
     def clicou_salvar(self,event):
         self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
