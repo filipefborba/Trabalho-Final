@@ -85,10 +85,11 @@ class Tela_inicial():
 #        self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
 #        self.novo_arquivo.close() #Fechando o arquivo
         
-    def clicou_salvar(self):
+    def clicou_salvar(self,event):
         self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
         self.novo_arquivo.close() #Fechando o arquivo
+        self.Tela_login()
 
         
             
