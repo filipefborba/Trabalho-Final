@@ -42,7 +42,6 @@ class Tela_inicial():
         self.Cadastro.configure(text="Cadastrar-se", font='Arial 24')
         self.Cadastro.bind('<1>',self.clicou_cadasto)
 
-
    
     def clicou_cadasto(self,event):
         self.Tela_cadastro()
@@ -111,7 +110,7 @@ class Tela_inicial():
         self.Tela_login()
 
     def clicou_continuar_tela_principal(self,event):
-        self.Tela_principal()
+        self.Tela_principal()        
         
     def clicou_voltar_tela_inicial(self,event):
         self.__init__()
