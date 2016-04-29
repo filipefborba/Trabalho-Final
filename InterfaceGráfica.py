@@ -14,14 +14,17 @@ class Telas():
         self.window.title("Caronas Insper")
         self.window.geometry("640x800")
         self.window.configure(background='#E10022')
-        self.window.rowconfigure(0, minsize=100, weight=1)
-        self.window.rowconfigure(1, minsize=100, weight=1)
+
+        self.window.rowconfigure(0, minsize=50, weight=1)
+        self.window.rowconfigure(1, minsize=50, weight=1)
         self.window.rowconfigure(2, minsize=100, weight=1)
         self.window.rowconfigure(3, minsize=100, weight=1)
         self.window.rowconfigure(4, minsize=100, weight=1)
         self.window.rowconfigure(5, minsize=100, weight=1)
         self.window.rowconfigure(6, minsize=100, weight=1)
         self.window.rowconfigure(7, minsize=100, weight=1)
+        self.window.rowconfigure(8, minsize=100, weight=1)
+
         self.window.columnconfigure(0, minsize=20, weight=1)
         self.window.columnconfigure(1, minsize=200, weight=1)
         self.window.columnconfigure(2, minsize=200, weight=1)
@@ -35,12 +38,12 @@ class Telas():
 ####   Telas:
     def  tela_inicial(self):
         self.caronas = tk.Label(self.window)
-        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
-        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        self.caronas.grid(row=0, column=1,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 50', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.window)
-        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
-        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        self.Logo.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 50', bg='#E10022', fg='White')
 
         self.Login = tk.Button(self.window)
         self.Login.grid(row=4, column=2, sticky="ew")
@@ -94,26 +97,26 @@ class Telas():
 
         #Nome Completo
         self.nomeentrada = tk.Entry(self.window)
-        self.nomeentrada.grid(row=5, column=2, sticky="ew")
+        self.nomeentrada.grid(row=2, column=2, sticky="ew")
         
         self.nomelabel = tk.Label(self.window)
-        self.nomelabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.nomelabel.grid(row=2, column=1,columnspan=2, sticky="nsew")
         self.nomelabel.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #E-mail
         self.emailentrada = tk.Entry(self.window)
-        self.emailentrada.grid(row=5, column=2, sticky="ew")
+        self.emailentrada.grid(row=3, column=2, sticky="ew")
         
         self.emaillabel = tk.Label(self.window)
-        self.emailabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
-        self.emailabel.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.emaillabel.grid(row=3, column=1,columnspan=2, sticky="nsew")
+        self.emaillabel.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
         self.celularentrada = tk.Entry(self.window)
-        self.celularentrada.grid(row=5, column=2, sticky="ew")
+        self.celularentrada.grid(row=4, column=2, sticky="ew")
         
         self.celularlabel = tk.Label(self.window)
-        self.celularlabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.celularlabel.grid(row=4, column=1,columnspan=2, sticky="nsew")
         self.celularlabel.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
 
 
@@ -122,28 +125,28 @@ class Telas():
         self.usuarioentrada.grid(row=5, column=2, sticky="ew")
         
         self.usuariolabel = tk.Label(self.window)
-        self.usuariolabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.usuariolabel.grid(row=5, column=1,columnspan=2, sticky="nsew")
         self.usuariolabel.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Senha
         self.senhaentrada = tk.Entry(self.window)
-        self.senhaentrada.grid(row=5, column=2, sticky="ew")
+        self.senhaentrada.grid(row=6, column=2, sticky="ew")
         
         self.senhalabel = tk.Label(self.window)
-        self.senhalabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.senhalabel.grid(row=6, column=1,columnspan=2, sticky="nsew")
         self.senhalabel.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Confirmar Senha
         self.senhaconfirmaentrada = tk.Entry(self.window)
-        self.senhaconfirmaentrada.grid(row=5, column=2, sticky="ew")
+        self.senhaconfirmaentrada.grid(row=7, column=2, sticky="ew")
         
         self.senhaconfirmalabel = tk.Label(self.window)
-        self.senhaconfirmalabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.senhaconfirmalabel.grid(row=7, column=1,columnspan=2, sticky="nsew")
         self.senhaconfirmalabel.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Nota sobre o celular
         self.notalabel = tk.Label(self.window)
-        self.nota.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.nota.grid(row=8, column=1,columnspan=2, sticky="nsew")
         self.nota.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
 
 ##########################################################################        
