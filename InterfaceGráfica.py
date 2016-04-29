@@ -97,58 +97,58 @@ class Telas():
 ##########################################################################
 
         #Nome Completo
-        self.nomeentrada = tk.Entry(self.window)
-        self.nomeentrada.grid(row=2, column=2, sticky="ew")
+        self.nome_entrada = tk.Entry(self.window)
+        self.nome_entrada.grid(row=2, column=2, sticky="ew")
         
-        self.nomelabel = tk.Label(self.window)
-        self.nomelabel.grid(row=2, column=1,columnspan=1, sticky="nsew")
-        self.nomelabel.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.nome_label = tk.Label(self.window)
+        self.nome_label.grid(row=2, column=1,columnspan=1, sticky="nsew")
+        self.nome_label.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #E-mail
-        self.emailentrada = tk.Entry(self.window)
-        self.emailentrada.grid(row=3, column=2, sticky="ew")
+        self.email_entrada = tk.Entry(self.window)
+        self.email_entrada.grid(row=3, column=2, sticky="ew")
         
-        self.emaillabel = tk.Label(self.window)
-        self.emaillabel.grid(row=3, column=1,columnspan=1, sticky="nsew")
-        self.emaillabel.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.email_label = tk.Label(self.window)
+        self.email_label.grid(row=3, column=1,columnspan=1, sticky="nsew")
+        self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
-        self.celularentrada = tk.Entry(self.window)
-        self.celularentrada.grid(row=4, column=2, sticky="ew")
+        self.celular_entrada = tk.Entry(self.window)
+        self.celular_entrada.grid(row=4, column=2, sticky="ew")
         
-        self.celularlabel = tk.Label(self.window)
-        self.celularlabel.grid(row=4, column=1,columnspan=1, sticky="nsew")
-        self.celularlabel.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.celular_label = tk.Label(self.window)
+        self.celular_label.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.celular_label.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
 
 
         #Usuário
-        self.usuarioentrada = tk.Entry(self.window)
-        self.usuarioentrada.grid(row=5, column=2, sticky="ew")
+        self.usuario_entrada = tk.Entry(self.window)
+        self.usuario_entrada.grid(row=5, column=2, sticky="ew")
         
-        self.usuariolabel = tk.Label(self.window)
-        self.usuariolabel.grid(row=5, column=1,columnspan=1, sticky="nsew")
-        self.usuariolabel.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.usuario_label = tk.Label(self.window)
+        self.usuario_label.grid(row=5, column=1,columnspan=1, sticky="nsew")
+        self.usuario_label.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Senha
-        self.senhaentrada = tk.Entry(self.window)
-        self.senhaentrada.grid(row=6, column=2, sticky="ew")
+        self.senha_entrada = tk.Entry(self.window)
+        self.senha_entrada.grid(row=6, column=2, sticky="ew")
         
-        self.senhalabel = tk.Label(self.window)
-        self.senhalabel.grid(row=6, column=1,columnspan=1, sticky="nsew")
-        self.senhalabel.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.senha_label = tk.Label(self.window)
+        self.senha_label.grid(row=6, column=1,columnspan=1, sticky="nsew")
+        self.senha_label.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Confirmar Senha
-        self.senhaconfirmaentrada = tk.Entry(self.window)
-        self.senhaconfirmaentrada.grid(row=7, column=2, sticky="ew")
+        self.senha_confirma_entrada = tk.Entry(self.window)
+        self.senha_confirma_entrada.grid(row=7, column=2, sticky="ew")
         
-        self.senhaconfirmalabel = tk.Label(self.window)
-        self.senhaconfirmalabel.grid(row=7, column=1,columnspan=1, sticky="nsew")
-        self.senhaconfirmalabel.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.senha_confirma_label = tk.Label(self.window)
+        self.senha_confirma_label.grid(row=7, column=1,columnspan=1, sticky="nsew")
+        self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Nota sobre o celular
-        self.notalabel = tk.Label(self.window)
-        self.notalabel.grid(row=8, column=1,columnspan=3, sticky="nsew")
-        self.notalabel.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
+        self.nota_label = tk.Label(self.window)
+        self.nota_label.grid(row=8, column=1,columnspan=3, sticky="nsew")
+        self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
 
 ##########################################################################        
 #Fim da entrada de dados do cadastro
@@ -235,6 +235,8 @@ class Telas():
         self.voltar_pagina_principal.configure(text='Voltar')
         self.voltar_pagina_principal.grid(row=6, column=1,columnspan=1)
         self.voltar_pagina_principal.bind('<1>',self.clicou_voltar)
+
+#########
         
     def Tela_oferecer_carona(self):
         self.caronas = tk.Label(self.window)
@@ -299,7 +301,7 @@ class Telas():
         #Senha no índice 1 da lista
         #Celular no índice 2 da lista
         #E-mail no índice 3 da lista
-        self.dic_pessoas[self.usuarioentrada.get()]=[self.nomeentrada.get(),self.senhaentrada.get(), self.celularentrada.get(), self.emailentrada.get()]
+        self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
         self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
         self.novo_arquivo.close() #Fechando o arquivo
@@ -320,12 +322,6 @@ class Telas():
     def clicou_alterar(self,event):
 #        self.perfil()
         pass
-
-        
-
-#####
- #   def tela_principal(self):
-        
     
 ########## iniciando o programa
     def iniciar(self):
