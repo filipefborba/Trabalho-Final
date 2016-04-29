@@ -122,6 +122,7 @@ class Telas():
         self.novo_arquivo.close() #Fechando o arquivo
         self.Tela_login()
 
+
 ####################
 
     def tela_principal(self):
@@ -163,11 +164,17 @@ class Telas():
 #        self.perfil()
 
 
-###################
+#####
+ #   def tela_principal(self):
+        
+        
+
+    def clicou_continuar_tela_principal(self,event):
+        self.tela_principal()        
+        
+    def clicou_voltar_tela_inicial(self,event):
+        self.tela_inicial()
+    
+
     def iniciar(self):
         self.window.mainloop()
-
-        
-            
-Caronas_Insper = Telas()
-Caronas_Insper.iniciar()
