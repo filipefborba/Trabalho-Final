@@ -105,8 +105,8 @@ class Telas():
         self.emailentrada.grid(row=5, column=2, sticky="ew")
         
         self.emaillabel = tk.Label(self.window)
-        self.emailabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
-        self.emailabel.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.emaillabel.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.emaillabel.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
         self.celularentrada = tk.Entry(self.window)
