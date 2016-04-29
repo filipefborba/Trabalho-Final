@@ -25,7 +25,7 @@ class Telas():
         self.tela_inicial() 
         
         
-####   
+####   Telas:
     def  tela_inicial(self):
         self.caronas = tk.Label(self.window)
         self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
@@ -46,11 +46,7 @@ class Telas():
         self.Cadastro.bind('<1>',self.clicou_cadastro)
 
    
-    def clicou_cadastro(self,event):
-        self.Tela_cadastro()
         
-    def clicou_login(self,event):
-        self.Tela_login()
 #######
 
 
@@ -79,11 +75,7 @@ class Telas():
         self.voltar_tela_inicial.configure(text='Voltar')
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar_tela_inicial)
     
-    def clicou_continuar_tela_principal(self,event):
-        self.tela_principal()        
         
-    def clicou_voltar_tela_inicial(self,event):
-        self.tela_inicial()
 ############# 
  
     
@@ -116,15 +108,6 @@ class Telas():
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
                 
-    def clicou_salvar(self,event):
-        self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
-        self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
-        self.novo_arquivo.close() #Fechando o arquivo
-        self.Tela_login()
-
-
-####################
-
     def tela_principal(self):
         
         self.caronas = tk.Label(self.window)
@@ -154,6 +137,31 @@ class Telas():
         self.alterar_perfil.configure(text= "Alterar meu Perfil ",font='Bodoni 14')
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
 
+
+####################     Função dos botões
+
+    def clicou_cadastro(self,event):
+        self.Tela_cadastro()
+        
+        
+    def clicou_login(self,event):
+        self.Tela_login()
+
+    def clicou_continuar_tela_principal(self,event):
+        self.tela_principal()        
+        
+    def clicou_voltar_tela_inicial(self,event):
+        self.tela_inicial()
+        
+    def clicou_salvar(self,event):
+        self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
+        self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
+        self.novo_arquivo.close() #Fechando o arquivo
+        self.Tela_login()
+        
+
+
+
 #    def clicou_pedir(self,event):
 #        self.pedir()
 
@@ -167,14 +175,10 @@ class Telas():
 #####
  #   def tela_principal(self):
         
-        
-
-    def clicou_continuar_tela_principal(self,event):
-        self.tela_principal()        
-        
-    def clicou_voltar_tela_inicial(self,event):
-        self.tela_inicial()
     
-
+########## iniciando o programa
     def iniciar(self):
         self.window.mainloop()
+
+Caronas = Telas()
+Caronas.iniciar()
