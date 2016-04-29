@@ -4,10 +4,12 @@ import tkinter as tk
 class Telas():
     
     def __init__(self):
-        
+        #Cada pessoa deve ser uma chave de um dicionário
+        #Por isso criar dicionário no começo dessa função
+        #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         self.dic_pessoas = {}
 
-        
+        #Gerando a janela
         self.window = tk.Tk()
         self.window.title("Caronas Insper")
         self.window.geometry("640x800")
@@ -85,9 +87,6 @@ class Telas():
  
     
     def Tela_cadastro(self):
-        #Cada pessoa deve ser uma chave de um dicionário
-        #Por isso criar dicionário no começo dessa função
-        #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         
         self.Usuário = tk.Label(self.window)
         self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
@@ -155,9 +154,8 @@ class Telas():
         self.tela_inicial()
         
     def clicou_salvar(self,event):
-        
-        
-        self.dic_pessoas[self.nome_de_usuario.get()]=self.nova_senha.get()
+        #Senha no índice zero do dicionário
+        self.dic_pessoas[self.nome_de_usuario.get()]=[self.nova_senha.get()]
         self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
         self.novo_arquivo.close() #Fechando o arquivo
