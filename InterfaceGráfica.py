@@ -1,7 +1,7 @@
 import tkinter as tk
 
 
-class Tela_inicial():
+class Telas():
     
     def __init__(self):
         
@@ -22,11 +22,14 @@ class Tela_inicial():
         self.window.columnconfigure(2, minsize=200, weight=1)
         self.window.columnconfigure(3, minsize=200, weight=1)
         self.window.columnconfigure(4, minsize=20, weight=1)
+        self.tela_inicial() 
         
+        
+####   
+    def  tela_inicial(self):
         self.caronas = tk.Label(self.window)
         self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
         self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
-        
         
         self.Logo = tk.Label(self.window)
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
@@ -40,14 +43,16 @@ class Tela_inicial():
         self.Cadastro = tk.Button(self.window)
         self.Cadastro.grid(row=5, column=2, sticky="ew")
         self.Cadastro.configure(text="Cadastrar-se", font='Arial 24')
-        self.Cadastro.bind('<1>',self.clicou_cadasto)
+        self.Cadastro.bind('<1>',self.clicou_cadastro)
 
    
-    def clicou_cadasto(self,event):
+    def clicou_cadastro(self,event):
         self.Tela_cadastro()
         
     def clicou_login(self,event):
         self.Tela_login()
+#######
+
 
     def Tela_login(self):
         self.Usuário = tk.Label(self.window)
@@ -109,16 +114,20 @@ class Tela_inicial():
         self.novo_arquivo.close() #Fechando o arquivo
         self.Tela_login()
 
+ #   def tela_principal(self):
+        
+        
+
     def clicou_continuar_tela_principal(self,event):
-        self.Tela_principal()        
+        self.tela_principal()        
         
     def clicou_voltar_tela_inicial(self,event):
-        self.__init__()
+        self.tela_inicial()
     
     def iniciar(self):
         self.window.mainloop()
 
         
             
-Caronas_Insper = Tela_inicial()
+Caronas_Insper = Telas()
 Caronas_Insper.iniciar()
