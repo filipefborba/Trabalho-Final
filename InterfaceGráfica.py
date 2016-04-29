@@ -141,7 +141,7 @@ class Telas():
 ####################     Função dos botões
 
     def clicou_cadastro(self,event):
-        self.Tela_cadastro()
+        self.Tela_cadastro() 
         
         
     def clicou_login(self,event):
@@ -170,7 +170,7 @@ class Telas():
 
 #    def clicou_alterar(self,event):
 #        self.perfil()
-
+        
 
 #####
  #   def tela_principal(self):
