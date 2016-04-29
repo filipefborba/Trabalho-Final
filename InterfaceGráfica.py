@@ -1,7 +1,7 @@
 import tkinter as tk
 
 
-class Tela_inicial():
+class Telas():
     
     def __init__(self):
         
@@ -22,11 +22,14 @@ class Tela_inicial():
         self.window.columnconfigure(2, minsize=200, weight=1)
         self.window.columnconfigure(3, minsize=200, weight=1)
         self.window.columnconfigure(4, minsize=20, weight=1)
+        self.tela_inicial() 
         
+        
+####   
+    def  tela_inicial(self):
         self.caronas = tk.Label(self.window)
         self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
         self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
-        
         
         self.Logo = tk.Label(self.window)
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
@@ -40,14 +43,16 @@ class Tela_inicial():
         self.Cadastro = tk.Button(self.window)
         self.Cadastro.grid(row=5, column=2, sticky="ew")
         self.Cadastro.configure(text="Cadastrar-se", font='Arial 24')
-        self.Cadastro.bind('<1>',self.clicou_cadasto)
+        self.Cadastro.bind('<1>',self.clicou_cadastro)
 
    
-    def clicou_cadasto(self,event):
+    def clicou_cadastro(self,event):
         self.Tela_cadastro()
         
     def clicou_login(self,event):
         self.Tela_login()
+#######
+
 
     def Tela_login(self):
         self.Usuário = tk.Label(self.window)
@@ -73,6 +78,14 @@ class Tela_inicial():
         self.voltar_tela_inicial.grid(row=6, column=1,columnspan=1)
         self.voltar_tela_inicial.configure(text='Voltar')
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar_tela_inicial)
+    
+    def clicou_continuar_tela_principal(self,event):
+        self.tela_principal()        
+        
+    def clicou_voltar_tela_inicial(self,event):
+        self.tela_inicial()
+############# 
+ 
     
     def Tela_cadastro(self):
         #Cada pessoa deve ser uma chave de um dicionário
@@ -109,16 +122,52 @@ class Tela_inicial():
         self.novo_arquivo.close() #Fechando o arquivo
         self.Tela_login()
 
-    def clicou_continuar_tela_principal(self,event):
-        self.Tela_principal()        
+####################
+
+    def tela_principal(self):
         
-    def clicou_voltar_tela_inicial(self,event):
-        self.__init__()
-    
+        self.caronas = tk.Label(self.window)
+        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        self.Logo = tk.Label(self.window)
+        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        self.label = tk.Label(self.window)
+        self.label.grid(row=3, column=1,columnspan=3, sticky="nsew")
+        self.label.configure(text= "O que deseja fazer? ",font='Bodoni 14', bg='#E10022', fg='White')
+        
+        self.pedir_carona = tk.Button(self.window)
+        self.pedir_carona.grid(row=4, column=1,columnspan=3, sticky="nsew")
+        self.pedir_carona.configure(text= "Pedir Carona ",font='Bodoni 14')
+        self.pedir_carona.bind('<1>',self.clicou_pedir)
+        
+        self.oferecer_carona = tk.Button(self.window)
+        self.oferecer_carona.grid(row=5, column=1,columnspan=3, sticky="nsew")
+        self.oferecer_carona.configure(text= "Oferecer Carona ",font='Bodoni 14')
+        self.oferecer_carona.bind('<1>',self.clicou_oferecer)
+        
+        self.alterar_perfil = tk.Button(self.window)
+        self.alterar_perfil.grid(row=5, column=1,columnspan=3, sticky="nsew")
+        self.alterar_perfil.configure(text= "Alterar meu Perfil ",font='Bodoni 14')
+        self.alterar_perfil.bind('<1>',self.clicou_alterar)
+
+#    def clicou_pedir(self,event):
+#        self.pedir()
+
+#    def clicou_oferecer(self,event):
+#        self.oferecer()
+
+#    def clicou_alterar(self,event):
+#        self.perfil()
+
+
+###################
     def iniciar(self):
         self.window.mainloop()
 
         
             
-Caronas_Insper = Tela_inicial()
+Caronas_Insper = Telas()
 Caronas_Insper.iniciar()
