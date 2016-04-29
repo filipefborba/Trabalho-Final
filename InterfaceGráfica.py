@@ -5,6 +5,9 @@ class Telas():
     
     def __init__(self):
         
+        self.dic_pessoas = {}
+
+        
         self.window = tk.Tk()
         self.window.title("Caronas Insper")
         self.window.geometry("640x800")
@@ -23,6 +26,8 @@ class Telas():
         self.window.columnconfigure(3, minsize=200, weight=1)
         self.window.columnconfigure(4, minsize=20, weight=1)
         self.tela_inicial() 
+        
+
         
         
 ####   Telas:
@@ -83,7 +88,6 @@ class Telas():
         #Cada pessoa deve ser uma chave de um dicionário
         #Por isso criar dicionário no começo dessa função
         #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
-        self.dic_pessoas = {}
         
         self.Usuário = tk.Label(self.window)
         self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
@@ -99,9 +103,6 @@ class Telas():
         self.nova_senha = tk.Entry(self.window)
         self.nova_senha.grid(row=5, column=2, sticky="ew")
 
-
-        self.dic_pessoas[self.nome_de_usuario]=self.nova_senha
-        
         
         self.salvar_novo_cadastro = tk.Button(self.window)
         self.salvar_novo_cadastro.grid(row=6, column=3,columnspan=1)
@@ -154,6 +155,9 @@ class Telas():
         self.tela_inicial()
         
     def clicou_salvar(self,event):
+        
+        
+        self.dic_pessoas[self.nome_de_usuario.get()]=self.nova_senha.get()
         self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
         self.novo_arquivo.close() #Fechando o arquivo
