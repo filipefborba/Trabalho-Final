@@ -4,7 +4,12 @@ import tkinter as tk
 class Telas():
     
     def __init__(self):
-        
+        #Cada pessoa deve ser uma chave de um dicionário
+        #Por isso criar dicionário no começo dessa função
+        #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
+        self.dic_pessoas = {}
+
+        #Gerando a janela
         self.window = tk.Tk()
         self.window.title("Caronas Insper")
         self.window.geometry("640x800")
@@ -12,17 +17,19 @@ class Telas():
         self.window.rowconfigure(0, minsize=100, weight=1)
         self.window.rowconfigure(1, minsize=100, weight=1)
         self.window.rowconfigure(2, minsize=100, weight=1)
-        self.window.rowconfigure(3, minsize=200, weight=1)
+        self.window.rowconfigure(3, minsize=100, weight=1)
         self.window.rowconfigure(4, minsize=100, weight=1)
         self.window.rowconfigure(5, minsize=100, weight=1)
-        self.window.rowconfigure(6, minsize=50, weight=1)
-        self.window.rowconfigure(7, minsize=50, weight=1)
+        self.window.rowconfigure(6, minsize=100, weight=1)
+        self.window.rowconfigure(7, minsize=100, weight=1)
         self.window.columnconfigure(0, minsize=20, weight=1)
         self.window.columnconfigure(1, minsize=200, weight=1)
         self.window.columnconfigure(2, minsize=200, weight=1)
         self.window.columnconfigure(3, minsize=200, weight=1)
         self.window.columnconfigure(4, minsize=20, weight=1)
         self.tela_inicial() 
+        
+
         
         
 ####   Telas:
@@ -80,10 +87,6 @@ class Telas():
  
     
     def Tela_cadastro(self):
-        #Cada pessoa deve ser uma chave de um dicionário
-        #Por isso criar dicionário no começo dessa função
-        #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
-        self.dic_pessoas = {}
         
         self.Usuário = tk.Label(self.window)
         self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
@@ -99,15 +102,14 @@ class Telas():
         self.nova_senha = tk.Entry(self.window)
         self.nova_senha.grid(row=5, column=2, sticky="ew")
 
-
-        self.dic_pessoas[self.nome_de_usuario]=self.nova_senha
-        
         
         self.salvar_novo_cadastro = tk.Button(self.window)
         self.salvar_novo_cadastro.grid(row=6, column=3,columnspan=1)
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
-                
+               
+#########
+               
     def tela_principal(self):
         
         self.caronas = tk.Label(self.window)
@@ -133,10 +135,91 @@ class Telas():
         self.oferecer_carona.bind('<1>',self.clicou_oferecer)
         
         self.alterar_perfil = tk.Button(self.window)
-        self.alterar_perfil.grid(row=5, column=1,columnspan=3, sticky="nsew")
+        self.alterar_perfil.grid(row=6, column=1,columnspan=3, sticky="nsew")
         self.alterar_perfil.configure(text= "Alterar meu Perfil ",font='Bodoni 14')
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
 
+    def Tela_pedir_carona(self):
+        self.caronas = tk.Label(self.window)
+        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        self.Logo = tk.Label(self.window)
+        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        #Espaço para o usuário escrever a saída
+        self.bairro_de_saida = tk.Entry(self.window)
+        self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
+        self.bairro_de_saida.bind('<Return>',self.clicou_confirmar)
+        
+        self.saida = tk.Label(self.window)
+        self.saida.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        #Espaço para o usuário escrever o destino
+        self.bairro_de_chegada = tk.Entry(self.window)
+        self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
+        self.bairro_de_chegada.bind('<Return>',self.clicou_confirmar)
+        
+        self.chegada = tk.Label(self.window)
+        self.chegada.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.chegada.configure(text= "Local de chegada: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        #Botão que confirma a ação do usuário
+        self.confirmar = tk.Button(self.window)
+        self.confirmar.configure(text='Confirmar')
+        self.confirmar.grid(row=6, column=3,columnspan=1)
+        self.confirmar.bind('<1>',self.clicou_confirmar)
+        self.confirmar.bind('<Return>',self.clicou_confirmar)
+        
+        #Botão que leva o usuário a página anterior
+        self.voltar_pagina_principal = tk.Button(self.window)
+        self.voltar_pagina_principal.configure(text='Voltar')
+        self.voltar_pagina_principal.grid(row=6, column=1,columnspan=1)
+        self.voltar_pagina_principal.bind('<1>',self.clicou_voltar)
+        
+    def Tela_oferecer_carona(self):
+        self.caronas = tk.Label(self.window)
+        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        self.Logo = tk.Label(self.window)
+        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        #Espaço para o usuário escrever a saída
+        self.bairro_de_saida = tk.Entry(self.window)
+        self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
+        self.bairro_de_saida.bind('<Return>',self.clicou_confirmar)
+        
+        self.saida = tk.Label(self.window)
+        self.saida.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        #Espaço para o usuário escrever o destino
+        self.bairro_de_chegada = tk.Entry(self.window)
+        self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
+        self.bairro_de_chegada.bind('<Return>',self.clicou_confirmar)
+        
+        self.chegada = tk.Label(self.window)
+        self.chegada.grid(row=5, column=0,columnspan=2, sticky="nsew")
+        self.chegada.configure(text= "Local de chegada: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        #Botão que confirma a ação do usuário
+        self.confirmar = tk.Button(self.window)
+        self.confirmar.configure(text='Confirmar')
+        self.confirmar.grid(row=6, column=3,columnspan=1)
+        self.confirmar.bind('<1>',self.clicou_confirmar)
+        self.confirmar.bind('<Return>',self.clicou_confirmar)
+        
+        #Botão que leva o usuário a página anterior
+        self.voltar_pagina_principal = tk.Button(self.window)
+        self.voltar_pagina_principal.configure(text='Voltar')
+        self.voltar_pagina_principal.grid(row=6, column=1,columnspan=1)
+        self.voltar_pagina_principal.bind('<1>',self.clicou_voltar)
+
+        
 
 ####################     Função dos botões
 
@@ -154,21 +237,27 @@ class Telas():
         self.tela_inicial()
         
     def clicou_salvar(self,event):
+        #Senha no índice zero do dicionário
+        self.dic_pessoas[self.nome_de_usuario.get()]=[self.nova_senha.get()]
         self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
         self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
         self.novo_arquivo.close() #Fechando o arquivo
         self.Tela_login()
         
+    def clicou_pedir(self,event):
+        self.Tela_pedir_carona()
+                
+    def clicou_voltar(self,event):
+        self.tela_principal()
+        
+    def clicou_confirmar(self,event):
+        pass
 
+    def clicou_oferecer(self,event):
+        self.Tela_oferecer_carona()
 
-
-#    def clicou_pedir(self,event):
-#        self.pedir()
-
-#    def clicou_oferecer(self,event):
-#        self.oferecer()
-
-#    def clicou_alterar(self,event):
+    def clicou_alterar(self,event):
+        pass
 #        self.perfil()
         
 
