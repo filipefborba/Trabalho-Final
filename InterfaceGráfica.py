@@ -254,7 +254,7 @@ class Telas():
     def clicou_oferecer(self,event):
         self.Tela_oferecer_carona()
 
-#    def clicou_alterar(self,event):
+    def clicou_alterar(self,event):
 #        self.perfil()
 
 
