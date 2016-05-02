@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.ttk as ttk
 
 
 class Telas():
@@ -235,8 +236,6 @@ class Telas():
         self.voltar_pagina_principal.configure(text='Voltar')
         self.voltar_pagina_principal.grid(row=6, column=1,columnspan=1)
         self.voltar_pagina_principal.bind('<1>',self.clicou_voltar)
-
-#########
         
     def Tela_oferecer_carona(self):
         self.caronas = tk.Label(self.window)
@@ -248,7 +247,8 @@ class Telas():
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
-        self.bairro_de_saida = tk.Entry(self.window)
+#        self.bairro_de_saida = tk.Entry(self.window)
+        self.bairro_de_saida = ttk.OptionMenu(self.window,'Bairros')
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         self.bairro_de_saida.bind('<Return>',self.clicou_confirmar)
         
@@ -257,7 +257,8 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        self.bairro_de_chegada = tk.Entry(self.window)
+#        self.bairro_de_chegada = tk.Entry(self.window)
+        self.bairro_de_chegada = ttk.OptionMenu(self.window,'Bairros')
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         self.bairro_de_chegada.bind('<Return>',self.clicou_confirmar)
         
@@ -322,6 +323,10 @@ class Telas():
     def clicou_alterar(self,event):
 #        self.perfil()
         pass
+
+        
+
+        
     
 ########## iniciando o programa
     def iniciar(self):
