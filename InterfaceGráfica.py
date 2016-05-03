@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-
+import tkinter.messagebox as tkm
 
 class Telas():
     
@@ -67,8 +67,8 @@ class Telas():
         self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
         self.Usuário.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
         
-        self.entrada_usuário = tk.Entry(self.window)
-        self.entrada_usuário.grid(row=4, column=2, sticky="ew")
+        self.entrada_usuario = tk.Entry(self.window)
+        self.entrada_usuario.grid(row=4, column=2, sticky="ew")
         
         self.Senha = tk.Label(self.window)
         self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
@@ -183,17 +183,17 @@ class Telas():
         self.label.configure(text= "O que deseja fazer? ",font='Bodoni 14', bg='#E10022', fg='White')
         
         self.pedir_carona = tk.Button(self.window)
-        self.pedir_carona.grid(row=4, column=1,columnspan=3, sticky="nsew")
+        self.pedir_carona.grid(row=4, column=1,columnspan=3)
         self.pedir_carona.configure(text= "Pedir Carona ",font='Bodoni 14')
         self.pedir_carona.bind('<1>',self.clicou_pedir)
         
         self.oferecer_carona = tk.Button(self.window)
-        self.oferecer_carona.grid(row=5, column=1,columnspan=3, sticky="nsew")
+        self.oferecer_carona.grid(row=5, column=1,columnspan=3)
         self.oferecer_carona.configure(text= "Oferecer Carona ",font='Bodoni 14')
         self.oferecer_carona.bind('<1>',self.clicou_oferecer)
         
         self.alterar_perfil = tk.Button(self.window)
-        self.alterar_perfil.grid(row=6, column=1,columnspan=3, sticky="nsew")
+        self.alterar_perfil.grid(row=6, column=1,columnspan=3)
         self.alterar_perfil.configure(text= "Alterar meu Perfil ",font='Bodoni 14')
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
 
@@ -206,19 +206,22 @@ class Telas():
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
-        #Espaço para o usuário escrever a saída
-        self.bairro_de_saida = tk.Entry(self.window)
+        bairro_saida = ['',1,2,3,4,5]
+        valor = tk.StringVar()
+        valor.set(bairro_saida[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.window,valor,*bairro_saida)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
-        self.bairro_de_saida.bind('<Return>',self.clicou_confirmar)
         
         self.saida = tk.Label(self.window)
         self.saida.grid(row=4, column=1,columnspan=1, sticky="nsew")
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        self.bairro_de_chegada = tk.Entry(self.window)
+        bairro_chegada = ['',1,2,3,4,5]
+        valor = tk.StringVar()
+        valor.set(bairro_chegada[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.window,valor,*bairro_chegada)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
-        self.bairro_de_chegada.bind('<Return>',self.clicou_confirmar)
         
         self.chegada = tk.Label(self.window)
         self.chegada.grid(row=5, column=0,columnspan=2, sticky="nsew")
@@ -247,20 +250,22 @@ class Telas():
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
-#        self.bairro_de_saida = tk.Entry(self.window)
-        self.bairro_de_saida = ttk.OptionMenu(self.window,'Bairros')
+        bairro_saida = ['',1,2,3,4,5]
+        valor = tk.StringVar()
+        valor.set(bairro_saida[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.window,valor,*bairro_saida)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
-        self.bairro_de_saida.bind('<Return>',self.clicou_confirmar)
         
         self.saida = tk.Label(self.window)
         self.saida.grid(row=4, column=1,columnspan=1, sticky="nsew")
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-#        self.bairro_de_chegada = tk.Entry(self.window)
-        self.bairro_de_chegada = ttk.OptionMenu(self.window,'Bairros')
+        bairro_chegada = ['',1,2,3,4,5]
+        valor = tk.StringVar()
+        valor.set(bairro_chegada[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.window,valor,*bairro_chegada)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
-        self.bairro_de_chegada.bind('<Return>',self.clicou_confirmar)
         
         self.chegada = tk.Label(self.window)
         self.chegada.grid(row=5, column=0,columnspan=2, sticky="nsew")
@@ -291,7 +296,17 @@ class Telas():
         self.Tela_login()
 
     def clicou_continuar_tela_principal(self,event):
-        self.tela_principal()        
+#        print (self.entrada_usuario.get())
+#        senha = self.dic_pessoas[self.entrada_usuario.get()]
+#
+#        if (self.entrada_usuario.get() in self.dic_pessoas) and senha[1]==self.entrada_senha.get():
+#            self.tela_principal()
+#        else:
+#            print ('feio')
+#            #tkm.showinfo(title='Erro',message='Usuário ou senha incorreto!')
+        self.tela_principal()
+
+            
         
     def clicou_voltar_tela_inicial(self,event):
         self.tela_inicial()
