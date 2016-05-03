@@ -206,7 +206,7 @@ class Telas():
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
-        bairro_saida = ['',1,2,3,4,5]
+        bairro_saida = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
         valor.set(bairro_saida[0])
         self.bairro_de_saida = ttk.OptionMenu(self.window,valor,*bairro_saida)
@@ -217,7 +217,7 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        bairro_chegada = ['',1,2,3,4,5]
+        bairro_chegada = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
         valor.set(bairro_chegada[0])
         self.bairro_de_chegada = ttk.OptionMenu(self.window,valor,*bairro_chegada)
@@ -250,7 +250,7 @@ class Telas():
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
-        bairro_saida = ['',1,2,3,4,5]
+        bairro_saida = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
         valor.set(bairro_saida[0])
         self.bairro_de_saida = ttk.OptionMenu(self.window,valor,*bairro_saida)
@@ -261,7 +261,7 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        bairro_chegada = ['',1,2,3,4,5]
+        bairro_chegada = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
         valor.set(bairro_chegada[0])
         self.bairro_de_chegada = ttk.OptionMenu(self.window,valor,*bairro_chegada)
@@ -296,7 +296,11 @@ class Telas():
         self.Tela_login()
 
     def clicou_continuar_tela_principal(self,event):
-#        print (self.entrada_usuario.get())
+#        cadastros = open('cadastros.txt','r')
+#        cadastros.readline()
+#        print (cadastros)
+#        cadastros.close()
+#
 #        senha = self.dic_pessoas[self.entrada_usuario.get()]
 #
 #        if (self.entrada_usuario.get() in self.dic_pessoas) and senha[1]==self.entrada_senha.get():
