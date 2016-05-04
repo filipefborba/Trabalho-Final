@@ -9,9 +9,11 @@ class Telas():
         #Por isso criar dicionário no começo dessa função
         #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         self.dic_pessoas = {}
-
+        
+        self.bairros = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros']
+        
+        
         #Gerando a janela
-
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
         self.root.geometry("640x800")
@@ -89,6 +91,13 @@ class Telas():
         self.Tela_login.columnconfigure(4, minsize=20, weight=1)
         self.Tela_login.grid(row=0, column=0, sticky="nsew")
         
+        self.caronas = tk.Label(self.Tela_login)
+        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        self.Logo = tk.Label(self.Tela_login)
+        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
         self.Usuário = tk.Label(self.Tela_login)
         self.Usuário.grid(row=4, column=1,columnspan=1, sticky="nsew")
@@ -276,6 +285,14 @@ class Telas():
         self.alterar_perfil.configure(text= "Alterar meu Perfil ",font='Bodoni 14')
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
 
+
+        #Botão que leva o usuário a página anterior
+        self.voltar_pagina_principal = tk.Button(self.Tela_principal)
+        self.voltar_pagina_principal.configure(text='Voltar')
+        self.voltar_pagina_principal.grid(row=7, column=1,columnspan=1)
+        self.voltar_pagina_principal.bind('<1>',self.clicou_voltar_login)
+
+
     def Tela_pedir_carona_frame(self):
         
         self.Tela_pedir_carona = tk.Frame(self.root)
@@ -308,10 +325,9 @@ class Telas():
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
-        bairro_saida = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
-        valor.set(bairro_saida[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_pedir_carona,valor,*bairro_saida)
+        valor.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_pedir_carona)
@@ -319,10 +335,9 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        bairro_chegada = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
-        valor.set(bairro_chegada[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_pedir_carona,valor,*bairro_chegada)
+        valor.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_pedir_carona)
@@ -375,10 +390,9 @@ class Telas():
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
-        bairro_saida = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
-        valor.set(bairro_saida[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*bairro_saida)
+        valor.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_oferecer_carona)
@@ -386,10 +400,9 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        bairro_chegada = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera']
         valor = tk.StringVar()
-        valor.set(bairro_chegada[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*bairro_chegada)
+        valor.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_oferecer_carona)
@@ -471,6 +484,9 @@ class Telas():
     def clicou_alterar(self,event):
 #        self.perfil()
         pass
+    
+    def clicou_voltar_login(self,event):
+        self.Tela_login_frame()
 
         
 
