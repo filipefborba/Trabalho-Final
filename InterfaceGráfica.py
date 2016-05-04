@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
+import pickle
 
 class Telas():
     
@@ -10,7 +11,7 @@ class Telas():
         #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         self.dic_pessoas = {}
         
-        self.bairros = ['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Boa Vista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros']
+        self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa'])
         
         
         #Gerando a janela
@@ -421,6 +422,33 @@ class Telas():
         self.voltar_pagina_principal.configure(text='Voltar')
         self.voltar_pagina_principal.grid(row=6, column=1,columnspan=1)
         self.voltar_pagina_principal.bind('<1>',self.clicou_voltar)
+        
+        
+    def Tela_ler_perfil_label(self):
+        self.tela_ler_perfil = tk.Frame(self.root)
+        self.tela_ler_perfil.configure(bg='#E10022')
+        
+        self.tela_ler_perfil.columnconfigure(0, minsize=213, weight=1)
+        self.tela_ler_perfil.columnconfigure(1, minsize=213, weight=1)
+        self.tela_ler_perfil.columnconfigure(2, minsize=213, weight=1)
+
+
+        self.tela_ler_perfil.rowconfigure(0, minsize=5, weight=1)
+        self.tela_ler_perfil.rowconfigure(1, minsize=60, weight=1)
+        self.tela_ler_perfil.rowconfigure(2, minsize=60, weight=1)
+        self.tela_ler_perfil.rowconfigure(3, minsize=205, weight=1)
+        self.tela_ler_perfil.rowconfigure(4, minsize=100, weight=1)
+        self.tela_ler_perfil.rowconfigure(5, minsize=45, weight=1)
+        self.tela_ler_perfil.rowconfigure(6, minsize=100, weight=1)
+        self.tela_ler_perfil.rowconfigure(7, minsize=205, weight=1)
+        
+#        with open('usuarios.pickle','rb') as f:
+#            self.dic_pessoas = pickle.load(f)
+#            
+#        self.repostas = tk.Label(self.tela_ler_perfil)
+#        self.repostas.grid(row=3,column=1)
+#        self.repostas.configure(self.dic_pessoas)
+
 
         
 
@@ -446,13 +474,24 @@ class Telas():
 #        else:
 #            print ('feio')
 #            #tkm.showinfo(title='Erro',message='Usuário ou senha incorreto!')
-        self.tela_principal_frame()
+ 
+       with open('usuarios.pickle','rb') as f:
+            self.dic_pessoas = pickle.load(f)
+    
+       senha = self.dic_pessoas[self.entrada_usuario.get()]
+       
+       if (self.entrada_usuario.get() in self.dic_pessoas) and (senha[1] == self.entrada_senha.get()):
+           self.tela_principal_frame()
+       else:
+           tkm.showinfo('Erro','Usuário ou senha inválido')
 
             
         
     def clicou_voltar_tela_inicial(self,event):
         self.tela_inicial_frame()
-        
+    
+
+    #Salvar informações do cadastro    
     def clicou_salvar(self,event):
     
         confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
@@ -462,10 +501,12 @@ class Telas():
             #Celular no índice 2 da lista
             #E-mail no índice 3 da lista
             self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
-            self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
-            self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
-            self.novo_arquivo.close() #Fechando o arquivo
+            
+            with open ('usuarios.pickle','wb') as f:
+                pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
+                
             self.Tela_login_frame()
+        
         else:
             pass
         
@@ -482,8 +523,7 @@ class Telas():
         self.Tela_oferecer_carona_frame()
 
     def clicou_alterar(self,event):
-#        self.perfil()
-        pass
+        self.Tela_ler_perfil_label()
     
     def clicou_voltar_login(self,event):
         self.Tela_login_frame()
