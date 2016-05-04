@@ -21,11 +21,9 @@ class Telas():
         
         self.tela_inicial_frame() 
         
-
-        
         
 ####   Telas:
-    def  tela_inicial_frame(self):
+    def tela_inicial_frame(self):
         
         self.tela_inicial = tk.Frame(self.root)
         self.tela_inicial.configure(bg='#E10022')
@@ -50,7 +48,7 @@ class Telas():
         self.caronas.grid(row=1, column=0,columnspan=3, sticky="nsew")
         self.caronas.configure(text= "Caronas",font='Bodoni 50', bg='#E10022', fg='White')
         
-        self.Logo = tk.Label(self.tela_inicial)
+        self.Logo = tk.Label(self.tela_inicial)   
         self.Logo.grid(row=2, column=0,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Insper",font='Bodoni 50', bg='#E10022', fg='White')
 
