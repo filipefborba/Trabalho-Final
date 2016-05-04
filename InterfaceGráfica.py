@@ -15,8 +15,8 @@ class Telas():
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
         self.root.geometry("640x800")
-        self.root.rowconfigure(0, minsize=640)
-        self.root.columnconfigure(0, minsize=800)
+        self.root.rowconfigure(0, minsize=800)
+        self.root.columnconfigure(0, minsize=640)
         self.root.grid()
         
         self.tela_inicial_frame() 
@@ -33,24 +33,24 @@ class Telas():
         self.tela_inicial.columnconfigure(2, minsize=213, weight=1)
 
 
-        self.tela_inicial.rowconfigure(0, minsize=10, weight=1)
+        self.tela_inicial.rowconfigure(0, minsize=5, weight=1)
         self.tela_inicial.rowconfigure(1, minsize=60, weight=1)
         self.tela_inicial.rowconfigure(2, minsize=60, weight=1)
-        self.tela_inicial.rowconfigure(3, minsize=265, weight=1)
-        self.tela_inicial.rowconfigure(4, minsize=50, weight=1)
-        self.tela_inicial.rowconfigure(5, minsize=40, weight=1)
-        self.tela_inicial.rowconfigure(6, minsize=50, weight=1)
-        self.tela_inicial.rowconfigure(7, minsize=265, weight=1)
+        self.tela_inicial.rowconfigure(3, minsize=205, weight=1)
+        self.tela_inicial.rowconfigure(4, minsize=100, weight=1)
+        self.tela_inicial.rowconfigure(5, minsize=45, weight=1)
+        self.tela_inicial.rowconfigure(6, minsize=100, weight=1)
+        self.tela_inicial.rowconfigure(7, minsize=205, weight=1)
 
         self.tela_inicial.grid(row=0, column=0, sticky="nsew")
         
         self.caronas = tk.Label(self.tela_inicial)
         self.caronas.grid(row=1, column=0,columnspan=3, sticky="nsew")
-        self.caronas.configure(text= "Caronas",font='Bodoni 50', bg='#E10022', fg='White')
+        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.tela_inicial)   
         self.Logo.grid(row=2, column=0,columnspan=3, sticky="nsew")
-        self.Logo.configure(text= "Insper",font='Bodoni 50', bg='#E10022', fg='White')
+        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
 
         self.Login = tk.Button(self.tela_inicial)
         self.Login.grid(row=4, column=1, sticky="ew")
@@ -125,21 +125,29 @@ class Telas():
         
         self.Tela_cadastro.rowconfigure(0, minsize=50, weight=1)
         self.Tela_cadastro.rowconfigure(1, minsize=50, weight=1)
-        self.Tela_cadastro.rowconfigure(2, minsize=100, weight=1)
-        self.Tela_cadastro.rowconfigure(3, minsize=100, weight=1)
-        self.Tela_cadastro.rowconfigure(4, minsize=100, weight=1)
-        self.Tela_cadastro.rowconfigure(5, minsize=100, weight=1)
-        self.Tela_cadastro.rowconfigure(6, minsize=100, weight=1)
-        self.Tela_cadastro.rowconfigure(7, minsize=100, weight=1)
-        self.Tela_cadastro.rowconfigure(8, minsize=50, weight=1)
-        self.Tela_cadastro.rowconfigure(9, minsize=50, weight=1)
+        self.Tela_cadastro.rowconfigure(2, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(3, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(4, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(5, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(6, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(7, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(8, minsize=75, weight=1)
+        self.Tela_cadastro.rowconfigure(9, minsize=40, weight=1)
 
-        self.Tela_cadastro.columnconfigure(0, minsize=20, weight=1)
-        self.Tela_cadastro.columnconfigure(1, minsize=200, weight=1)
-        self.Tela_cadastro.columnconfigure(2, minsize=200, weight=1)
-        self.Tela_cadastro.columnconfigure(3, minsize=200, weight=1)
-        self.Tela_cadastro.columnconfigure(4, minsize=20, weight=1)
+        self.Tela_cadastro.columnconfigure(0, minsize=100, weight=1)
+        self.Tela_cadastro.columnconfigure(1, minsize=100, weight=1)
+        self.Tela_cadastro.columnconfigure(2, minsize=60, weight=1)
+
         self.Tela_cadastro.grid(row=0, column=0, sticky="nsew")
+        
+        self.caronas = tk.Label(self.Tela_cadastro)
+        self.caronas.grid(row=0, column=0, columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Caronas",font='Bodoni 50', bg='#E10022', fg='White')
+        
+        self.Logo = tk.Label(self.Tela_cadastro)   
+        self.Logo.grid(row=1, column=0, columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Insper",font='Bodoni 50', bg='#E10022', fg='White')
+
         
 ##########################################################################        
 #Entrada de dados cadastro
@@ -147,56 +155,56 @@ class Telas():
 
         #Nome Completo
         self.nome_entrada = tk.Entry(self.Tela_cadastro)
-        self.nome_entrada.grid(row=2, column=2, sticky="ew")
+        self.nome_entrada.grid(row=2, column=1, sticky="ew")
         
         self.nome_label = tk.Label(self.Tela_cadastro)
-        self.nome_label.grid(row=2, column=1,columnspan=1, sticky="nsew")
+        self.nome_label.grid(row=2, column=0, sticky="nsew")
         self.nome_label.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #E-mail
         self.email_entrada = tk.Entry(self.Tela_cadastro)
-        self.email_entrada.grid(row=3, column=2, sticky="ew")
+        self.email_entrada.grid(row=3, column=1, sticky="ew")
         
         self.email_label = tk.Label(self.Tela_cadastro)
-        self.email_label.grid(row=3, column=1,columnspan=1, sticky="nsew")
+        self.email_label.grid(row=3, column=0, sticky="nsew")
         self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
         self.celular_entrada = tk.Entry(self.Tela_cadastro)
-        self.celular_entrada.grid(row=4, column=2, sticky="ew")
+        self.celular_entrada.grid(row=4, column=1, sticky="ew")
         
         self.celular_label = tk.Label(self.Tela_cadastro)
-        self.celular_label.grid(row=4, column=1,columnspan=1, sticky="nsew")
+        self.celular_label.grid(row=4, column=0, sticky="nsew")
         self.celular_label.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
 
 
         #Usuário
         self.usuario_entrada = tk.Entry(self.Tela_cadastro)
-        self.usuario_entrada.grid(row=5, column=2, sticky="ew")
+        self.usuario_entrada.grid(row=5, column=1, sticky="ew")
         
         self.usuario_label = tk.Label(self.Tela_cadastro)
-        self.usuario_label.grid(row=5, column=1,columnspan=1, sticky="nsew")
+        self.usuario_label.grid(row=5, column=0, sticky="nsew")
         self.usuario_label.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Senha
         self.senha_entrada = tk.Entry(self.Tela_cadastro)
-        self.senha_entrada.grid(row=6, column=2, sticky="ew")
+        self.senha_entrada.grid(row=6, column=1, sticky="ew")
         
         self.senha_label = tk.Label(self.Tela_cadastro)
-        self.senha_label.grid(row=6, column=1,columnspan=1, sticky="nsew")
+        self.senha_label.grid(row=6, column=0, sticky="nsew")
         self.senha_label.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Confirmar Senha
         self.senha_confirma_entrada = tk.Entry(self.Tela_cadastro)
-        self.senha_confirma_entrada.grid(row=7, column=2, sticky="ew")
+        self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
         
         self.senha_confirma_label = tk.Label(self.Tela_cadastro)
-        self.senha_confirma_label.grid(row=7, column=1,columnspan=1, sticky="nsew")
+        self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
         self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Nota sobre o celular
         self.nota_label = tk.Label(self.Tela_cadastro)
-        self.nota_label.grid(row=8, column=1,columnspan=3, sticky="nsew")
+        self.nota_label.grid(row=8, column=1, sticky="nsew")
         self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
 
 ##########################################################################        
@@ -204,12 +212,12 @@ class Telas():
 ##########################################################################
         
         self.salvar_novo_cadastro = tk.Button(self.Tela_cadastro)
-        self.salvar_novo_cadastro.grid(row=9, column=3,columnspan=1)
+        self.salvar_novo_cadastro.grid(row=8, column=3)
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
         
         self.voltar_tela_inicial = tk.Button(self.Tela_cadastro)
-        self.voltar_tela_inicial.grid(row=9, column=1,columnspan=1)
+        self.voltar_tela_inicial.grid(row=8, column=0)
         self.voltar_tela_inicial.configure(text='Voltar')
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar_tela_inicial)
 
