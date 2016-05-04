@@ -442,14 +442,13 @@ class Telas():
         self.tela_ler_perfil.rowconfigure(6, minsize=100, weight=1)
         self.tela_ler_perfil.rowconfigure(7, minsize=205, weight=1)
         
-#        with open('usuarios.pickle','rb') as f:
-#            self.dic_pessoas = pickle.load(f)
-#            
+        with open('usuarios.pickle','rb') as f:
+            self.dic_pessoas = pickle.load(f)
+            
 #        self.repostas = tk.Label(self.tela_ler_perfil)
 #        self.repostas.grid(row=3,column=1)
 #        self.repostas.configure(self.dic_pessoas)
-
-
+            
         
 
 ####################     Função dos botões
@@ -461,26 +460,16 @@ class Telas():
     def clicou_login(self,event):
         self.Tela_login_frame()
 
-    def clicou_continuar_tela_principal(self,event):
-#        cadastros = open('cadastros.txt','r')
-#        cadastros.readline()
-#        print (cadastros)
-#        cadastros.close()
-#
-#        senha = self.dic_pessoas[self.entrada_usuario.get()]
-#
-#        if (self.entrada_usuario.get() in self.dic_pessoas) and senha[1]==self.entrada_senha.get():
-#            self.tela_principal()
-#        else:
-#            print ('feio')
-#            #tkm.showinfo(title='Erro',message='Usuário ou senha incorreto!')
- 
+    def clicou_continuar_tela_principal(self,event): 
        with open('usuarios.pickle','rb') as f:
             self.dic_pessoas = pickle.load(f)
     
-       senha = self.dic_pessoas[self.entrada_usuario.get()]
+       #Nome de usuário salvo em uma váriavel
+       self.usuario = self.entrada_usuario.get()
+       #Conteúdo da lista do dicionário
+       self.conteudo = self.dic_pessoas[self.entrada_usuario.get()]
        
-       if (self.entrada_usuario.get() in self.dic_pessoas) and (senha[1] == self.entrada_senha.get()):
+       if (self.usuario in self.dic_pessoas) and (self.conteudo[1] == self.entrada_senha.get()):
            self.tela_principal_frame()
        else:
            tkm.showinfo('Erro','Usuário ou senha inválido')
