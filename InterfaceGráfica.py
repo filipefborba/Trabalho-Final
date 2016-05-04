@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-#import tkinter.messagebox as tkm
+import tkinter.messagebox as tkm
 
 class Telas():
     
@@ -441,16 +441,20 @@ class Telas():
         self.tela_inicial_frame()
         
     def clicou_salvar(self,event):
-
-        #Nome no índice 0 da lista
-        #Senha no índice 1 da lista
-        #Celular no índice 2 da lista
-        #E-mail no índice 3 da lista
-        self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
-        self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
-        self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
-        self.novo_arquivo.close() #Fechando o arquivo
-        self.Tela_login_frame()
+    
+        confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
+        if confirmando_cadastro:
+            #Nome no índice 0 da lista
+            #Senha no índice 1 da lista
+            #Celular no índice 2 da lista
+            #E-mail no índice 3 da lista
+            self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+            self.novo_arquivo = open('cadastros.txt','a') #Arquivo onde as informações serão salvas
+            self.novo_arquivo.write('\n{0}'.format(self.dic_pessoas)) #Escrevendo o login
+            self.novo_arquivo.close() #Fechando o arquivo
+            self.Tela_login_frame()
+        else:
+            pass
         
     def clicou_pedir(self,event):
         self.Tela_pedir_carona_frame()
