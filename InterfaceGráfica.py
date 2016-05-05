@@ -12,7 +12,7 @@ class Telas():
         self.dic_pessoas = {}
         
         self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa'])
-        
+        self.horarios = ['','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00']
         
         #Gerando a janela
         self.root = tk.Tk()
@@ -325,6 +325,12 @@ class Telas():
         self.Logo = tk.Label(self.Tela_pedir_carona)
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        valor = tk.StringVar()
+        valor.set(self.horarios[0])
+        self.Horários = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.horarios)
+        self.Horários.grid(row=3, column=2, sticky="ew")
+        
         
         valor = tk.StringVar()
         valor.set(self.bairros[0])
