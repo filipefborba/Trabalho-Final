@@ -1,4 +1,4 @@
-import caronas, tela_cadastro
+import caronas, tela_cadastro, telaprincipal
 from PyQt4 import QtCore, QtGui
 
 if __name__ == "__main__":
@@ -8,9 +8,4 @@ if __name__ == "__main__":
     caronas = caronas.Ui_MainWindow()
     caronas.setupUi(MainWindow)
     MainWindow.show()
-    if caronas.self.login.clicked:
-	    MainWindow = QtGui.QMainWindow()
-	    cadastro = tela_cadastro.Ui_MainWindow()
-	    cadastro.setupUi(MainWindow)
-	    MainWindow.show()
-	    sys.exit(app.exec_())
+    sys.exit(app.exec_())
