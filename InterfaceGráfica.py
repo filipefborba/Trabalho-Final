@@ -11,6 +11,9 @@ class Telas():
         #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         self.dic_pessoas = {}
         
+        self.dic_pedidos = {}
+        self.dic_oferecimento = {}
+        
         self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso'])
         self.horarios = ['','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00']
         
@@ -357,8 +360,8 @@ class Telas():
         self.confirmar = tk.Button(self.Tela_pedir_carona)
         self.confirmar.configure(text='Confirmar')
         self.confirmar.grid(row=6, column=3,columnspan=1)
-        self.confirmar.bind('<1>',self.clicou_confirmar)
-        self.confirmar.bind('<Return>',self.clicou_confirmar)
+        self.confirmar.bind('<1>',self.clicou_confirmar_pedido)
+        self.confirmar.bind('<Return>',self.clicou_confirmar_pedido)
         
         #Botão que leva o usuário a página anterior
         self.voltar_pagina_principal = tk.Button(self.Tela_pedir_carona)
@@ -422,8 +425,8 @@ class Telas():
         self.confirmar = tk.Button(self.Tela_oferecer_carona)
         self.confirmar.configure(text='Confirmar')
         self.confirmar.grid(row=6, column=3,columnspan=1)
-        self.confirmar.bind('<1>',self.clicou_confirmar)
-        self.confirmar.bind('<Return>',self.clicou_confirmar)
+        self.confirmar.bind('<1>',self.clicou_confirmar_oferecimento)
+        self.confirmar.bind('<Return>',self.clicou_confirmar_oferecimento)
         
         #Botão que leva o usuário a página anterior
         self.voltar_pagina_principal = tk.Button(self.Tela_oferecer_carona)
@@ -514,8 +517,25 @@ class Telas():
     def clicou_voltar(self,event):
         self.tela_principal_frame()
         
-    def clicou_confirmar(self,event):
-        pass
+    def clicou_confirmar_pedido(self,event):
+        self.dic_pedidos[self.conteudo[0]] = self.conteudo[2]
+        
+        with open ('pedidos.pickle','wb') as h:
+            pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
+            
+        tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+        
+        self.tela_principal_frame()
+
+    def clicou_confirmar_oferecimento(self,event):
+        self.dic_oferecimento[self.conteudo[0]] = self.conteudo[2]
+        
+        with open ('oferecimentos.pickle','wb') as g:
+            pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
+            
+        tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+        
+        self.tela_principal_frame()
 
     def clicou_oferecer(self,event):
         self.Tela_oferecer_carona_frame()
@@ -527,8 +547,15 @@ class Telas():
         self.Tela_login_frame()
         
     def clicou_verificar_caronas(self,event):
-        pass
+        with open ('pedidos.pickle','rb') as h:
+            self.pedidos_de_carona = pickle.load(h)
 
+        with open ('oferecimentos.pickle','rb') as g:
+            self.oferecimento_de_caronas = pickle.load(g)
+            
+        print ('''
+        Caronas pedidas: {0}
+        Caronas oferecidas {1}'''.format(self.pedidos_de_carona,self.oferecimento_de_caronas))
         
 
         
