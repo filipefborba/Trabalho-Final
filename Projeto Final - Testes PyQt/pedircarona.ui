@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>90</y>
+      <width>531</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bodoni MT</family>
+      <pointsize>28</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Selecione suas localizações:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>360</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bodoni MT</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Local de Destino:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>260</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bodoni MT</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Local de Partida:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="partida">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>270</y>
+      <width>411</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>false</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>Jardins</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Itaim Bibi</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Aclimação</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Perdizes</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morumbi</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Insper</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="destino">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>370</y>
+      <width>411</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>false</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>Jardins</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Itaim Bibi</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Aclimação</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Perdizes</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Morumbi</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Insper</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
