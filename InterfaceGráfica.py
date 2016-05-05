@@ -11,7 +11,7 @@ class Telas():
         #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
         self.dic_pessoas = {}
         
-        self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa'])
+        self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso'])
         self.horarios = ['','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00']
         
         #Gerando a janela
@@ -239,58 +239,60 @@ class Telas():
         self.Tela_principal = tk.Frame(self.root)
         self.Tela_principal.configure(bg='#E10022')
         
-        self.Tela_principal.rowconfigure(0, minsize=50, weight=1)
-        self.Tela_principal.rowconfigure(1, minsize=50, weight=1)
-        self.Tela_principal.rowconfigure(2, minsize=100, weight=1)
-        self.Tela_principal.rowconfigure(3, minsize=100, weight=1)
-        self.Tela_principal.rowconfigure(4, minsize=100, weight=1)
-        self.Tela_principal.rowconfigure(5, minsize=100, weight=1)
-        self.Tela_principal.rowconfigure(6, minsize=100, weight=1)
-        self.Tela_principal.rowconfigure(7, minsize=100, weight=1)
-        self.Tela_principal.rowconfigure(8, minsize=50, weight=1)
-        self.Tela_principal.rowconfigure(9, minsize=50, weight=1)
+        self.Tela_principal.rowconfigure(0, minsize=100, weight=1)
+        self.Tela_principal.rowconfigure(1, minsize=100, weight=1)
+        self.Tela_principal.rowconfigure(2, minsize=50, weight=1)
+        self.Tela_principal.rowconfigure(3, minsize=70, weight=1)
+        self.Tela_principal.rowconfigure(4, minsize=70, weight=1)
+        self.Tela_principal.rowconfigure(5, minsize=50, weight=1)
+        self.Tela_principal.rowconfigure(6, minsize=30, weight=1)
 
         self.Tela_principal.columnconfigure(0, minsize=20, weight=1)
         self.Tela_principal.columnconfigure(1, minsize=200, weight=1)
         self.Tela_principal.columnconfigure(2, minsize=200, weight=1)
         self.Tela_principal.columnconfigure(3, minsize=200, weight=1)
-        self.Tela_principal.columnconfigure(4, minsize=20, weight=1)
+
         self.Tela_principal.grid(row=0, column=0, sticky="nsew")
-        
-        
+            
         
         self.caronas = tk.Label(self.Tela_principal)
-        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
+        self.caronas.grid(row=0, column=1,columnspan=3, sticky="nsew")
         self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.Tela_principal)
-        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
+        self.Logo.grid(row=1, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
         
+        
         self.label = tk.Label(self.Tela_principal)
-        self.label.grid(row=3, column=1,columnspan=3, sticky="nsew")
+        self.label.grid(row=2, column=2,columnspan=1, sticky="nsew")
         self.label.configure(text= "O que deseja fazer? ",font='Bodoni 14', bg='#E10022', fg='White')
         
         self.pedir_carona = tk.Button(self.Tela_principal)
-        self.pedir_carona.grid(row=4, column=1,columnspan=3)
+        self.pedir_carona.grid(row=3, column=1,columnspan=1)
         self.pedir_carona.configure(text= "Pedir Carona ",font='Bodoni 14')
         self.pedir_carona.bind('<1>',self.clicou_pedir)
         
         self.oferecer_carona = tk.Button(self.Tela_principal)
-        self.oferecer_carona.grid(row=5, column=1,columnspan=3)
+        self.oferecer_carona.grid(row=3, column=3,columnspan=1)
         self.oferecer_carona.configure(text= "Oferecer Carona ",font='Bodoni 14')
         self.oferecer_carona.bind('<1>',self.clicou_oferecer)
         
         self.alterar_perfil = tk.Button(self.Tela_principal)
-        self.alterar_perfil.grid(row=6, column=1,columnspan=3)
+        self.alterar_perfil.grid(row=4, column=1,columnspan=1)
         self.alterar_perfil.configure(text= "Alterar meu Perfil ",font='Bodoni 14')
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
+        
+        self.verificar_caronas = tk.Button(self.Tela_principal)
+        self.verificar_caronas.grid(row=4, column=3)
+        self.verificar_caronas.configure(text= "Verificar Caronas",font='Bodoni 14')
+        self.verificar_caronas.bind('<1>',self.clicou_verificar_caronas)
 
 
         #Botão que leva o usuário a página anterior
         self.voltar_pagina_principal = tk.Button(self.Tela_principal)
         self.voltar_pagina_principal.configure(text='Voltar')
-        self.voltar_pagina_principal.grid(row=7, column=1,columnspan=1)
+        self.voltar_pagina_principal.grid(row=5, column=1,columnspan=1)
         self.voltar_pagina_principal.bind('<1>',self.clicou_voltar_login)
 
 
@@ -471,11 +473,12 @@ class Telas():
             self.dic_pessoas = pickle.load(f)
     
        #Nome de usuário salvo em uma váriavel
-       self.usuario = self.entrada_usuario.get()
+       self.usuarios = self.entrada_usuario.get()
        #Conteúdo da lista do dicionário
-       self.conteudo = self.dic_pessoas[self.entrada_usuario.get()]
+       if self.usuarios in self.dic_pessoas:
+           self.conteudo = self.dic_pessoas[self.usuarios]
        
-       if (self.usuario in self.dic_pessoas) and (self.conteudo[1] == self.entrada_senha.get()):
+       if (self.usuarios in self.dic_pessoas) and (self.conteudo[1] == self.entrada_senha.get()):
            self.tela_principal_frame()
        else:
            tkm.showinfo('Erro','Usuário ou senha inválido')
@@ -522,6 +525,9 @@ class Telas():
     
     def clicou_voltar_login(self,event):
         self.Tela_login_frame()
+        
+    def clicou_verificar_caronas(self,event):
+        pass
 
         
 
