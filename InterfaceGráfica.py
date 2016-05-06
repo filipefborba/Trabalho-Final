@@ -130,7 +130,7 @@ class Telas():
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar_tela_inicial)
     
         
-############# 
+#############    
  
     
     def Tela_cadastro_frame(self):
@@ -281,7 +281,7 @@ class Telas():
         self.pedir_carona.bind('<1>',self.clicou_pedir)
         
         self.oferecer_carona = tk.Button(self.Tela_principal)
-        self.oferecer_carona.grid(row=3, column=3,columnspan=1)
+        self.oferecer_carona.grid(row=3, column=2,columnspan=1)
         self.oferecer_carona.configure(text= "Oferecer Carona ",font='Bodoni 14')
         self.oferecer_carona.bind('<1>',self.clicou_oferecer)
         
@@ -291,9 +291,20 @@ class Telas():
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
         
         self.verificar_caronas = tk.Button(self.Tela_principal)
-        self.verificar_caronas.grid(row=4, column=3)
+        self.verificar_caronas.grid(row=4, column=2)
         self.verificar_caronas.configure(text= "Verificar Caronas",font='Bodoni 14')
         self.verificar_caronas.bind('<1>',self.clicou_verificar_caronas)
+        
+        self.cancelar_pedido_carona = tk.Button(self.Tela_principal)
+        self.cancelar_pedido_carona.grid(row=3, column=3)
+        self.cancelar_pedido_carona.configure(text='Cancelar pedido')
+        self.cancelar_pedido_carona.bind('<1>',self.cancelar_pedido)
+
+        self.cancelar_oferta_carona = tk.Button(self.Tela_principal)
+        self.cancelar_oferta_carona.grid(row=4, column=3)
+        self.cancelar_oferta_carona.configure(text='Cancelar oferta')
+        self.cancelar_oferta_carona.bind('<1>',self.cancelar_oferta)
+
 
 
         #Botão que leva o usuário a página anterior
@@ -598,33 +609,33 @@ class Telas():
 
     #Salvar informações do cadastro    
     def clicou_salvar(self,event):
-    
-        confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
-        if confirmando_cadastro:
-            try:
-                with open ('usuarios.pickle','rb') as f:
-                    self.dic_pessoas = pickle.load(f)
+        if self.senha_entrada.get() == self.senha_confirma_entrada.get(): 
+            confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
+            if confirmando_cadastro:
+                try:
+                    with open ('usuarios.pickle','rb') as f:
+                        self.dic_pessoas = pickle.load(f)
+                        
+                    #Nome no índice 0 da lista
+                    #Senha no índice 1 da lista
+                    #Celular no índice 2 da lista
+                    #E-mail no índice 3 da lista
+                    self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
                     
-                #Nome no índice 0 da lista
-                #Senha no índice 1 da lista
-                #Celular no índice 2 da lista
-                #E-mail no índice 3 da lista
-                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+                except:
+                    #Nome no índice 0 da lista
+                    #Senha no índice 1 da lista
+                    #Celular no índice 2 da lista
+                    #E-mail no índice 3 da lista
+                    self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
                 
-            except:
-                #Nome no índice 0 da lista
-                #Senha no índice 1 da lista
-                #Celular no índice 2 da lista
-                #E-mail no índice 3 da lista
-                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
-            
-            with open ('usuarios.pickle','wb') as f:
-                pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
-                
-            self.Tela_login_frame()
-                                
+                with open ('usuarios.pickle','wb') as f:
+                    pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
+                    
+                self.Tela_login_frame()
+                                    
         else:
-            pass
+            tkm.showinfo('Erro','Senhas não combinadas!')
         
     def clicou_pedir(self,event):
         self.Tela_pedir_carona_frame()
@@ -696,7 +707,11 @@ class Telas():
         except:
             print ('Sem ofertas!')
             
-        
+    def cancelar_pedido(self,event):
+        pass
+    
+    def cancelar_oferta(self,event):
+        pass
 
         
     
