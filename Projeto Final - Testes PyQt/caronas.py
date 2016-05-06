@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import tela_cadastro, telaprincipal
+import tela_cadastro, telalogin
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -25,21 +25,25 @@ except AttributeError:
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(844, 559)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
+        #Botão para entrar na página de login
         self.login = QtGui.QPushButton(self.centralwidget)
         self.login.setGeometry(QtCore.QRect(270, 240, 300, 50))
         self.login.setObjectName(_fromUtf8("login"))
         self.login.clicked.connect(self.abrirlogin)
 
+        #Botão para entrar na página de cadastro
         self.cadastro = QtGui.QPushButton(self.centralwidget)
         self.cadastro.setGeometry(QtCore.QRect(270, 340, 300, 50))
         self.cadastro.setObjectName(_fromUtf8("cadastro"))
         self.cadastro.clicked.connect(self.abrircadastro)
 
+        #Título grande
         self.caronasinsperlabel = QtGui.QLabel(self.centralwidget)
         self.caronasinsperlabel.setGeometry(QtCore.QRect(170, 40, 521, 161))
         font = QtGui.QFont()
@@ -57,12 +61,14 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    #Função que define os textos dentro dos botões e da janela
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.login.setText(_translate("MainWindow", "Login", None))
         self.cadastro.setText(_translate("MainWindow", "Cadastre-se", None))
         self.caronasinsperlabel.setText(_translate("MainWindow", "Caronas Insper", None))
 
+    #Função para o botão: abre a página de login
     def abrircadastro(self):
         self.MainWindow = tela_cadastro.Ui_MainWindow
         teladecadastro = QtGui.QMainWindow()
@@ -71,15 +77,16 @@ class Ui_MainWindow(object):
         teladecadastro.show()
         sys.exit(app.exec_())
 
+    #Função para o botão: abre a página de cadastro
     def abrirlogin(self):
-        self.MainWindow = tela_cadastro.Ui_MainWindow
+        self.MainWindow = telalogin.Ui_MainWindow
         teladelogin = QtGui.QMainWindow()
-        ui = telaprincipal.Ui_MainWindow()
+        ui = telalogin.Ui_MainWindow()
         ui.setupUi(teladelogin)
         teladelogin.show()
         sys.exit(app.exec_())
 
-
+#Apenas para rodar sepadaramente
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
