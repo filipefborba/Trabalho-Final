@@ -184,7 +184,9 @@ class Telas():
         self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
-        self.celular_entrada = tk.Entry(self.Tela_cadastro)
+        numero = tk.StringVar()
+        numero.set('() 9')
+        self.celular_entrada = tk.Entry(self.Tela_cadastro, textvariable = numero)
         self.celular_entrada.grid(row=4, column=1, sticky="ew")
         
         self.celular_label = tk.Label(self.Tela_cadastro)
@@ -491,11 +493,68 @@ class Telas():
             self.dic_pessoas = pickle.load(f)
             
         print (self.dic_pessoas[self.usuarios])
-#        self.repostas = tk.Label(self.tela_ler_perfil)
-#        self.repostas.grid(row=3,column=1)
-#        self.repostas.configure(self.dic_pessoas)
-            
+
+#######################################################
+
+        #Nome Completo
+        self.nome_entrada = tk.Entry(self.Tela_cadastro)
+        self.nome_entrada.grid(row=2, column=1, sticky="ew")
         
+        self.nome_label = tk.Label(self.Tela_cadastro)
+        self.nome_label.grid(row=2, column=0, sticky="nsew")
+        self.nome_label.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
+
+        #E-mail
+        self.email_entrada = tk.Entry(self.Tela_cadastro)
+        self.email_entrada.grid(row=3, column=1, sticky="ew")
+        
+        self.email_label = tk.Label(self.Tela_cadastro)
+        self.email_label.grid(row=3, column=0, sticky="nsew")
+        self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
+
+        #Número de Celular
+        numero = tk.StringVar()
+        numero.set('() 9')
+        self.celular_entrada = tk.Entry(self.Tela_cadastro, textvariable = numero)
+        self.celular_entrada.grid(row=4, column=1, sticky="ew")
+        
+        self.celular_label = tk.Label(self.Tela_cadastro)
+        self.celular_label.grid(row=4, column=0, sticky="nsew")
+        self.celular_label.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
+
+
+        #Usuário
+        self.usuario_entrada = tk.Entry(self.Tela_cadastro)
+        self.usuario_entrada.grid(row=5, column=1, sticky="ew")
+        
+        self.usuario_label = tk.Label(self.Tela_cadastro)
+        self.usuario_label.grid(row=5, column=0, sticky="nsew")
+        self.usuario_label.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
+
+        #Senha
+        self.senha_entrada = tk.Entry(self.Tela_cadastro)
+        self.senha_entrada.grid(row=6, column=1, sticky="ew")
+        
+        self.senha_label = tk.Label(self.Tela_cadastro)
+        self.senha_label.grid(row=6, column=0, sticky="nsew")
+        self.senha_label.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+
+        #Confirmar Senha
+        self.senha_confirma_entrada = tk.Entry(self.Tela_cadastro)
+        self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
+        
+        self.senha_confirma_label = tk.Label(self.Tela_cadastro)
+        self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
+        self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
+
+        #Nota sobre o celular
+        self.nota_label = tk.Label(self.Tela_cadastro)
+        self.nota_label.grid(row=8, column=1, sticky="nsew")
+        self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
+
+
+#######################################################
+
 
 ####################     Função dos botões
 
@@ -512,7 +571,8 @@ class Telas():
            with open('usuarios.pickle','rb') as f:
                 self.dic_pessoas = pickle.load(f)
                 
-           #Nome de usuário salvo em uma váriavel
+           #Nome completo salvo em uma váriavel
+           self.nome_completo = self.dic_pessoas[self.nome_completo]
            self.usuarios = self.entrada_usuario.get()
 
         except:
@@ -549,14 +609,14 @@ class Telas():
                 #Senha no índice 1 da lista
                 #Celular no índice 2 da lista
                 #E-mail no índice 3 da lista
-                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+                self.dic_pessoas[self.nome_entrada.get()]=[self.usuario_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
                 
             except:
                 #Nome no índice 0 da lista
                 #Senha no índice 1 da lista
                 #Celular no índice 2 da lista
                 #E-mail no índice 3 da lista
-                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+                self.dic_pessoas[self.nome_entrada.get()]=[self.usuario_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
             
             with open ('usuarios.pickle','wb') as f:
                 pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
