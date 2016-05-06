@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import pedircarona
+import caronas
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -75,6 +75,8 @@ class Ui_MainWindow(object):
         self.agendar = QtGui.QPushButton(self.centralwidget)
         self.agendar.setGeometry(QtCore.QRect(260, 340, 300, 50))
         self.agendar.setObjectName(_fromUtf8("agendar"))
+        self.agendar.clicked.connect(self.abriragendar)
+
 
         #Botão de pedir a carona
         self.pedir = QtGui.QPushButton(self.centralwidget)
@@ -84,8 +86,19 @@ class Ui_MainWindow(object):
 
         #Botão para alterar o perfil
         self.perfil = QtGui.QPushButton(self.centralwidget)
-        self.perfil.setGeometry(QtCore.QRect(260, 430, 300, 50))
+        self.perfil.setGeometry(QtCore.QRect(260, 500, 300, 50))
         self.perfil.setObjectName(_fromUtf8("perfil"))
+        
+        #Botão para remover a carona
+        self.remover = QtGui.QPushButton(self.centralwidget)
+        self.remover.setGeometry(QtCore.QRect(260, 420, 300, 50))
+        self.remover.setObjectName(_fromUtf8("remover"))
+
+        #Botão para fazer logout
+        self.logout = QtGui.QPushButton(self.centralwidget)
+        self.logout.setGeometry(QtCore.QRect(0, 530, 101, 31))
+        self.logout.setObjectName(_fromUtf8("logout"))
+        self.logout.clicked.connect(self.abrircaronas)
 
         #Label representativa do status ##SERÁ MUDADO##
         self.statusdacarona = QtGui.QLabel(self.centralwidget)
@@ -112,6 +125,9 @@ class Ui_MainWindow(object):
         self.pedir.setText(_translate("MainWindow", "Pedir carona", None))
         self.perfil.setText(_translate("MainWindow", "Alterar perfil", None))
         self.statusdacarona.setText(_translate("MainWindow", "Inativo/Pendente/Ativo", None))
+        self.remover.setText(_translate("MainWindow", "Remover carona pedida/agendada", None))
+        self.logout.setText(_translate("MainWindow", "Log Out", None))
+
 
     def abrirpedir(self):
         self.MainWindow = pedircarona.Ui_MainWindow
@@ -120,6 +136,24 @@ class Ui_MainWindow(object):
         ui.setupUi(telapedir)
         telapedir.show()
         sys.exit(app.exec_())
+
+    def abriragendar(self):
+        self.MainWindow = pedircarona.Ui_MainWindow
+        telapedir = QtGui.QMainWindow()
+        ui = pedircarona.Ui_MainWindow()
+        ui.setupUi(telapedir)
+        telapedir.show()
+        sys.exit(app.exec_())
+
+
+    def abrircaronas(self):
+        self.MainWindow = caronas.Ui_MainWindow
+        tela_caronas = QtGui.QMainWindow()
+        ui = caronas.Ui_MainWindow()
+        ui.setupUi(tela_caronas)
+        tela_caronas.show()
+        sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     import sys

@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import telaprincipal
+import principal
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -85,9 +85,9 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("MS Shell Dlg 2"))
         font.setPointSize(8)
-
         self.voltar.setFont(font)
         self.voltar.setObjectName(_fromUtf8("voltar"))
+        self.voltar.clicked.connect(self.abrircaronas)
 
         self.usuariolabel = QtGui.QLabel(self.centralwidget)
         self.usuariolabel.setGeometry(QtCore.QRect(40, 250, 111, 41))
@@ -124,11 +124,19 @@ class Ui_MainWindow(object):
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
     def abrirprincipal(self):
-        self.MainWindow = telaprincipal.Ui_MainWindow
+        self.MainWindow = principal.Ui_MainWindow
         tela_principal = QtGui.QMainWindow()
-        ui = telaprincipal.Ui_MainWindow()
+        ui = principal.Ui_MainWindow()
         ui.setupUi(tela_principal)
         tela_principal.show()
+        sys.exit(app.exec_())
+
+    def abrircaronas(self):
+        self.MainWindow = caronas.Ui_MainWindow
+        tela_caronas = QtGui.QMainWindow()
+        ui = caronas.Ui_MainWindow()
+        ui.setupUi(tela_caronas)
+        tela_caronas.show()
         sys.exit(app.exec_())
 
 if __name__ == "__main__":

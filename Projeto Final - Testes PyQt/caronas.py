@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import tela_cadastro, telalogin
+import cadastro, login
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -92,20 +92,20 @@ class Ui_MainWindow(object):
 
     #Função para o botão: abre a página de login
     def abrircadastro(self):
-        self.MainWindow = tela_cadastro.Ui_MainWindow
-        teladecadastro = QtGui.QMainWindow()
-        ui = tela_cadastro.Ui_MainWindow()
-        ui.setupUi(teladecadastro)
-        teladecadastro.show()
+        self.MainWindow = cadastro.Ui_MainWindow
+        tela_cadastro = QtGui.QMainWindow()
+        ui = cadastro.Ui_MainWindow()
+        ui.setupUi(tela_cadastro)
+        tela_cadastro.show()
         sys.exit(app.exec_())
 
     #Função para o botão: abre a página de cadastro
     def abrirlogin(self):
-        self.MainWindow = telalogin.Ui_MainWindow
-        teladelogin = QtGui.QMainWindow()
-        ui = telalogin.Ui_MainWindow()
-        ui.setupUi(teladelogin)
-        teladelogin.show()
+        self.MainWindow = login.Ui_MainWindow
+        tela_login = QtGui.QMainWindow()
+        ui = login.Ui_MainWindow()
+        ui.setupUi(tela_login)
+        tela_login.show()
         sys.exit(app.exec_())
 
 #Apenas para rodar sepadaramente
