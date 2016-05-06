@@ -16,6 +16,7 @@ class Telas():
         
         self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso'])
         self.horarios = ['','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00']
+        self.lugares = ['','1','2','3','4']        
         
         #Gerando a janela
         self.root = tk.Tk()
@@ -225,12 +226,12 @@ class Telas():
 ##########################################################################
         
         self.salvar_novo_cadastro = tk.Button(self.Tela_cadastro)
-        self.salvar_novo_cadastro.grid(row=8, column=3)
+        self.salvar_novo_cadastro.grid(row=7, column=3)
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
         
         self.voltar_tela_inicial = tk.Button(self.Tela_cadastro)
-        self.voltar_tela_inicial.grid(row=8, column=0)
+        self.voltar_tela_inicial.grid(row=7, column=0)
         self.voltar_tela_inicial.configure(text='Voltar')
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar_tela_inicial)
 
@@ -320,21 +321,36 @@ class Telas():
         self.Tela_pedir_carona.columnconfigure(2, minsize=200, weight=1)
         self.Tela_pedir_carona.columnconfigure(3, minsize=200, weight=1)
         self.Tela_pedir_carona.columnconfigure(4, minsize=20, weight=1)
+        
+        
         self.Tela_pedir_carona.grid(row=0, column=0, sticky="nsew")
         
         
         self.caronas = tk.Label(self.Tela_pedir_carona)
         self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
-        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        self.caronas.configure(text= "Pedir",font='Bodoni 100', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.Tela_pedir_carona)
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
-        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        self.Logo.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        valor = tk.StringVar()
+        valor.set(self.lugares[0])
+        self.Lugares = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.lugares)
+        self.Lugares.grid(row=6, column=2, sticky="ew")
+        
+        self.label_lugares = tk.Label(self.Tela_pedir_carona)
+        self.label_lugares.grid(row=6, column=1,columnspan=1, sticky="nsew")
+        self.label_lugares.configure(text= "Lugares Disponíveis: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         valor = tk.StringVar()
         valor.set(self.horarios[0])
         self.Horários = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.horarios)
         self.Horários.grid(row=3, column=2, sticky="ew")
+        
+        self.label_horários = tk.Label(self.Tela_pedir_carona)
+        self.label_horários.grid(row=3, column=1,columnspan=1, sticky="nsew")
+        self.label_horários.configure(text= "Horários: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         
         valor = tk.StringVar()
@@ -395,11 +411,29 @@ class Telas():
         
         self.caronas = tk.Label(self.Tela_oferecer_carona)
         self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
-        self.caronas.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        self.caronas.configure(text= "Oferecer",font='Bodoni 100', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.Tela_oferecer_carona)
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
-        self.Logo.configure(text= "Insper",font='Bodoni 100', bg='#E10022', fg='White')
+        self.Logo.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
+        
+        valor = tk.StringVar()
+        valor.set(self.horarios[0])
+        self.Horários = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.horarios)
+        self.Horários.grid(row=3, column=2, sticky="ew")
+        
+        self.label_horários = tk.Label(self.Tela_oferecer_carona)
+        self.label_horários.grid(row=3, column=1,columnspan=1, sticky="nsew")
+        self.label_horários.configure(text= "Horários: ",font='Bodoni 24', bg='#E10022', fg='White')
+        
+        valor = tk.StringVar()
+        valor.set(self.lugares[0])
+        self.Lugares = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.lugares)
+        self.Lugares.grid(row=6, column=2, sticky="ew")
+        
+        self.label_lugares = tk.Label(self.Tela_oferecer_carona)
+        self.label_lugares.grid(row=6, column=1,columnspan=1, sticky="nsew")
+        self.label_lugares.configure(text= "Lugares Disponíveis: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
         valor = tk.StringVar()
