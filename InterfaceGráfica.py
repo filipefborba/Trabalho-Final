@@ -341,7 +341,7 @@ class Telas():
         
         self.label_lugares = tk.Label(self.Tela_pedir_carona)
         self.label_lugares.grid(row=6, column=1,columnspan=1, sticky="nsew")
-        self.label_lugares.configure(text= "Lugares Disponíveis: ",font='Bodoni 24', bg='#E10022', fg='White')
+        self.label_lugares.configure(text= "Lugares Necessários: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         self.hora_pedido = tk.StringVar()
         self.hora_pedido.set(self.horarios[0])
@@ -490,7 +490,7 @@ class Telas():
         with open('usuarios.pickle','rb') as f:
             self.dic_pessoas = pickle.load(f)
             
-        print (self.dic_pessoas)
+        print (self.dic_pessoas[self.usuarios])
 #        self.repostas = tk.Label(self.tela_ler_perfil)
 #        self.repostas.grid(row=3,column=1)
 #        self.repostas.configure(self.dic_pessoas)
@@ -572,15 +572,14 @@ class Telas():
     def clicou_voltar(self,event):
         self.tela_principal_frame()
         
-    def clicou_confirmar_pedido(self,event):
-        
+    def clicou_confirmar_pedido(self,event):     
         try:
             with open ('pedidos.pickle','rb') as h:
                 self.dic_pedidos = pickle.load(h)
-            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido, self.bairro_chegada_pedido, self.hora_pedido, self.lugares_pedido]
+            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido.get(), self.bairro_chegada_pedido.get(), self.hora_pedido.get(), self.lugares_pedido.get()]
             
         except:
-            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido, self.bairro_chegada_pedido, self.hora_pedido, self.lugares_pedido]
+            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido.get(), self.bairro_chegada_pedido.get(), self.hora_pedido.get(), self.lugares_pedido.get()]
         
         with open ('pedidos.pickle','wb') as h:
             pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
@@ -590,15 +589,15 @@ class Telas():
         self.tela_principal_frame()
 
     def clicou_confirmar_oferecimento(self,event):
-#        if len(self.dic_oferecimento) != 0:
+#        if len(self.dic_oferecimento) != 0:            
         try:
             with open ('oferecimentos.pickle','rb') as g:
                 self.dic_oferecimento = pickle.load(g)
             
-            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento,self.bairro_chegada_oferecimento, self.horarios_oferecer, self.lugares_oferecer]
+            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento.get(),self.bairro_chegada_oferecimento.get(), self.horarios_oferecer.get(), self.lugares_oferecer.get()]
 
         except:
-            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento,self.bairro_chegada_oferecimento, self.horarios_oferecer, self.lugares_oferecer]
+            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento.get(),self.bairro_chegada_oferecimento.get(), self.horarios_oferecer.get(), self.lugares_oferecer.get()]
 
                 
         with open ('oferecimentos.pickle','wb') as g:
@@ -622,18 +621,21 @@ class Telas():
             with open ('pedidos.pickle','rb') as h:
                 self.pedidos_de_carona = pickle.load(h)
                 
+                print ('Caronas pedidas: {0}'.format(self.pedidos_de_carona))
+
+                
         except:
             print('Sem pedidos de caronas!')
             
         try:
             with open ('oferecimentos.pickle','rb') as g:
                 self.oferecimento_de_caronas = pickle.load(g)
+                
+            print ('Caronas oferecidas {0}'.format(self.oferecimento_de_caronas))
+
         except:
             print ('Sem ofertas!')
             
-#        print ('''
-#        Caronas pedidas: {0}
-#        Caronas oferecidas {1}'''.format(self.pedidos_de_carona,self.oferecimento_de_caronas))
         
 
         
