@@ -1,4 +1,0 @@
-
-{<tkinter.Entry object .182478173856>: <tkinter.Entry object .182478173912>}
-{<tkinter.Entry object .182478173856>: <tkinter.Entry object .182478173912>}
-{<tkinter.Entry object .182478173800>: <tkinter.Entry object .182478174696>}

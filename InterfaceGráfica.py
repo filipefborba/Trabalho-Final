@@ -295,9 +295,9 @@ class Telas():
 
         #Botão que leva o usuário a página anterior
         self.voltar_pagina_principal = tk.Button(self.Tela_principal)
-        self.voltar_pagina_principal.configure(text='Voltar')
+        self.voltar_pagina_principal.configure(text='Log Out')
         self.voltar_pagina_principal.grid(row=5, column=1,columnspan=1)
-        self.voltar_pagina_principal.bind('<1>',self.clicou_voltar_login)
+        self.voltar_pagina_principal.bind('<1>',self.clicou_voltar_tela_inicial)
 
 
     def Tela_pedir_carona_frame(self):
@@ -334,18 +334,18 @@ class Telas():
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
         
-        valor = tk.StringVar()
-        valor.set(self.lugares[0])
-        self.Lugares = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.lugares)
+        self.lugares_pedido = tk.StringVar()
+        self.lugares_pedido.set(self.lugares[0])
+        self.Lugares = ttk.OptionMenu(self.Tela_pedir_carona,self.lugares_pedido,*self.lugares)
         self.Lugares.grid(row=6, column=2, sticky="ew")
         
         self.label_lugares = tk.Label(self.Tela_pedir_carona)
         self.label_lugares.grid(row=6, column=1,columnspan=1, sticky="nsew")
         self.label_lugares.configure(text= "Lugares Disponíveis: ",font='Bodoni 24', bg='#E10022', fg='White')
         
-        valor = tk.StringVar()
-        valor.set(self.horarios[0])
-        self.Horários = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.horarios)
+        self.hora_pedido = tk.StringVar()
+        self.hora_pedido.set(self.horarios[0])
+        self.Horários = ttk.OptionMenu(self.Tela_pedir_carona,self.hora_pedido,*self.horarios)
         self.Horários.grid(row=3, column=2, sticky="ew")
         
         self.label_horários = tk.Label(self.Tela_pedir_carona)
@@ -353,9 +353,9 @@ class Telas():
         self.label_horários.configure(text= "Horários: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         
-        valor = tk.StringVar()
-        valor.set(self.bairros[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.bairros)
+        self.bairro_saida_pedido = tk.StringVar()
+        self.bairro_saida_pedido.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_pedir_carona,self.bairro_saida_pedido,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_pedir_carona)
@@ -363,9 +363,9 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        valor = tk.StringVar()
-        valor.set(self.bairros[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_pedir_carona,valor,*self.bairros)
+        self.bairro_chegada_pedido = tk.StringVar()
+        self.bairro_chegada_pedido.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_pedir_carona,self.bairro_chegada_pedido,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_pedir_carona)
@@ -417,18 +417,18 @@ class Telas():
         self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Caronas",font='Bodoni 100', bg='#E10022', fg='White')
         
-        valor = tk.StringVar()
-        valor.set(self.horarios[0])
-        self.Horários = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.horarios)
+        self.horarios_oferecer = tk.StringVar()
+        self.horarios_oferecer.set(self.horarios[0])
+        self.Horários = ttk.OptionMenu(self.Tela_oferecer_carona,self.horarios_oferecer,*self.horarios)
         self.Horários.grid(row=3, column=2, sticky="ew")
         
         self.label_horários = tk.Label(self.Tela_oferecer_carona)
         self.label_horários.grid(row=3, column=1,columnspan=1, sticky="nsew")
         self.label_horários.configure(text= "Horários: ",font='Bodoni 24', bg='#E10022', fg='White')
         
-        valor = tk.StringVar()
-        valor.set(self.lugares[0])
-        self.Lugares = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.lugares)
+        self.lugares_oferecer = tk.StringVar()
+        self.lugares_oferecer.set(self.lugares[0])
+        self.Lugares = ttk.OptionMenu(self.Tela_oferecer_carona,self.lugares_oferecer,*self.lugares)
         self.Lugares.grid(row=6, column=2, sticky="ew")
         
         self.label_lugares = tk.Label(self.Tela_oferecer_carona)
@@ -436,9 +436,9 @@ class Telas():
         self.label_lugares.configure(text= "Lugares Disponíveis: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
-        valor = tk.StringVar()
-        valor.set(self.bairros[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.bairros)
+        self.bairro_saida_oferecimento = tk.StringVar()
+        self.bairro_saida_oferecimento.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_saida_oferecimento,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_oferecer_carona)
@@ -446,9 +446,9 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 24', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        valor = tk.StringVar()
-        valor.set(self.bairros[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,valor,*self.bairros)
+        self.bairro_chegada_oferecimento = tk.StringVar()
+        self.bairro_chegada_oferecimento.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_chegada_oferecimento,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_oferecer_carona)
@@ -490,6 +490,7 @@ class Telas():
         with open('usuarios.pickle','rb') as f:
             self.dic_pessoas = pickle.load(f)
             
+        print (self.dic_pessoas)
 #        self.repostas = tk.Label(self.tela_ler_perfil)
 #        self.repostas.grid(row=3,column=1)
 #        self.repostas.configure(self.dic_pessoas)
@@ -505,19 +506,28 @@ class Telas():
     def clicou_login(self,event):
         self.Tela_login_frame()
 
-    def clicou_continuar_tela_principal(self,event): 
-       with open('usuarios.pickle','rb') as f:
-            self.dic_pessoas = pickle.load(f)
-    
-       #Nome de usuário salvo em uma váriavel
-       self.usuarios = self.entrada_usuario.get()
+    def clicou_continuar_tela_principal(self,event):
+#       if len(self.dic_pessoas) != 0:
+        try:
+           with open('usuarios.pickle','rb') as f:
+                self.dic_pessoas = pickle.load(f)
+                
+           #Nome de usuário salvo em uma váriavel
+           self.usuarios = self.entrada_usuario.get()
+
+        except:
+            #Nome de usuário salvo em uma váriavel
+            self.usuarios = self.entrada_usuario.get()
+
+            
+       
        #Conteúdo da lista do dicionário
-       if self.usuarios in self.dic_pessoas:
+        if self.usuarios in self.dic_pessoas:
            self.conteudo = self.dic_pessoas[self.usuarios]
        
-       if (self.usuarios in self.dic_pessoas) and (self.conteudo[1] == self.entrada_senha.get()):
+        if (self.usuarios in self.dic_pessoas) and (self.conteudo[1] == self.entrada_senha.get()):
            self.tela_principal_frame()
-       else:
+        else:
            tkm.showinfo('Erro','Usuário ou senha inválido')
 
             
@@ -531,23 +541,28 @@ class Telas():
     
         confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
         if confirmando_cadastro:
-            with open ('usuarios.pickle','rb') as f:
-                self.dic_pessoas = pickle.load(f)
-
-
-            #Nome no índice 0 da lista
-            #Senha no índice 1 da lista
-            #Celular no índice 2 da lista
-            #E-mail no índice 3 da lista
-            self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+            try:
+                with open ('usuarios.pickle','rb') as f:
+                    self.dic_pessoas = pickle.load(f)
+                    
+                #Nome no índice 0 da lista
+                #Senha no índice 1 da lista
+                #Celular no índice 2 da lista
+                #E-mail no índice 3 da lista
+                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+                
+            except:
+                #Nome no índice 0 da lista
+                #Senha no índice 1 da lista
+                #Celular no índice 2 da lista
+                #E-mail no índice 3 da lista
+                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
             
             with open ('usuarios.pickle','wb') as f:
                 pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
                 
             self.Tela_login_frame()
-            
-            print (self.dic_pessoas)
-                    
+                                
         else:
             pass
         
@@ -559,11 +574,13 @@ class Telas():
         
     def clicou_confirmar_pedido(self,event):
         
-        
-        with open ('pedidos.pickle','rb') as h:
-            self.dic_pedidos = pickle.load(h)
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.dic_pedidos = pickle.load(h)
+            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido, self.bairro_chegada_pedido, self.hora_pedido, self.lugares_pedido]
             
-        self.dic_pedidos[self.conteudo[0]] = self.conteudo[2]
+        except:
+            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido, self.bairro_chegada_pedido, self.hora_pedido, self.lugares_pedido]
         
         with open ('pedidos.pickle','wb') as h:
             pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
@@ -573,11 +590,17 @@ class Telas():
         self.tela_principal_frame()
 
     def clicou_confirmar_oferecimento(self,event):
-        with open ('oferecimentos.pickle','rb') as g:
-            self.dic_oferecimento = pickle.load(g)
+#        if len(self.dic_oferecimento) != 0:
+        try:
+            with open ('oferecimentos.pickle','rb') as g:
+                self.dic_oferecimento = pickle.load(g)
+            
+            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento,self.bairro_chegada_oferecimento, self.horarios_oferecer, self.lugares_oferecer]
 
-        self.dic_oferecimento[self.conteudo[0]] = self.conteudo[2]
-        
+        except:
+            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento,self.bairro_chegada_oferecimento, self.horarios_oferecer, self.lugares_oferecer]
+
+                
         with open ('oferecimentos.pickle','wb') as g:
             pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
             
@@ -595,15 +618,22 @@ class Telas():
         self.Tela_login_frame()
         
     def clicou_verificar_caronas(self,event):
-        with open ('pedidos.pickle','rb') as h:
-            self.pedidos_de_carona = pickle.load(h)
-
-        with open ('oferecimentos.pickle','rb') as g:
-            self.oferecimento_de_caronas = pickle.load(g)
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.pedidos_de_carona = pickle.load(h)
+                
+        except:
+            print('Sem pedidos de caronas!')
             
-        print ('''
-        Caronas pedidas: {0}
-        Caronas oferecidas {1}'''.format(self.pedidos_de_carona,self.oferecimento_de_caronas))
+        try:
+            with open ('oferecimentos.pickle','rb') as g:
+                self.oferecimento_de_caronas = pickle.load(g)
+        except:
+            print ('Sem ofertas!')
+            
+#        print ('''
+#        Caronas pedidas: {0}
+#        Caronas oferecidas {1}'''.format(self.pedidos_de_carona,self.oferecimento_de_caronas))
         
 
         
