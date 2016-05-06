@@ -515,7 +515,7 @@ class Telas():
 
         #Nome Completo
         nome = tk.StringVar()
-        nome.set (self.dic_pessoas[self.entrada_usuario.get()])
+        nome.set (self.conteudo[0])
         self.nome_entrada = tk.Entry(self.tela_ler_perfil, textvariable = nome)
         self.nome_entrada.grid(row=2, column=1, sticky="ew")
         
@@ -525,7 +525,7 @@ class Telas():
 
         #E-mail
         email = tk.StringVar()
-        email.set (self.dic_pessoas[self.entrada_usuario.get()])
+        email.set (self.conteudo[2])
         self.email_entrada = tk.Entry(self.tela_ler_perfil, textvariable = email)
         self.email_entrada.grid(row=3, column=1, sticky="ew")
         
@@ -535,7 +535,7 @@ class Telas():
 
         #Número de Celular
         numero = tk.StringVar()
-        numero.set (self.dic_pessoas[self.entrada_usuario.get()])
+        numero.set (self.conteudo[3])
         self.celular_entrada = tk.Entry(self.tela_ler_perfil, textvariable = numero)
         self.celular_entrada.grid(row=4, column=1, sticky="ew")
         
@@ -555,9 +555,10 @@ class Telas():
 
         #Senha
         senha = tk.StringVar()
-        senha.set (self.dic_pessoas[self.entrada_usuario.get()])
+        senha.set (self.conteudo[1])
         self.senha_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_entrada.grid(row=6, column=1, sticky="ew")
+        self.senha_entrada.configure(show='*')
         
         self.senha_label = tk.Label(self.tela_ler_perfil)
         self.senha_label.grid(row=6, column=0, sticky="nsew")
@@ -565,9 +566,10 @@ class Telas():
 
         #Confirmar Senha
         senha = tk.StringVar()
-        senha.set (self.dic_pessoas[self.entrada_usuario.get()])
+        senha.set (self.conteudo[1])
         self.senha_confirma_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
+        self.senha_confirma_entrada.configure(show='*')
         
         self.senha_confirma_label = tk.Label(self.tela_ler_perfil)
         self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
