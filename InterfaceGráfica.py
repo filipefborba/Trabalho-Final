@@ -489,19 +489,22 @@ class Telas():
         self.tela_ler_perfil = tk.Frame(self.root)
         self.tela_ler_perfil.configure(bg='#E10022')
         
-        self.tela_ler_perfil.columnconfigure(0, minsize=213, weight=1)
-        self.tela_ler_perfil.columnconfigure(1, minsize=213, weight=1)
-        self.tela_ler_perfil.columnconfigure(2, minsize=213, weight=1)
+        self.tela_ler_perfil.rowconfigure(0, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(1, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(2, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(3, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(4, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(5, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(6, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(7, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(8, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(9, minsize=80, weight=1)
 
-
-        self.tela_ler_perfil.rowconfigure(0, minsize=5, weight=1)
-        self.tela_ler_perfil.rowconfigure(1, minsize=60, weight=1)
-        self.tela_ler_perfil.rowconfigure(2, minsize=60, weight=1)
-        self.tela_ler_perfil.rowconfigure(3, minsize=205, weight=1)
-        self.tela_ler_perfil.rowconfigure(4, minsize=100, weight=1)
-        self.tela_ler_perfil.rowconfigure(5, minsize=45, weight=1)
-        self.tela_ler_perfil.rowconfigure(6, minsize=100, weight=1)
-        self.tela_ler_perfil.rowconfigure(7, minsize=205, weight=1)
+        self.tela_ler_perfil.columnconfigure(0, minsize=220, weight=1)
+        self.tela_ler_perfil.columnconfigure(1, minsize=200, weight=1)
+        self.tela_ler_perfil.columnconfigure(2, minsize=17, weight=1)
+        
+        self.tela_ler_perfil.grid(row=0, column=0, sticky="nsew")
         
         with open('usuarios.pickle','rb') as f:
             self.dic_pessoas = pickle.load(f)
@@ -511,61 +514,69 @@ class Telas():
 #######################################################
 
         #Nome Completo
-        self.nome_entrada = tk.Entry(self.Tela_cadastro)
+        nome = tk.StringVar()
+        nome.set (self.dic_pessoas[self.entrada_usuario.get()])
+        self.nome_entrada = tk.Entry(self.tela_ler_perfil, textvariable = nome)
         self.nome_entrada.grid(row=2, column=1, sticky="ew")
         
-        self.nome_label = tk.Label(self.Tela_cadastro)
+        self.nome_label = tk.Label(self.tela_ler_perfil)
         self.nome_label.grid(row=2, column=0, sticky="nsew")
         self.nome_label.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #E-mail
-        self.email_entrada = tk.Entry(self.Tela_cadastro)
+        email = tk.StringVar()
+        email.set (self.dic_pessoas[self.entrada_usuario.get()])
+        self.email_entrada = tk.Entry(self.tela_ler_perfil, textvariable = email)
         self.email_entrada.grid(row=3, column=1, sticky="ew")
         
-        self.email_label = tk.Label(self.Tela_cadastro)
+        self.email_label = tk.Label(self.tela_ler_perfil)
         self.email_label.grid(row=3, column=0, sticky="nsew")
         self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
         numero = tk.StringVar()
-        numero.set('() 9')
-        self.celular_entrada = tk.Entry(self.Tela_cadastro, textvariable = numero)
+        numero.set (self.dic_pessoas[self.entrada_usuario.get()])
+        self.celular_entrada = tk.Entry(self.tela_ler_perfil, textvariable = numero)
         self.celular_entrada.grid(row=4, column=1, sticky="ew")
         
-        self.celular_label = tk.Label(self.Tela_cadastro)
+        self.celular_label = tk.Label(self.tela_ler_perfil)
         self.celular_label.grid(row=4, column=0, sticky="nsew")
         self.celular_label.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
 
 
         #Usuário
-        self.usuario_entrada = tk.Entry(self.Tela_cadastro)
+        self.usuario_entrada = tk.Entry(self.tela_ler_perfil)
+        self.usuario_entrada.configure(state = "disabled")
         self.usuario_entrada.grid(row=5, column=1, sticky="ew")
         
-        self.usuario_label = tk.Label(self.Tela_cadastro)
+        self.usuario_label = tk.Label(self.tela_ler_perfil)
         self.usuario_label.grid(row=5, column=0, sticky="nsew")
         self.usuario_label.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Senha
-        self.senha_entrada = tk.Entry(self.Tela_cadastro)
+        senha = tk.StringVar()
+        senha.set (self.dic_pessoas[self.entrada_usuario.get()])
+        self.senha_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_entrada.grid(row=6, column=1, sticky="ew")
         
-        self.senha_label = tk.Label(self.Tela_cadastro)
+        self.senha_label = tk.Label(self.tela_ler_perfil)
         self.senha_label.grid(row=6, column=0, sticky="nsew")
         self.senha_label.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Confirmar Senha
-        self.senha_confirma_entrada = tk.Entry(self.Tela_cadastro)
+        senha = tk.StringVar()
+        senha.set (self.dic_pessoas[self.entrada_usuario.get()])
+        self.senha_confirma_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
         
-        self.senha_confirma_label = tk.Label(self.Tela_cadastro)
+        self.senha_confirma_label = tk.Label(self.tela_ler_perfil)
         self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
         self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Nota sobre o celular
-        self.nota_label = tk.Label(self.Tela_cadastro)
+        self.nota_label = tk.Label(self.tela_ler_perfil)
         self.nota_label.grid(row=8, column=1, sticky="nsew")
         self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
-
 
 #######################################################
         
