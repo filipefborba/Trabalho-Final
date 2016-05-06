@@ -649,6 +649,12 @@ class Telas():
         try:
             with open ('pedidos.pickle','rb') as h:
                 self.dic_pedidos = pickle.load(h)
+                
+            #Celular índice 0
+            #Bairro de saída índice 1
+            #Bairro de chegada índice 2
+            #Horário índice 3
+            #Quantidade de lugares índice 4
             self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido.get(), self.bairro_chegada_pedido.get(), self.hora_pedido.get(), self.lugares_pedido.get()]
             
         except:
@@ -666,7 +672,12 @@ class Telas():
         try:
             with open ('oferecimentos.pickle','rb') as g:
                 self.dic_oferecimento = pickle.load(g)
-            
+                        #Celular índice 0
+            #Bairro de saída índice 1
+            #Bairro de chegada índice 2
+            #Horário índice 3
+            #Quantidade de lugares índice 4
+
             self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento.get(),self.bairro_chegada_oferecimento.get(), self.horarios_oferecer.get(), self.lugares_oferecer.get()]
 
         except:
@@ -692,25 +703,9 @@ class Telas():
         self.Tela_login_frame()
         
     def clicou_verificar_caronas(self,event):
-        try:
-            with open ('pedidos.pickle','rb') as h:
-                self.pedidos_de_carona = pickle.load(h)
-                
-                print ('Caronas pedidas: {0}'.format(self.pedidos_de_carona))
-
-                
-        except:
-            tkm.showinfo('Pedidos', 'Sem pedidos de caronas!')
-            
-        try:
-            with open ('oferecimentos.pickle','rb') as g:
-                self.oferecimento_de_caronas = pickle.load(g)
-                
-            print ('Caronas oferecidas: {0}'.format(self.oferecimento_de_caronas))
-
-        except:
-            tkm.showinfo('Oferta','Sem ofertas!')
-            
+        self.match_pedido()
+        self.match_ofertas()
+                        
     def cancelar_pedido(self,event):
         try:
             with open ('pedidos.pickle','rb') as h:
@@ -747,8 +742,61 @@ class Telas():
             
         with open ('oferecimentos.pickle','wb') as g:
             pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
+     
 
-    
+#Celular índice 0
+#Bairro de saída índice 1
+#Bairro de chegada índice 2
+#Horário índice 3
+#Quantidade de lugares índice 4
+
+##########Outras funções
+       
+    def match_pedido(self):
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.dic_pedidos = pickle.load(h)
+                
+            try:
+                with open ('oferecimentos.pickle','rb') as g:
+                    self.dic_oferecimento = pickle.load(g)
+
+                for pedidos in self.dic_pedidos:
+                    for ofertas in self.dic_oferecimento:
+                        if pedidos[1]==ofertas[1] and pedidos[2]==ofertas[2] and pedidos[3]==ofertas[3] and pedidos[4]<=ofertas[4]:
+                            tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(ofertas, ofertas[0]))
+                        else:
+                            tkm.showinfo('Caronas','Não existem caronas no momento!')
+
+                    
+            except:
+                tkm.showinfo('Caronas','Não existem ofertas de carona!')
+                
+        except:
+            tkm.showinfo('Caronas','Não existem pedidos de carona!')
+            
+    def match_ofertas(self):
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.dic_pedidos = pickle.load(h)
+                
+            try:
+                with open ('oferecimentos.pickle','rb') as g:
+                    self.dic_oferecimento = pickle.load(g)
+
+                for ofertas in self.dic_oferecimento:
+                    for pedidos in self.dic_pedidos:
+                        if pedidos[1]==ofertas[1] and pedidos[2]==ofertas[2] and pedidos[3]==ofertas[3] and pedidos[4]<=ofertas[4]:
+                            tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, pedidos[0]))
+                        else:
+                            tkm.showinfo('Caronas','Não existem caronas no momento!')
+            except:
+                tkm.showinfo('Caronas','Não existem pedidos de carona!')
+                
+        except:
+            tkm.showinfo('Caronas','Não existem ofertas de carona!')
+            
+   
 ########## iniciando o programa
     def iniciar(self):
         self.root.mainloop()
