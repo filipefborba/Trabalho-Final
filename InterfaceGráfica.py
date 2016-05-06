@@ -531,6 +531,10 @@ class Telas():
     
         confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
         if confirmando_cadastro:
+            with open ('usuarios.pickle','rb') as f:
+                self.dic_pessoas = pickle.load(f)
+
+
             #Nome no índice 0 da lista
             #Senha no índice 1 da lista
             #Celular no índice 2 da lista
@@ -541,7 +545,9 @@ class Telas():
                 pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
                 
             self.Tela_login_frame()
-        
+            
+            print (self.dic_pessoas)
+                    
         else:
             pass
         
@@ -552,6 +558,11 @@ class Telas():
         self.tela_principal_frame()
         
     def clicou_confirmar_pedido(self,event):
+        
+        
+        with open ('pedidos.pickle','rb') as h:
+            self.dic_pedidos = pickle.load(h)
+            
         self.dic_pedidos[self.conteudo[0]] = self.conteudo[2]
         
         with open ('pedidos.pickle','wb') as h:
@@ -562,6 +573,9 @@ class Telas():
         self.tela_principal_frame()
 
     def clicou_confirmar_oferecimento(self,event):
+        with open ('oferecimentos.pickle','rb') as g:
+            self.dic_oferecimento = pickle.load(g)
+
         self.dic_oferecimento[self.conteudo[0]] = self.conteudo[2]
         
         with open ('oferecimentos.pickle','wb') as g:
