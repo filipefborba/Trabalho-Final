@@ -206,6 +206,7 @@ class Telas():
         #Senha
         self.senha_entrada = tk.Entry(self.Tela_cadastro)
         self.senha_entrada.grid(row=6, column=1, sticky="ew")
+        self.senha_entrada.configure(show='*')
         
         self.senha_label = tk.Label(self.Tela_cadastro)
         self.senha_label.grid(row=6, column=0, sticky="nsew")
@@ -214,6 +215,7 @@ class Telas():
         #Confirmar Senha
         self.senha_confirma_entrada = tk.Entry(self.Tela_cadastro)
         self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
+        self.senha_confirma_entrada.configure(show='*')
         
         self.senha_confirma_label = tk.Label(self.Tela_cadastro)
         self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
@@ -676,6 +678,8 @@ class Telas():
             
         tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
         
+        
+        
         self.tela_principal_frame()
 
     def clicou_oferecer(self,event):
@@ -696,24 +700,54 @@ class Telas():
 
                 
         except:
-            print('Sem pedidos de caronas!')
+            tkm.showinfo('Pedidos', 'Sem pedidos de caronas!')
             
         try:
             with open ('oferecimentos.pickle','rb') as g:
                 self.oferecimento_de_caronas = pickle.load(g)
                 
-            print ('Caronas oferecidas {0}'.format(self.oferecimento_de_caronas))
+            print ('Caronas oferecidas: {0}'.format(self.oferecimento_de_caronas))
 
         except:
-            print ('Sem ofertas!')
+            tkm.showinfo('Oferta','Sem ofertas!')
             
     def cancelar_pedido(self,event):
-        pass
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.dic_pedidos = pickle.load(h)
+                        
+        except:
+                tkm.showinfo('Cancelamento', 'Não existe um pedido de carona')
+                
+        if self.conteudo[0] in self.dic_pedidos:
+            del self.dic_pedidos[self.conteudo[0]]
+            tkm.showinfo('Cancelamento','Pedido cancelado com sucesso!')
+       
+        else:
+            tkm.showinfo('Cancelamento', 'Não existe um pedido de carona')
+            
+        with open ('pedidos.pickle','wb') as h:
+            pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
+
+
     
     def cancelar_oferta(self,event):
-        pass
-
+        try:
+            with open ('oferecimentos.pickle','rb') as g:
+                self.dic_oferecimento = pickle.load(g)
         
+        except:
+            tkm.showinfo('Cancelamento', 'Não havia sido feita uma oferta de carona por este usuário')
+        
+        if self.conteudo[0] in self.dic_oferecimento:
+                del self.dic_oferecimento[self.conteudo[0]]
+                tkm.showinfo('Cancelamento', 'Oferta cancelada com sucesso!')
+        else:
+            tkm.showinfo('Cancelamento', 'Não havia sido feita uma oferta de carona por este usuário')
+            
+        with open ('oferecimentos.pickle','wb') as g:
+            pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
+
     
 ########## iniciando o programa
     def iniciar(self):
