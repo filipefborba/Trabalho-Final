@@ -1,4 +1,4 @@
-import caronas, tela_cadastro, telalogin, telaprincipal, pedircarona
+import caronas, cadastro, login, principal, pedircarona
 from PyQt4 import QtCore, QtGui
 
 if __name__ == "__main__":

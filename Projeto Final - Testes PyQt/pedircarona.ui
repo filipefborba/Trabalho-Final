@@ -161,7 +161,7 @@
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>460</y>
+      <y>490</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -180,7 +180,7 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>460</y>
+      <y>490</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -193,6 +193,58 @@
     </property>
     <property name="text">
      <string>Confirmar</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="lugares">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>400</y>
+      <width>411</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lugareslabel">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>390</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bodoni MT</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Lugares disponíveis:</string>
     </property>
    </widget>
   </widget>
