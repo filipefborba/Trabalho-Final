@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'caronas.ui'
+# Form implementation generated from reading ui file 'telalogin.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import tela_cadastro, telalogin
+import telaprincipal
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(844, 559)
+        MainWindow.resize(796, 553)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -53,62 +53,84 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         MainWindow.setPalette(palette)
 
-        #Botão para entrar na página de login
-        self.login = QtGui.QPushButton(self.centralwidget)
-        self.login.setGeometry(QtCore.QRect(270, 240, 300, 50))
-        self.login.setObjectName(_fromUtf8("login"))
-        self.login.clicked.connect(self.abrirlogin)
-
-        #Botão para entrar na página de cadastro
-        self.cadastro = QtGui.QPushButton(self.centralwidget)
-        self.cadastro.setGeometry(QtCore.QRect(270, 340, 300, 50))
-        self.cadastro.setObjectName(_fromUtf8("cadastro"))
-        self.cadastro.clicked.connect(self.abrircadastro)
-
         #Título grande
         self.caronasinsperlabel = QtGui.QLabel(self.centralwidget)
-        self.caronasinsperlabel.setGeometry(QtCore.QRect(170, 40, 521, 161))
+        self.caronasinsperlabel.setGeometry(QtCore.QRect(140, 30, 521, 161))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Bodoni MT"))
         font.setPointSize(60)
+
         self.caronasinsperlabel.setFont(font)
         self.caronasinsperlabel.setObjectName(_fromUtf8("caronasinsperlabel"))
+        self.senhalabel = QtGui.QLabel(self.centralwidget)
+        self.senhalabel.setGeometry(QtCore.QRect(40, 310, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Bodoni MT"))
+        font.setPointSize(12)
+
+        self.senhalabel.setFont(font)
+        self.senhalabel.setObjectName(_fromUtf8("senhalabel"))
+
+        self.senhainput = QtGui.QLineEdit(self.centralwidget)
+        self.senhainput.setGeometry(QtCore.QRect(170, 320, 491, 20))
+        self.senhainput.setEchoMode(QtGui.QLineEdit.Password)
+        self.senhainput.setObjectName(_fromUtf8("senhainput"))
+
+        self.usuarioinput = QtGui.QLineEdit(self.centralwidget)
+        self.usuarioinput.setGeometry(QtCore.QRect(170, 260, 491, 20))
+        self.usuarioinput.setObjectName(_fromUtf8("usuarioinput"))
+
+        self.voltar = QtGui.QPushButton(self.centralwidget)
+        self.voltar.setGeometry(QtCore.QRect(160, 430, 101, 41))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("MS Shell Dlg 2"))
+        font.setPointSize(8)
+
+        self.voltar.setFont(font)
+        self.voltar.setObjectName(_fromUtf8("voltar"))
+
+        self.usuariolabel = QtGui.QLabel(self.centralwidget)
+        self.usuariolabel.setGeometry(QtCore.QRect(40, 250, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Bodoni MT"))
+        font.setPointSize(12)
+
+        self.usuariolabel.setFont(font)
+        self.usuariolabel.setObjectName(_fromUtf8("usuariolabel"))
+
+        self.confirmar = QtGui.QPushButton(self.centralwidget)
+        self.confirmar.setGeometry(QtCore.QRect(520, 430, 101, 41))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("MS Shell Dlg 2"))
+        font.setPointSize(8)
+        self.confirmar.setFont(font)
+        self.confirmar.setObjectName(_fromUtf8("confirmar"))
+        self.confirmar.clicked.connect(self.abrirprincipal)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
-        self.statusbar.setEnabled(True)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    #Função que define os textos dentro dos botões e da janela
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
-        self.login.setText(_translate("MainWindow", "Login", None))
-        self.cadastro.setText(_translate("MainWindow", "Cadastre-se", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.caronasinsperlabel.setText(_translate("MainWindow", "Caronas Insper", None))
+        self.senhalabel.setText(_translate("MainWindow", "Senha:", None))
+        self.voltar.setText(_translate("MainWindow", "Voltar", None))
+        self.usuariolabel.setText(_translate("MainWindow", "Usuário:", None))
+        self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
-    #Função para o botão: abre a página de login
-    def abrircadastro(self):
-        self.MainWindow = tela_cadastro.Ui_MainWindow
-        teladecadastro = QtGui.QMainWindow()
-        ui = tela_cadastro.Ui_MainWindow()
-        ui.setupUi(teladecadastro)
-        teladecadastro.show()
+    def abrirprincipal(self):
+        self.MainWindow = telaprincipal.Ui_MainWindow
+        tela_principal = QtGui.QMainWindow()
+        ui = telaprincipal.Ui_MainWindow()
+        ui.setupUi(tela_principal)
+        tela_principal.show()
         sys.exit(app.exec_())
 
-    #Função para o botão: abre a página de cadastro
-    def abrirlogin(self):
-        self.MainWindow = telalogin.Ui_MainWindow
-        teladelogin = QtGui.QMainWindow()
-        ui = telalogin.Ui_MainWindow()
-        ui.setupUi(teladelogin)
-        teladelogin.show()
-        sys.exit(app.exec_())
-
-#Apenas para rodar sepadaramente
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
@@ -117,3 +139,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+

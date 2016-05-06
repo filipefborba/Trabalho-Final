@@ -14,7 +14,10 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_2">
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <widget class="QLabel" name="statuslabel">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -33,7 +36,7 @@
      <string>Status da carona:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="titulo">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -52,7 +55,7 @@
      <string>Olá, (usuario). O que deseja fazer?</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="login_2">
+   <widget class="QPushButton" name="agendar">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -65,7 +68,7 @@
      <string>Agendar carona</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="login">
+   <widget class="QPushButton" name="pedir">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -78,7 +81,7 @@
      <string>Pedir carona</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="login_3">
+   <widget class="QPushButton" name="perfil">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -91,7 +94,7 @@
      <string>Alterar perfil</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="statusdacarona">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -110,16 +113,6 @@
      <string>Inativo/Pendente/Ativo</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
