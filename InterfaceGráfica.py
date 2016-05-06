@@ -117,6 +117,7 @@ class Telas():
         
         self.entrada_senha = tk.Entry(self.Tela_login)
         self.entrada_senha.grid(row=5, column=2, sticky="ew")
+        self.entrada_senha.configure(show='*')
         
         self.continuar_tela_principal = tk.Button(self.Tela_login)
         self.continuar_tela_principal.grid(row=6, column=3,columnspan=1)
@@ -554,7 +555,7 @@ class Telas():
 
 
 #######################################################
-
+        
 
 ####################     Função dos botões
 
@@ -571,8 +572,7 @@ class Telas():
            with open('usuarios.pickle','rb') as f:
                 self.dic_pessoas = pickle.load(f)
                 
-           #Nome completo salvo em uma váriavel
-           self.nome_completo = self.dic_pessoas[self.nome_completo]
+           #Nome de usuário salvo em uma váriavel
            self.usuarios = self.entrada_usuario.get()
 
         except:
@@ -609,14 +609,14 @@ class Telas():
                 #Senha no índice 1 da lista
                 #Celular no índice 2 da lista
                 #E-mail no índice 3 da lista
-                self.dic_pessoas[self.nome_entrada.get()]=[self.usuario_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
                 
             except:
                 #Nome no índice 0 da lista
                 #Senha no índice 1 da lista
                 #Celular no índice 2 da lista
                 #E-mail no índice 3 da lista
-                self.dic_pessoas[self.nome_entrada.get()]=[self.usuario_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
+                self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
             
             with open ('usuarios.pickle','wb') as f:
                 pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
