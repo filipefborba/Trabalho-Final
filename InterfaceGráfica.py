@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 import pickle
+import firebase
 
 class Telas():
     
