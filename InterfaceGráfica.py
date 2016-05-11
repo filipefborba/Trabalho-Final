@@ -22,7 +22,7 @@ class Telas():
         #Gerando a janela
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
-        self.root.geometry("600x600")
+        self.root.geometry("600x840")
         self.root.resizable(width=False, height=False)
         #self.root.rowconfigure(0, minsize=800)
         #self.root.columnconfigure(0, minsize=640)
@@ -233,7 +233,7 @@ class Telas():
 ##########################################################################
         
         self.salvar_novo_cadastro = tk.Button(self.Tela_cadastro)
-        self.salvar_novo_cadastro.grid(row=7, column=3)
+        self.salvar_novo_cadastro.grid(row=7, column=2)
         self.salvar_novo_cadastro.configure(text='salvar')
         self.salvar_novo_cadastro.bind('<1>',self.clicou_salvar)
         
@@ -547,7 +547,9 @@ class Telas():
 
 
         #Usuário
-        self.usuario_entrada = tk.Entry(self.tela_ler_perfil)
+        uzuario = tk.StringVar()
+        uzuario.set (self.usuarios)
+        self.usuario_entrada = tk.Entry(self.tela_ler_perfil, textvariable =uzuario)
         self.usuario_entrada.configure(state = "disabled")
         self.usuario_entrada.grid(row=5, column=1, sticky="ew")
         
