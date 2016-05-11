@@ -22,8 +22,8 @@ class Telas():
         #Gerando a janela
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
-        self.root.geometry("600x600")
-        self.root.resizable(width=False, height=False)
+        self.root.geometry("640x800")
+#        self.root.resizable(width=False, height=False)
         #self.root.rowconfigure(0, minsize=800)
         #self.root.columnconfigure(0, minsize=640)
         self.root.grid()
@@ -785,7 +785,7 @@ class Telas():
                         conteudo_pedido = self.dic_pedidos[self.usuarios]
                         for ofertas in self.dic_oferecimento:
                             conteudo_oferecimento = self.dic_oferecimento[ofertas]
-                            if conteudo_pedido[1]==conteudo_oferecimento[1]:
+                            if conteudo_pedido[1]==conteudo_oferecimento[1] and conteudo_pedido[2]==conteudo_oferecimento[2] and conteudo_pedido[3]==conteudo_oferecimento[3] and conteudo_pedido[4]<=conteudo_oferecimento[4]:
                                 tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(ofertas, conteudo_oferecimento[0]))
                             else:
                                 tkm.showinfo('Caronas','Não existem caronas no momento!')
@@ -811,8 +811,8 @@ class Telas():
                         conteudo_oferecimento = self.dic_oferecimento[self.usuarios]
                         for pedidos in self.dic_pedidos:
                             conteudo_pedido = self.dic_pedidos[pedidos]
-                            if conteudo_pedido[1]==conteudo_oferecimento[1]:
-                                tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, pedidos[0]))
+                            if conteudo_pedido[1]==conteudo_oferecimento[1] and conteudo_pedido[2]==conteudo_oferecimento[2] and conteudo_pedido[3]==conteudo_oferecimento[3] and conteudo_pedido[4]<=conteudo_oferecimento[4]:
+                                tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, conteudo_pedido[0]))
                             else:
                                 tkm.showinfo('Caronas','Não existem caronas no momento!')
             except:
