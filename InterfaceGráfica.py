@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 import pickle
+import firebase
 
 class Telas():
     
@@ -207,6 +208,7 @@ class Telas():
         #Senha
         self.senha_entrada = tk.Entry(self.Tela_cadastro)
         self.senha_entrada.grid(row=6, column=1, sticky="ew")
+        self.senha_entrada.configure(show='*')
         
         self.senha_label = tk.Label(self.Tela_cadastro)
         self.senha_label.grid(row=6, column=0, sticky="nsew")
@@ -215,6 +217,7 @@ class Telas():
         #Confirmar Senha
         self.senha_confirma_entrada = tk.Entry(self.Tela_cadastro)
         self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
+        self.senha_confirma_entrada.configure(show='*')
         
         self.senha_confirma_label = tk.Label(self.Tela_cadastro)
         self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
@@ -488,19 +491,22 @@ class Telas():
         self.tela_ler_perfil = tk.Frame(self.root)
         self.tela_ler_perfil.configure(bg='#E10022')
         
-        self.tela_ler_perfil.columnconfigure(0, minsize=213, weight=1)
-        self.tela_ler_perfil.columnconfigure(1, minsize=213, weight=1)
-        self.tela_ler_perfil.columnconfigure(2, minsize=213, weight=1)
+        self.tela_ler_perfil.rowconfigure(0, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(1, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(2, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(3, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(4, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(5, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(6, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(7, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(8, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(9, minsize=80, weight=1)
 
-
-        self.tela_ler_perfil.rowconfigure(0, minsize=5, weight=1)
-        self.tela_ler_perfil.rowconfigure(1, minsize=60, weight=1)
-        self.tela_ler_perfil.rowconfigure(2, minsize=60, weight=1)
-        self.tela_ler_perfil.rowconfigure(3, minsize=205, weight=1)
-        self.tela_ler_perfil.rowconfigure(4, minsize=100, weight=1)
-        self.tela_ler_perfil.rowconfigure(5, minsize=45, weight=1)
-        self.tela_ler_perfil.rowconfigure(6, minsize=100, weight=1)
-        self.tela_ler_perfil.rowconfigure(7, minsize=205, weight=1)
+        self.tela_ler_perfil.columnconfigure(0, minsize=220, weight=1)
+        self.tela_ler_perfil.columnconfigure(1, minsize=200, weight=1)
+        self.tela_ler_perfil.columnconfigure(2, minsize=17, weight=1)
+        
+        self.tela_ler_perfil.grid(row=0, column=0, sticky="nsew")
         
         with open('usuarios.pickle','rb') as f:
             self.dic_pessoas = pickle.load(f)
@@ -510,61 +516,71 @@ class Telas():
 #######################################################
 
         #Nome Completo
-        self.nome_entrada = tk.Entry(self.Tela_cadastro)
+        nome = tk.StringVar()
+        nome.set (self.conteudo[0])
+        self.nome_entrada = tk.Entry(self.tela_ler_perfil, textvariable = nome)
         self.nome_entrada.grid(row=2, column=1, sticky="ew")
         
-        self.nome_label = tk.Label(self.Tela_cadastro)
+        self.nome_label = tk.Label(self.tela_ler_perfil)
         self.nome_label.grid(row=2, column=0, sticky="nsew")
         self.nome_label.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #E-mail
-        self.email_entrada = tk.Entry(self.Tela_cadastro)
+        email = tk.StringVar()
+        email.set (self.conteudo[2])
+        self.email_entrada = tk.Entry(self.tela_ler_perfil, textvariable = email)
         self.email_entrada.grid(row=3, column=1, sticky="ew")
         
-        self.email_label = tk.Label(self.Tela_cadastro)
+        self.email_label = tk.Label(self.tela_ler_perfil)
         self.email_label.grid(row=3, column=0, sticky="nsew")
         self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
         numero = tk.StringVar()
-        numero.set('() 9')
-        self.celular_entrada = tk.Entry(self.Tela_cadastro, textvariable = numero)
+        numero.set (self.conteudo[3])
+        self.celular_entrada = tk.Entry(self.tela_ler_perfil, textvariable = numero)
         self.celular_entrada.grid(row=4, column=1, sticky="ew")
         
-        self.celular_label = tk.Label(self.Tela_cadastro)
+        self.celular_label = tk.Label(self.tela_ler_perfil)
         self.celular_label.grid(row=4, column=0, sticky="nsew")
         self.celular_label.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
 
 
         #Usuário
-        self.usuario_entrada = tk.Entry(self.Tela_cadastro)
+        self.usuario_entrada = tk.Entry(self.tela_ler_perfil)
+        self.usuario_entrada.configure(state = "disabled")
         self.usuario_entrada.grid(row=5, column=1, sticky="ew")
         
-        self.usuario_label = tk.Label(self.Tela_cadastro)
+        self.usuario_label = tk.Label(self.tela_ler_perfil)
         self.usuario_label.grid(row=5, column=0, sticky="nsew")
         self.usuario_label.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Senha
-        self.senha_entrada = tk.Entry(self.Tela_cadastro)
+        senha = tk.StringVar()
+        senha.set (self.conteudo[1])
+        self.senha_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_entrada.grid(row=6, column=1, sticky="ew")
+        self.senha_entrada.configure(show='*')
         
-        self.senha_label = tk.Label(self.Tela_cadastro)
+        self.senha_label = tk.Label(self.tela_ler_perfil)
         self.senha_label.grid(row=6, column=0, sticky="nsew")
         self.senha_label.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Confirmar Senha
-        self.senha_confirma_entrada = tk.Entry(self.Tela_cadastro)
+        senha = tk.StringVar()
+        senha.set (self.conteudo[1])
+        self.senha_confirma_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
+        self.senha_confirma_entrada.configure(show='*')
         
-        self.senha_confirma_label = tk.Label(self.Tela_cadastro)
+        self.senha_confirma_label = tk.Label(self.tela_ler_perfil)
         self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
         self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Nota sobre o celular
-        self.nota_label = tk.Label(self.Tela_cadastro)
+        self.nota_label = tk.Label(self.tela_ler_perfil)
         self.nota_label.grid(row=8, column=1, sticky="nsew")
         self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
-
 
 #######################################################
         
@@ -648,6 +664,12 @@ class Telas():
         try:
             with open ('pedidos.pickle','rb') as h:
                 self.dic_pedidos = pickle.load(h)
+                
+            #Celular índice 0
+            #Bairro de saída índice 1
+            #Bairro de chegada índice 2
+            #Horário índice 3
+            #Quantidade de lugares índice 4
             self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido.get(), self.bairro_chegada_pedido.get(), self.hora_pedido.get(), self.lugares_pedido.get()]
             
         except:
@@ -665,7 +687,12 @@ class Telas():
         try:
             with open ('oferecimentos.pickle','rb') as g:
                 self.dic_oferecimento = pickle.load(g)
-            
+                        #Celular índice 0
+            #Bairro de saída índice 1
+            #Bairro de chegada índice 2
+            #Horário índice 3
+            #Quantidade de lugares índice 4
+
             self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento.get(),self.bairro_chegada_oferecimento.get(), self.horarios_oferecer.get(), self.lugares_oferecer.get()]
 
         except:
@@ -676,6 +703,8 @@ class Telas():
             pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
             
         tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+        
+        
         
         self.tela_principal_frame()
 
@@ -689,33 +718,100 @@ class Telas():
         self.Tela_login_frame()
         
     def clicou_verificar_caronas(self,event):
+        self.match_pedido()
+        self.match_ofertas()
+                        
+    def cancelar_pedido(self,event):
         try:
             with open ('pedidos.pickle','rb') as h:
-                self.pedidos_de_carona = pickle.load(h)
-                
-                print ('Caronas pedidas: {0}'.format(self.pedidos_de_carona))
-
-                
+                self.dic_pedidos = pickle.load(h)
+                        
         except:
-            print('Sem pedidos de caronas!')
-            
-        try:
-            with open ('oferecimentos.pickle','rb') as g:
-                self.oferecimento_de_caronas = pickle.load(g)
+                tkm.showinfo('Cancelamento', 'Não existe um pedido de carona')
                 
-            print ('Caronas oferecidas {0}'.format(self.oferecimento_de_caronas))
-
-        except:
-            print ('Sem ofertas!')
+        if self.conteudo[0] in self.dic_pedidos:
+            del self.dic_pedidos[self.conteudo[0]]
+            tkm.showinfo('Cancelamento','Pedido cancelado com sucesso!')
+       
+        else:
+            tkm.showinfo('Cancelamento', 'Não existe um pedido de carona')
             
-    def cancelar_pedido(self,event):
-        pass
+        with open ('pedidos.pickle','wb') as h:
+            pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
+
+
     
     def cancelar_oferta(self,event):
-        pass
-
+        try:
+            with open ('oferecimentos.pickle','rb') as g:
+                self.dic_oferecimento = pickle.load(g)
         
-    
+        except:
+            tkm.showinfo('Cancelamento', 'Não havia sido feita uma oferta de carona por este usuário')
+        
+        if self.conteudo[0] in self.dic_oferecimento:
+                del self.dic_oferecimento[self.conteudo[0]]
+                tkm.showinfo('Cancelamento', 'Oferta cancelada com sucesso!')
+        else:
+            tkm.showinfo('Cancelamento', 'Não havia sido feita uma oferta de carona por este usuário')
+            
+        with open ('oferecimentos.pickle','wb') as g:
+            pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
+     
+
+#Celular índice 0
+#Bairro de saída índice 1
+#Bairro de chegada índice 2
+#Horário índice 3
+#Quantidade de lugares índice 4
+
+##########Outras funções
+       
+    def match_pedido(self):
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.dic_pedidos = pickle.load(h)
+                
+            try:
+                with open ('oferecimentos.pickle','rb') as g:
+                    self.dic_oferecimento = pickle.load(g)
+
+                for pedidos in self.dic_pedidos:
+                    for ofertas in self.dic_oferecimento:
+                        if pedidos[1]==ofertas[1] and pedidos[2]==ofertas[2] and pedidos[3]==ofertas[3] and pedidos[4]<=ofertas[4]:
+                            tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(ofertas, ofertas[0]))
+                        else:
+                            tkm.showinfo('Caronas','Não existem caronas no momento!')
+
+                    
+            except:
+                tkm.showinfo('Caronas','Não existem ofertas de carona!')
+                
+        except:
+            tkm.showinfo('Caronas','Não existem pedidos de carona!')
+            
+    def match_ofertas(self):
+        try:
+            with open ('pedidos.pickle','rb') as h:
+                self.dic_pedidos = pickle.load(h)
+                
+            try:
+                with open ('oferecimentos.pickle','rb') as g:
+                    self.dic_oferecimento = pickle.load(g)
+
+                for ofertas in self.dic_oferecimento:
+                    for pedidos in self.dic_pedidos:
+                        if pedidos[1]==ofertas[1] and pedidos[2]==ofertas[2] and pedidos[3]==ofertas[3] and pedidos[4]<=ofertas[4]:
+                            tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, pedidos[0]))
+                        else:
+                            tkm.showinfo('Caronas','Não existem caronas no momento!')
+            except:
+                tkm.showinfo('Caronas','Não existem pedidos de carona!')
+                
+        except:
+            tkm.showinfo('Caronas','Não existem ofertas de carona!')
+            
+   
 ########## iniciando o programa
     def iniciar(self):
         self.root.mainloop()
