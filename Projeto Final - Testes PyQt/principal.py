@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import caronas
+import caronas, pedircarona, agendarcarona
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -88,7 +88,7 @@ class Ui_MainWindow(object):
         self.perfil = QtGui.QPushButton(self.centralwidget)
         self.perfil.setGeometry(QtCore.QRect(260, 500, 300, 50))
         self.perfil.setObjectName(_fromUtf8("perfil"))
-        
+
         #Botão para remover a carona
         self.remover = QtGui.QPushButton(self.centralwidget)
         self.remover.setGeometry(QtCore.QRect(260, 420, 300, 50))
@@ -138,11 +138,11 @@ class Ui_MainWindow(object):
         sys.exit(app.exec_())
 
     def abriragendar(self):
-        self.MainWindow = pedircarona.Ui_MainWindow
-        telapedir = QtGui.QMainWindow()
-        ui = pedircarona.Ui_MainWindow()
-        ui.setupUi(telapedir)
-        telapedir.show()
+        self.MainWindow = agendarcarona.Ui_MainWindow
+        tela_agendar = QtGui.QMainWindow()
+        ui = agendarcarona.Ui_MainWindow()
+        ui.setupUi(tela_agendar)
+        tela_agendar.show()
         sys.exit(app.exec_())
 
 

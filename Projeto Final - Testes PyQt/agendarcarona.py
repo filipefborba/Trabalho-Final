@@ -134,7 +134,7 @@ class Ui_MainWindow(object):
         self.lugareslabel.setObjectName(_fromUtf8("lugareslabel"))
 
         self.lugares = QtGui.QComboBox(self.centralwidget)
-        self.lugares.setGeometry(QtCore.QRect(200, 400, 411, 22))
+        self.lugares.setGeometry(QtCore.QRect(190, 410, 411, 22))
         self.lugares.setEditable(True)
         self.lugares.setObjectName(_fromUtf8("lugares"))
         self.lugares.addItem(_fromUtf8(""))

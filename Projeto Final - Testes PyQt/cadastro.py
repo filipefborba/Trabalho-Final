@@ -164,8 +164,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
         self.nomelabel.setText(_translate("MainWindow", "Nome completo:", None))
-        self.celularlabel.setText(_translate("MainWindow", "Nº de celular:", None))
-        self.emaillabel.setText(_translate("MainWindow", "E-mail:", None))
+        self.celularlabel.setText(_translate("MainWindow", "Nº de celular: ", None))
+        self.emaillabel.setText(_translate("MainWindow", "E-mail:@.com", None))
         self.usuariolabel.setText(_translate("MainWindow", "Usuário:", None))
         self.senhalabel.setText(_translate("MainWindow", "Senha:", None))
         self.confirmarsenhalabel.setText(_translate("MainWindow", "Confirmar senha:", None))
@@ -175,6 +175,7 @@ class Ui_MainWindow(object):
 
     def registrarcadastro(self):
         pass
+
 
     def abrircaronas(self):
         self.MainWindow = caronas.Ui_MainWindow
