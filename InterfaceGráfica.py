@@ -22,9 +22,10 @@ class Telas():
         #Gerando a janela
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
-        self.root.geometry("640x800")
-        self.root.rowconfigure(0, minsize=800)
-        self.root.columnconfigure(0, minsize=640)
+        self.root.geometry("600x600")
+        self.root.resizable(width=False, height=False)
+        #self.root.rowconfigure(0, minsize=800)
+        #self.root.columnconfigure(0, minsize=640)
         self.root.grid()
         
         self.tela_inicial_frame() 
