@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 import pickle
+import smtplib
 import firebase
 
 class Telas():
@@ -22,13 +23,10 @@ class Telas():
         #Gerando a janela
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
-<<<<<<< HEAD
         self.root.geometry("640x800")
 #        self.root.resizable(width=False, height=False)
-=======
         self.root.geometry("600x840")
         self.root.resizable(width=False, height=False)
->>>>>>> 19c90f680ffce65ff249390869e589a45a2370d7
         #self.root.rowconfigure(0, minsize=800)
         #self.root.columnconfigure(0, minsize=640)
         self.root.grid()
@@ -793,7 +791,15 @@ class Telas():
                         for ofertas in self.dic_oferecimento:
                             conteudo_oferecimento = self.dic_oferecimento[ofertas]
                             if conteudo_pedido[1]==conteudo_oferecimento[1] and conteudo_pedido[2]==conteudo_oferecimento[2] and conteudo_pedido[3]==conteudo_oferecimento[3] and conteudo_pedido[4]<=conteudo_oferecimento[4]:
-                                tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(ofertas, conteudo_oferecimento[0]))
+                                fromaddr = "decoejz@gmail.com"
+                                toaddrs = "luca.ribeiro.noto@gmail.com"
+                                
+                                msg = 'O seu carona é: {0}, e seu telefone é: {1}'.format(ofertas, conteudo_oferecimento[0])
+                                
+                                server = smtplib.SMTP('insper.edu.br')
+                                server.set_debuglevel(1)
+                                server.sendmail(fromaddr, toaddrs, msg)
+                                server.quit()
                             else:
                                 tkm.showinfo('Caronas','Não existem caronas no momento!')
 
@@ -819,7 +825,15 @@ class Telas():
                         for pedidos in self.dic_pedidos:
                             conteudo_pedido = self.dic_pedidos[pedidos]
                             if conteudo_pedido[1]==conteudo_oferecimento[1] and conteudo_pedido[2]==conteudo_oferecimento[2] and conteudo_pedido[3]==conteudo_oferecimento[3] and conteudo_pedido[4]<=conteudo_oferecimento[4]:
-                                tkm.showinfo('Caronas','O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, conteudo_pedido[0]))
+                                fromaddr = "decoejz@gmail.com"
+                                toaddrs = "luca.ribeiro.noto@gmail.com"
+                                
+                                msg = 'O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, conteudo_pedido[0])
+                                
+                                server = smtplib.SMTP('insper.edu.br')
+                                server.set_debuglevel(1)
+                                server.sendmail(fromaddr, toaddrs, msg)
+                                server.quit()                           
                             else:
                                 tkm.showinfo('Caronas','Não existem caronas no momento!')
             except:
@@ -827,8 +841,7 @@ class Telas():
                 
         except:
             tkm.showinfo('Caronas','Não existem ofertas de carona!')
-            
-   
+    
 ########## iniciando o programa
     def iniciar(self):
         self.root.mainloop()
