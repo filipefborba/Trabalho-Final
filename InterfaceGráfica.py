@@ -2,7 +2,6 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 import pickle
-import smtplib
 import firebase
 
 class Telas():
@@ -26,7 +25,7 @@ class Telas():
         self.root.geometry("640x800")
 #        self.root.resizable(width=False, height=False)
         self.root.geometry("600x840")
-        self.root.resizable(width=False, height=False)
+#        self.root.resizable(width=False, height=False)
         #self.root.rowconfigure(0, minsize=800)
         #self.root.columnconfigure(0, minsize=640)
         self.root.grid()
@@ -589,6 +588,36 @@ class Telas():
 
 #######################################################
         
+#        self.salvar_cadastro = tk.Button(self.Tela_cadastro)
+#        self.salvar_cadastro.grid(row=7, column=2)
+#        self.salvar_cadastro.configure(text='salvar')
+#        self.salvar_cadastro.bind('<1>',self.clicou_continuar_tela_principal)
+#        
+#        self.voltar_tela_inicial = tk.Button(self.Tela_cadastro)
+#        self.voltar_tela_inicial.grid(row=7, column=0)
+#        self.voltar_tela_inicial.configure(text='Voltar')
+#        self.voltar_tela_inicial.bind('<1>',self.clicou_continuar_tela_principal)
+
+
+    def Tela_verificar_frame(self):
+        self.tela_verificar = tk.Frame(self.root)
+        self.tela_verificar.configure(bg='#E10022')
+        
+        self.tela_verificar.rowconfigure(0, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(1, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(2, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(3, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(4, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(5, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(6, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(7, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(8, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(9, minsize=16, weight=1)
+
+        self.tela_verificar.columnconfigure(0, minsize=20, weight=1)
+        self.tela_verificar.columnconfigure(1, minsize=200, weight=1)
+        
+        
 
 ####################     Função dos botões
 
@@ -726,8 +755,7 @@ class Telas():
         
     #Função que verifica caronas
     def clicou_verificar_caronas(self,event):
-        self.match_pedido()
-        self.match_ofertas()
+        self.Tela_verificar_frame()
                         
     #Função que cancela as caronas pedidas
     def cancelar_pedido(self,event):
@@ -766,81 +794,8 @@ class Telas():
             
         with open ('oferecimentos.pickle','wb') as g:
             pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
-     
+           
 
-#Celular índice 0
-#Bairro de saída índice 1
-#Bairro de chegada índice 2
-#Horário índice 3
-#Quantidade de lugares índice 4
-
-##########Funções que fazem dar match nos pedidos
-      
-    def match_pedido(self):
-        try:
-            with open ('pedidos.pickle','rb') as h:
-                self.dic_pedidos = pickle.load(h)
-                
-            try:
-                with open ('oferecimentos.pickle','rb') as g:
-                    self.dic_oferecimento = pickle.load(g)
-
-                for pedidos in self.dic_pedidos:
-                    if self.usuarios == pedidos:
-                        conteudo_pedido = self.dic_pedidos[self.usuarios]
-                        for ofertas in self.dic_oferecimento:
-                            conteudo_oferecimento = self.dic_oferecimento[ofertas]
-                            if conteudo_pedido[1]==conteudo_oferecimento[1] and conteudo_pedido[2]==conteudo_oferecimento[2] and conteudo_pedido[3]==conteudo_oferecimento[3] and conteudo_pedido[4]<=conteudo_oferecimento[4]:
-                                fromaddr = "decoejz@gmail.com"
-                                toaddrs = "luca.ribeiro.noto@gmail.com"
-                                
-                                msg = 'O seu carona é: {0}, e seu telefone é: {1}'.format(ofertas, conteudo_oferecimento[0])
-                                
-                                server = smtplib.SMTP('insper.edu.br')
-                                server.set_debuglevel(1)
-                                server.sendmail(fromaddr, toaddrs, msg)
-                                server.quit()
-                            else:
-                                tkm.showinfo('Caronas','Não existem caronas no momento!')
-
-                    
-            except:
-                tkm.showinfo('Caronas','Não existem ofertas de carona no momento!')
-                
-        except:
-            tkm.showinfo('Caronas','Não existem pedidos de carona!')
-            
-    def match_ofertas(self):
-        try:
-            with open ('oferecimentos.pickle','rb') as g:
-                self.dic_oferecimento = pickle.load(g)
-                
-            try:
-                with open ('pedidos.pickle','rb') as h:
-                    self.dic_pedidos = pickle.load(h)
-
-                for ofertas in self.dic_oferecimento:
-                    if self.usuarios == ofertas:
-                        conteudo_oferecimento = self.dic_oferecimento[self.usuarios]
-                        for pedidos in self.dic_pedidos:
-                            conteudo_pedido = self.dic_pedidos[pedidos]
-                            if conteudo_pedido[1]==conteudo_oferecimento[1] and conteudo_pedido[2]==conteudo_oferecimento[2] and conteudo_pedido[3]==conteudo_oferecimento[3] and conteudo_pedido[4]<=conteudo_oferecimento[4]:
-                                fromaddr = "decoejz@gmail.com"
-                                toaddrs = "luca.ribeiro.noto@gmail.com"
-                                
-                                msg = 'O seu carona é: {0}, e seu telefone é: {1}'.format(pedidos, conteudo_pedido[0])
-                                
-                                server = smtplib.SMTP('insper.edu.br')
-                                server.set_debuglevel(1)
-                                server.sendmail(fromaddr, toaddrs, msg)
-                                server.quit()                           
-                            else:
-                                tkm.showinfo('Caronas','Não existem caronas no momento!')
-            except:
-                tkm.showinfo('Caronas','Não existem pedidos de carona!')
-                
-        except:
-            tkm.showinfo('Caronas','Não existem ofertas de carona!')
     
 ########## iniciando o programa
     def iniciar(self):
