@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 import pickle
-import firebase
+from firebase import firebase
 
 class Telas():
     
@@ -628,30 +628,25 @@ class Telas():
     def clicou_login(self,event):
         self.Tela_login_frame()
 
-    def clicou_continuar_tela_principal(self,event):
-#       if len(self.dic_pessoas) != 0:
-        try:
-           with open('usuarios.pickle','rb') as f:
-                self.dic_pessoas = pickle.load(f)
-                
-           #Nome de usuário salvo em uma váriavel
-           self.usuarios = self.entrada_usuario.get()
+   def clicou_continuar_tela_principal(self,event):
+        self.usuarios = self.entrada_usuario.get()
+        
 
-        except:
-            #Nome de usuário salvo em uma váriavel
-            self.usuarios = self.entrada_usuario.get()
-
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        banana = fb.get('/Users', None)
+        
+        if self.usuarios in banana:
             
-       
-       #Conteúdo da lista do dicionário
-        if self.usuarios in self.dic_pessoas:
-           self.conteudo = self.dic_pessoas[self.usuarios]
-       
-        if (self.usuarios in self.dic_pessoas) and (self.conteudo[1] == self.entrada_senha.get()):
-           self.tela_principal_frame()
+            banana2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
+            self.senha_pra_conferir = banana2.get(self.usuarios, 'senha')
+            
+            if self.senha_pra_conferir == self.entrada_senha.get():
+                self.tela_principal_frame()       
+            else:
+               tkm.showinfo('Erro','Senha inválida')
+            
         else:
-           tkm.showinfo('Erro','Usuário ou senha inválido')
-
+            tkm.showinfo('Erro','Usuário Inexistente')
             
         
     def clicou_voltar_tela_inicial(self,event):
@@ -661,28 +656,14 @@ class Telas():
     #Salvar informações do cadastro    
     def clicou_salvar(self,event):
         if self.senha_entrada.get() == self.senha_confirma_entrada.get(): 
+            
             confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
+            
             if confirmando_cadastro:
-                try:
-                    with open ('usuarios.pickle','rb') as f:
-                        self.dic_pessoas = pickle.load(f)
-                        
-                    #Nome no índice 0 da lista
-                    #Senha no índice 1 da lista
-                    #Celular no índice 2 da lista
-                    #E-mail no índice 3 da lista
-                    self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
-                    
-                except:
-                    #Nome no índice 0 da lista
-                    #Senha no índice 1 da lista
-                    #Celular no índice 2 da lista
-                    #E-mail no índice 3 da lista
-                    self.dic_pessoas[self.usuario_entrada.get()]=[self.nome_entrada.get(),self.senha_entrada.get(), self.celular_entrada.get(), self.email_entrada.get()]
                 
-                with open ('usuarios.pickle','wb') as f:
-                    pickle.dump(self.dic_pessoas,f,pickle.HIGHEST_PROTOCOL)
-                    
+                fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+                dicionario = {'Nome': self.nome_entrada.get(),'email': self.email_entrada.get(), 'telefone': self.celular_entrada.get(), 'senha': self.senha_entrada.get()}
+                fb.put('Users', self.usuario_entrada.get(), dicionario)
                 self.Tela_login_frame()
                                     
         else:
