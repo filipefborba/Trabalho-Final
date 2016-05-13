@@ -510,16 +510,15 @@ class Telas():
         
         self.tela_ler_perfil.grid(row=0, column=0, sticky="nsew")
         
-        with open('usuarios.pickle','rb') as f:
-            self.dic_pessoas = pickle.load(f)
-            
-        print (self.dic_pessoas[self.usuarios])
+        dados = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
+        dados.get(self.usuarios, 'Nome')
 
 #######################################################
 
         #Nome Completo
+
         nome = tk.StringVar()
-        nome.set (self.conteudo[0])
+        nome.set(dados.get(self.usuarios, 'Nome'))
         self.nome_entrada = tk.Entry(self.tela_ler_perfil, textvariable = nome)
         self.nome_entrada.grid(row=2, column=1, sticky="ew")
         
@@ -529,7 +528,7 @@ class Telas():
 
         #E-mail
         email = tk.StringVar()
-        email.set (self.conteudo[2])
+        email.set (dados.get(self.usuarios, 'email'))
         self.email_entrada = tk.Entry(self.tela_ler_perfil, textvariable = email)
         self.email_entrada.grid(row=3, column=1, sticky="ew")
         
@@ -539,7 +538,7 @@ class Telas():
 
         #Número de Celular
         numero = tk.StringVar()
-        numero.set (self.conteudo[3])
+        numero.set (dados.get(self.usuarios, 'telefone'))
         self.celular_entrada = tk.Entry(self.tela_ler_perfil, textvariable = numero)
         self.celular_entrada.grid(row=4, column=1, sticky="ew")
         
@@ -561,7 +560,7 @@ class Telas():
 
         #Senha
         senha = tk.StringVar()
-        senha.set (self.conteudo[1])
+        senha.set (dados.get(self.usuarios, 'senha'))
         self.senha_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_entrada.grid(row=6, column=1, sticky="ew")
         self.senha_entrada.configure(show='*')
@@ -572,7 +571,7 @@ class Telas():
 
         #Confirmar Senha
         senha = tk.StringVar()
-        senha.set (self.conteudo[1])
+        senha.set (dados.get(self.usuarios, 'senha'))
         self.senha_confirma_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
         self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
         self.senha_confirma_entrada.configure(show='*')
@@ -628,7 +627,7 @@ class Telas():
     def clicou_login(self,event):
         self.Tela_login_frame()
 
-   def clicou_continuar_tela_principal(self,event):
+    def clicou_continuar_tela_principal(self,event):
         self.usuarios = self.entrada_usuario.get()
         
 
