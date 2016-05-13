@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import principal
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -151,11 +152,11 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.destinolabel.setText(_translate("MainWindow", "Local de Destino:", None))
-        self.destino.setItemText(0, _translate("MainWindow", "Bairro 1", None))
+        self.destino.setItemText(0, _translate("MainWindow", "Casa", None))
         self.destino.setItemText(1, _translate("MainWindow", "Insper", None))
-        self.partida.setItemText(0, _translate("MainWindow", "Bairro 1", None))
+        self.partida.setItemText(0, _translate("MainWindow", "Casa", None))
         self.partida.setItemText(1, _translate("MainWindow", "Insper", None))
         self.titulo.setText(_translate("MainWindow", "Agende a sua carona:", None))
         self.partidalabel.setText(_translate("MainWindow", "Local de Partida:", None))

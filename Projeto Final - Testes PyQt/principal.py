@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import caronas, pedircarona, agendarcarona
+import caronas, pedircarona, agendarcarona, removercarona, perfil
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -88,11 +88,13 @@ class Ui_MainWindow(object):
         self.perfil = QtGui.QPushButton(self.centralwidget)
         self.perfil.setGeometry(QtCore.QRect(260, 500, 300, 50))
         self.perfil.setObjectName(_fromUtf8("perfil"))
+        self.perfil.clicked.connect(self.abrirperfil)
 
         #Botão para remover a carona
         self.remover = QtGui.QPushButton(self.centralwidget)
         self.remover.setGeometry(QtCore.QRect(260, 420, 300, 50))
         self.remover.setObjectName(_fromUtf8("remover"))
+        self.remover.clicked.connect(self.abrirremover)
 
         #Botão para fazer logout
         self.logout = QtGui.QPushButton(self.centralwidget)
@@ -118,9 +120,9 @@ class Ui_MainWindow(object):
 
     #Função que define os textos dentro dos botões e da janela
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.statuslabel.setText(_translate("MainWindow", "Status da carona:", None))
-        self.titulo.setText(_translate("MainWindow", "Olá, (usuario). O que deseja fazer?", None))
+        self.titulo.setText(_translate("MainWindow", "Seja bem-vindo! O que deseja fazer?", None))
         self.agendar.setText(_translate("MainWindow", "Agendar carona", None))
         self.pedir.setText(_translate("MainWindow", "Pedir carona", None))
         self.perfil.setText(_translate("MainWindow", "Alterar perfil", None))
@@ -143,6 +145,23 @@ class Ui_MainWindow(object):
         ui = agendarcarona.Ui_MainWindow()
         ui.setupUi(tela_agendar)
         tela_agendar.show()
+        sys.exit(app.exec_())
+
+    def abrirremover(self):
+        self.MainWindow = removercarona.Ui_MainWindow
+        tela_remover = QtGui.QMainWindow()
+        ui = removercarona.Ui_MainWindow()
+        ui.setupUi(tela_remover)
+        tela_remover.show()
+        sys.exit(app.exec_())
+
+
+    def abrirperfil(self):
+        self.MainWindow = perfil.Ui_MainWindow
+        tela_perfil = QtGui.QMainWindow()
+        ui = perfil.Ui_MainWindow()
+        ui.setupUi(tela_perfil)
+        tela_perfil.show()
         sys.exit(app.exec_())
 
 
