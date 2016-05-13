@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'cadastro.ui'
+# Form implementation generated from reading ui file 'perfil.ui'
 #
 # Created by: PyQt4 UI code generator 4.11.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from firebase import firebase
-fb = firebase.FirebaseApplication("https://caronas.firebaseio.com/users/")
+import principal
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -26,9 +25,8 @@ except AttributeError:
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        #Frame da Janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.setFixedSize(801, 592)
+        MainWindow.resize(801, 592)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -54,7 +52,7 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         MainWindow.setPalette(palette)
 
-        #########LABELS#######################################
+#########LABELS#######################################
         self.nomelabel = QtGui.QLabel(self.centralwidget)
         self.nomelabel.setGeometry(QtCore.QRect(40, 120, 111, 41))
         font = QtGui.QFont()
@@ -97,13 +95,13 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.confirmarsenhalabel.setFont(font)
         self.confirmarsenhalabel.setObjectName(_fromUtf8("confirmarsenhalabel"))
-        self.cadastrotitulo = QtGui.QLabel(self.centralwidget)
-        self.cadastrotitulo.setGeometry(QtCore.QRect(260, 40, 271, 61))
+        self.alterarperfiltitulo = QtGui.QLabel(self.centralwidget)
+        self.alterarperfiltitulo.setGeometry(QtCore.QRect(200, 40, 421, 61))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Bodoni MT"))
         font.setPointSize(48)
-        self.cadastrotitulo.setFont(font)
-        self.cadastrotitulo.setObjectName(_fromUtf8("cadastrotitulo"))
+        self.alterarperfiltitulo.setFont(font)
+        self.alterarperfiltitulo.setObjectName(_fromUtf8("alterarperfiltitulo"))
         ###################FIM DAS LABELS###################################
 
 
@@ -143,7 +141,7 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.voltar.setFont(font)
         self.voltar.setObjectName(_fromUtf8("voltar"))
-        self.voltar.clicked.connect(self.abrircaronas)
+        self.voltar.clicked.connect(self.abrirprincipal)
 
         self.confirmar = QtGui.QPushButton(self.centralwidget)
         self.confirmar.setGeometry(QtCore.QRect(510, 480, 101, 41))
@@ -152,7 +150,6 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.confirmar.setFont(font)
         self.confirmar.setObjectName(_fromUtf8("confirmar"))
-        self.confirmar.clicked.connect(self.registrarcadastro)
 
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -162,29 +159,24 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.nomelabel.setText(_translate("MainWindow", "Nome completo:", None))
-        self.celularlabel.setText(_translate("MainWindow", "Nº de celular: ", None))
-        self.emaillabel.setText(_translate("MainWindow", "E-mail:@.com", None))
+        self.celularlabel.setText(_translate("MainWindow", "Nº de celular:", None))
+        self.emaillabel.setText(_translate("MainWindow", "E-mail:", None))
         self.usuariolabel.setText(_translate("MainWindow", "Usuário:", None))
         self.senhalabel.setText(_translate("MainWindow", "Senha:", None))
         self.confirmarsenhalabel.setText(_translate("MainWindow", "Confirmar senha:", None))
-        self.cadastrotitulo.setText(_translate("MainWindow", "Cadastro", None))
+        self.alterarperfiltitulo.setText(_translate("MainWindow", "Alterar Perfil", None))
         self.voltar.setText(_translate("MainWindow", "Voltar", None))
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
-    def registrarcadastro(self):
-        pass
-
-
-    def abrircaronas(self):
-        self.MainWindow = caronas.Ui_MainWindow
-        tela_caronas = QtGui.QMainWindow()
-        ui = caronas.Ui_MainWindow()
-        ui.setupUi(tela_caronas)
-        tela_caronas.show()
+    def abrirprincipal(self):
+        self.MainWindow = principal.Ui_MainWindow
+        tela_principal = QtGui.QMainWindow()
+        ui = principal.Ui_MainWindow()
+        ui.setupUi(tela_principal)
+        tela_principal.show()
         sys.exit(app.exec_())
 
 if __name__ == "__main__":

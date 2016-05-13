@@ -161,7 +161,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.titulo.setText(_translate("MainWindow", "Selecione suas localizações:", None))
         self.destinolabel.setText(_translate("MainWindow", "Local de Destino:", None))
         self.partidalabel.setText(_translate("MainWindow", "Local de Partida:", None))
