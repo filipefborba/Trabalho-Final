@@ -568,12 +568,12 @@ class Telas():
         self.senha_confirma_entrada.configure(show='*')
         
         self.senha_confirma_label = tk.Label(self.tela_ler_perfil)
-        self.senha_confirma_label.grid(row=8, column=0, sticky="nsew")
+        self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
         self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 12', bg='#E10022', fg='White')
 
         #Nota sobre o celular
         self.nota_label = tk.Label(self.tela_ler_perfil)
-        self.nota_label.grid(row=7, column=1, sticky="nsew")
+        self.nota_label.grid(row=8, column=1, sticky="nsew")
         self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
 
 #######################################################
