@@ -624,10 +624,8 @@ class Telas():
         pedidos = fb.get('/Pedidos', None)
         ofertas = fb.get('/Oferecimentos', None)
         
-        
-        
-        
-
+                
+                
 ####################     Função dos botões
 
     def clicou_cadastro(self,event):
@@ -651,6 +649,8 @@ class Telas():
             
             if self.senha_pra_conferir == self.entrada_senha.get():
                 self.nome_completo = fb2.get(self.usuarios, 'Nome')
+                self.telefone = fb2.get(self.usuarios, 'telefone')
+                self.email = fb2.get(self.usuarios, 'email')
                 self.tela_principal_frame()       
             else:
                tkm.showinfo('Erro','Senha inválida')
@@ -687,7 +687,7 @@ class Telas():
         
     def clicou_confirmar_pedido(self,event):
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get()}
+        dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get(), 'Telefone': self.telefone, 'Email': self.email}
         fb.put('Pedidos', self.nome_completo, dicionario)
 
         tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
@@ -696,7 +696,7 @@ class Telas():
 
     def clicou_confirmar_oferecimento(self,event):
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferecimento.get(), 'Local de Chegada': self.bairro_chegada_oferecimento.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+        dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferecimento.get(), 'Local de Chegada': self.bairro_chegada_oferecimento.get(), 'Lugares Necessários': self.lugares_oferecer.get(), 'Telefone': self.telefone, 'Email': self.email}
         fb.put('Oferecimentos', self.nome_completo, dicionario)
 
         tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
@@ -717,6 +717,7 @@ class Telas():
         
     #Função que verifica caronas
     def clicou_verificar_caronas(self,event):
+        tkm.showinfo('Aviso', 'Entre em contato com seu carona/oferta e depois exclua sua solicitação!')
         self.Tela_verificar_frame()
                         
     #Função que cancela as caronas pedidas
