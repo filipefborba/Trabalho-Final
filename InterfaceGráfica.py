@@ -483,25 +483,25 @@ class Telas():
         self.tela_ler_perfil = tk.Frame(self.root)
         self.tela_ler_perfil.configure(bg='#E10022')
         
-        self.tela_ler_perfil.rowconfigure(0, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(1, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(2, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(3, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(4, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(5, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(6, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(7, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(8, minsize=80, weight=1)
-        self.tela_ler_perfil.rowconfigure(9, minsize=80, weight=1)
+        self.tela_ler_perfil.rowconfigure(0, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(1, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(2, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(3, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(4, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(5, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(6, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(7, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(8, minsize=40, weight=1)
+        self.tela_ler_perfil.rowconfigure(9, minsize=40, weight=1)
 
         self.tela_ler_perfil.columnconfigure(0, minsize=220, weight=1)
         self.tela_ler_perfil.columnconfigure(1, minsize=200, weight=1)
-        self.tela_ler_perfil.columnconfigure(2, minsize=17, weight=1)
+        self.tela_ler_perfil.columnconfigure(2, minsize=220, weight=1)
         
         self.tela_ler_perfil.grid(row=0, column=0, sticky="nsew")
         
         dados = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
-        dados.get(self.usuarios, 'Nome')
+        
 
 #######################################################
 
@@ -510,77 +510,77 @@ class Telas():
         nome = tk.StringVar()
         nome.set(dados.get(self.usuarios, 'Nome'))
         self.nome_entrada = tk.Entry(self.tela_ler_perfil, textvariable = nome)
-        self.nome_entrada.grid(row=2, column=1, sticky="ew")
+        self.nome_entrada.grid(row=1, column=1, sticky="ew")
         
         self.nome_label = tk.Label(self.tela_ler_perfil)
-        self.nome_label.grid(row=2, column=0, sticky="nsew")
+        self.nome_label.grid(row=1, column=0, sticky="nsew")
         self.nome_label.configure(text= "Nome completo: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #E-mail
         email = tk.StringVar()
         email.set (dados.get(self.usuarios, 'email'))
         self.email_entrada = tk.Entry(self.tela_ler_perfil, textvariable = email)
-        self.email_entrada.grid(row=3, column=1, sticky="ew")
+        self.email_entrada.grid(row=2, column=1, sticky="ew")
         
         self.email_label = tk.Label(self.tela_ler_perfil)
-        self.email_label.grid(row=3, column=0, sticky="nsew")
+        self.email_label.grid(row=2, column=0, sticky="nsew")
         self.email_label.configure(text= "E-mail: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Número de Celular
         numero = tk.StringVar()
         numero.set (dados.get(self.usuarios, 'telefone'))
         self.celular_entrada = tk.Entry(self.tela_ler_perfil, textvariable = numero)
-        self.celular_entrada.grid(row=4, column=1, sticky="ew")
+        self.celular_entrada.grid(row=3, column=1, sticky="ew")
         
         self.celular_label = tk.Label(self.tela_ler_perfil)
-        self.celular_label.grid(row=4, column=0, sticky="nsew")
+        self.celular_label.grid(row=3, column=0, sticky="nsew")
         self.celular_label.configure(text= "Número de Celular*: ",font='Bodoni 24', bg='#E10022', fg='White')
 
 
         #Usuário
-        uzuario = tk.StringVar()
-        uzuario.set (self.usuarios)
-        self.usuario_entrada = tk.Entry(self.tela_ler_perfil, textvariable =uzuario)
+        user = tk.StringVar()
+        user.set (self.usuarios)
+        self.usuario_entrada = tk.Entry(self.tela_ler_perfil, textvariable =user)
         self.usuario_entrada.configure(state = "disabled")
-        self.usuario_entrada.grid(row=5, column=1, sticky="ew")
+        self.usuario_entrada.grid(row=4, column=1, sticky="ew")
         
         self.usuario_label = tk.Label(self.tela_ler_perfil)
-        self.usuario_label.grid(row=5, column=0, sticky="nsew")
+        self.usuario_label.grid(row=4, column=0, sticky="nsew")
         self.usuario_label.configure(text= "Usuário: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Senha
         senha = tk.StringVar()
         senha.set (dados.get(self.usuarios, 'senha'))
         self.senha_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
-        self.senha_entrada.grid(row=6, column=1, sticky="ew")
+        self.senha_entrada.grid(row=5, column=1, sticky="ew")
         self.senha_entrada.configure(show='*')
         
         self.senha_label = tk.Label(self.tela_ler_perfil)
-        self.senha_label.grid(row=6, column=0, sticky="nsew")
+        self.senha_label.grid(row=5, column=0, sticky="nsew")
         self.senha_label.configure(text= "Senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Confirmar Senha
         senha = tk.StringVar()
         senha.set (dados.get(self.usuarios, 'senha'))
         self.senha_confirma_entrada = tk.Entry(self.tela_ler_perfil, textvariable = senha)
-        self.senha_confirma_entrada.grid(row=7, column=1, sticky="ew")
+        self.senha_confirma_entrada.grid(row=6, column=1, sticky="ew")
         self.senha_confirma_entrada.configure(show='*')
         
         self.senha_confirma_label = tk.Label(self.tela_ler_perfil)
-        self.senha_confirma_label.grid(row=7, column=0, sticky="nsew")
+        self.senha_confirma_label.grid(row=6, column=0, sticky="nsew")
         self.senha_confirma_label.configure(text= "Confirmar senha: ",font='Bodoni 24', bg='#E10022', fg='White')
 
         #Nota sobre o celular
         self.nota_label = tk.Label(self.tela_ler_perfil)
-        self.nota_label.grid(row=8, column=1, sticky="nsew")
+        self.nota_label.grid(row=7, column=1, sticky="nsew")
         self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
 
 #######################################################
         
-#        self.salvar_cadastro = tk.Button(self.Tela_cadastro)
-#        self.salvar_cadastro.grid(row=7, column=2)
-#        self.salvar_cadastro.configure(text='salvar')
-#        self.salvar_cadastro.bind('<1>',self.clicou_continuar_tela_principal)
+        self.salvar_cadastro = tk.Button(self.tela_ler_perfil)
+        self.salvar_cadastro.grid(row=7, column=2)
+        self.salvar_cadastro.configure(text='Salvar Alterações')
+        self.salvar_cadastro.bind('<1>',self.clicou_continuar_tela_principal)
 #        
 #        self.voltar_tela_inicial = tk.Button(self.Tela_cadastro)
 #        self.voltar_tela_inicial.grid(row=7, column=0)
