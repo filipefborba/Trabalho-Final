@@ -1,20 +1,12 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
-import pickle
 from firebase import firebase
 
 class Telas():
     
     def __init__(self):
-        #Cada pessoa deve ser uma chave de um dicionário
-        #Por isso criar dicionário no começo dessa função
-        #A chave é o nome de uma pessoa e os valres estarão em uma lista em uma mesma ordem
-        self.dic_pessoas = {}
-        
-        self.dic_pedidos = {}
-        self.dic_oferecimento = {}
-        
+        #Listas com bairros disponiveis para carona, horários de saída e lugares disponiveis no carro
         self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso'])
         self.horarios = ['','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00']
         self.lugares = ['','1','2','3','4']        
@@ -23,9 +15,7 @@ class Telas():
         self.root = tk.Tk()
         self.root.title("Caronas Insper")
         self.root.geometry("640x800")
-#        self.root.resizable(width=False, height=False)
         self.root.geometry("600x840")
-#        self.root.resizable(width=False, height=False)
         #self.root.rowconfigure(0, minsize=800)
         #self.root.columnconfigure(0, minsize=640)
         self.root.grid()
@@ -602,7 +592,7 @@ class Telas():
         self.tela_verificar = tk.Frame(self.root)
         self.tela_verificar.configure(bg='#E10022')
         
-        self.tela_verificar.rowconfigure(0, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(0, minsize=2, weight=1)
         self.tela_verificar.rowconfigure(1, minsize=16, weight=1)
         self.tela_verificar.rowconfigure(2, minsize=16, weight=1)
         self.tela_verificar.rowconfigure(3, minsize=16, weight=1)
@@ -612,9 +602,29 @@ class Telas():
         self.tela_verificar.rowconfigure(7, minsize=16, weight=1)
         self.tela_verificar.rowconfigure(8, minsize=16, weight=1)
         self.tela_verificar.rowconfigure(9, minsize=16, weight=1)
+        self.tela_verificar.rowconfigure(10, minsize=2, weight=1)
 
-        self.tela_verificar.columnconfigure(0, minsize=20, weight=1)
-        self.tela_verificar.columnconfigure(1, minsize=200, weight=1)
+        self.tela_verificar.columnconfigure(0, minsize=2, weight=1)
+        self.tela_verificar.columnconfigure(1, minsize=100, weight=1)
+        self.tela_verificar.columnconfigure(2, minsize=100, weight=1)
+        self.tela_verificar.columnconfigure(3, minsize=2, weight=1)
+        
+        
+        self.tela_verificar.grid(row=0, column=0, sticky="nsew")
+        
+        pedidos = tk.Label(self.tela_verificar)
+        pedidos.grid (row= 1, column= 1, sticky='w')
+        pedidos.configure(text= 'Pedidos:', bg='#E10022', fg='White')
+        
+        ofertas = tk.Label(self.tela_verificar)
+        ofertas.grid (row= 1, column= 2, sticky='w')
+        ofertas.configure(text= 'Ofertas:', bg='#E10022', fg='White')
+        
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        pedidos = fb.get('/Pedidos', None)
+        ofertas = fb.get('/Oferecimentos', None)
+        
+        
         
         
 
