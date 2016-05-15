@@ -632,14 +632,15 @@ class Telas():
         
 
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        banana = fb.get('/Users', None)
+        pessoas = fb.get('/Users', None)
         
-        if self.usuarios in banana:
+        if self.usuarios in pessoas:
             
-            banana2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
-            self.senha_pra_conferir = banana2.get(self.usuarios, 'senha')
+            fb2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
+            self.senha_pra_conferir = fb2.get(self.usuarios, 'senha')
             
             if self.senha_pra_conferir == self.entrada_senha.get():
+                self.nome_completo = fb2.get(self.usuarios, 'Nome')
                 self.tela_principal_frame()       
             else:
                tkm.showinfo('Erro','Senha inválida')
@@ -674,50 +675,21 @@ class Telas():
     def clicou_voltar(self,event):
         self.tela_principal_frame()
         
-    def clicou_confirmar_pedido(self,event):     
-        try:
-            with open ('pedidos.pickle','rb') as h:
-                self.dic_pedidos = pickle.load(h)
-                
-            #Celular índice 0
-            #Bairro de saída índice 1
-            #Bairro de chegada índice 2
-            #Horário índice 3
-            #Quantidade de lugares índice 4
-            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido.get(), self.bairro_chegada_pedido.get(), self.hora_pedido.get(), self.lugares_pedido.get()]
-            
-        except:
-            self.dic_pedidos[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_pedido.get(), self.bairro_chegada_pedido.get(), self.hora_pedido.get(), self.lugares_pedido.get()]
-        
-        with open ('pedidos.pickle','wb') as h:
-            pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
-            
+    def clicou_confirmar_pedido(self,event):
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get()}
+        fb.put('Pedidos', self.nome_completo, dicionario)
+
         tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
         
         self.tela_principal_frame()
 
     def clicou_confirmar_oferecimento(self,event):
-        try:
-            with open ('oferecimentos.pickle','rb') as g:
-                self.dic_oferecimento = pickle.load(g)
-                        #Celular índice 0
-            #Bairro de saída índice 1
-            #Bairro de chegada índice 2
-            #Horário índice 3
-            #Quantidade de lugares índice 4
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferecimento.get(), 'Local de Chegada': self.bairro_chegada_oferecimento.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+        fb.put('Oferecimentos', self.nome_completo, dicionario)
 
-            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento.get(),self.bairro_chegada_oferecimento.get(), self.horarios_oferecer.get(), self.lugares_oferecer.get()]
-
-        except:
-            self.dic_oferecimento[self.conteudo[0]] = [self.conteudo[2],self.bairro_saida_oferecimento.get(),self.bairro_chegada_oferecimento.get(), self.horarios_oferecer.get(), self.lugares_oferecer.get()]
-
-                
-        with open ('oferecimentos.pickle','wb') as g:
-            pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
-            
         tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
-        
-        
         
         self.tela_principal_frame()
 
@@ -739,44 +711,28 @@ class Telas():
                         
     #Função que cancela as caronas pedidas
     def cancelar_pedido(self,event):
-        try:
-            with open ('pedidos.pickle','rb') as h:
-                self.dic_pedidos = pickle.load(h)
-                        
-        except:
-                tkm.showinfo('Cancelamento', 'Não existe um pedido de carona')
-                
-        if self.conteudo[0] in self.dic_pedidos:
-            del self.dic_pedidos[self.conteudo[0]]
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        pedidos = fb.get('/Pedidos', None)
+        
+        if self.nome_completo in pedidos:
+            fb.delete('Pedidos', self.nome_completo)
             tkm.showinfo('Cancelamento','Pedido cancelado com sucesso!')
        
         else:
             tkm.showinfo('Cancelamento', 'Não existe um pedido de carona')
-            
-        with open ('pedidos.pickle','wb') as h:
-            pickle.dump(self.dic_pedidos,h,pickle.HIGHEST_PROTOCOL)
-
 
     #Função que cancela a oferta de carona
     def cancelar_oferta(self,event):
-        try:
-            with open ('oferecimentos.pickle','rb') as g:
-                self.dic_oferecimento = pickle.load(g)
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        ofertas = fb.get('/Oferecimentos', None)
         
-        except:
-            tkm.showinfo('Cancelamento', 'Não havia sido feita uma oferta de carona por este usuário')
-        
-        if self.conteudo[0] in self.dic_oferecimento:
-                del self.dic_oferecimento[self.conteudo[0]]
-                tkm.showinfo('Cancelamento', 'Oferta cancelada com sucesso!')
+        if self.nome_completo in ofertas:
+            fb.delete('Oferecimentos', self.nome_completo)
+            tkm.showinfo('Cancelamento','Oferta cancelada com sucesso!')
+       
         else:
-            tkm.showinfo('Cancelamento', 'Não havia sido feita uma oferta de carona por este usuário')
+            tkm.showinfo('Cancelamento', 'Não existe oferta de carona')
             
-        with open ('oferecimentos.pickle','wb') as g:
-            pickle.dump(self.dic_oferecimento,g,pickle.HIGHEST_PROTOCOL)
-           
-
-    
 ########## iniciando o programa
     def iniciar(self):
         self.root.mainloop()
