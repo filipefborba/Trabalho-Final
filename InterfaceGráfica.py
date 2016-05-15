@@ -62,11 +62,39 @@ class Telas():
         self.Cadastro.grid(row=6, column=1, sticky="ew")
         self.Cadastro.configure(text="Cadastrar-se", font='Arial 20')
         self.Cadastro.bind('<1>',self.clicou_cadastro)
+        
+        self.sobre_nós = tk.Button(self.tela_inicial)
+        self.sobre_nós.grid(row=7, column=1, sticky="ew")
+        self.sobre_nós.configure(text="Sobre Nós", font='Arial 20')
+        self.sobre_nós.bind('<1>',self.clicou_sobre_nós)
 
    
         
 #######
+    def tela_criadores(self):
+        
+        self.Tela_login = tk.Frame(self.root)
+        self.Tela_login.configure(bg='#E10022')
+        
+        self.Tela_login.rowconfigure(0, minsize=25, weight=1)
+        self.Tela_login.rowconfigure(1, minsize=25, weight=1)
+        self.Tela_login.rowconfigure(2, minsize=50, weight=1)
+        self.Tela_login.rowconfigure(3, minsize=50, weight=1)
+        self.Tela_login.rowconfigure(4, minsize=50, weight=1)
+        self.Tela_login.rowconfigure(5, minsize=50, weight=1)
+        self.Tela_login.rowconfigure(6, minsize=50, weight=1)
+        self.Tela_login.rowconfigure(7, minsize=50, weight=1)
+        self.Tela_login.rowconfigure(8, minsize=25, weight=1)
+        self.Tela_login.rowconfigure(9, minsize=25, weight=1)
 
+        self.Tela_login.columnconfigure(0, minsize=10, weight=1)
+        self.Tela_login.columnconfigure(1, minsize=100, weight=1)
+        self.Tela_login.columnconfigure(2, minsize=100, weight=1)
+        self.Tela_login.columnconfigure(3, minsize=100, weight=1)
+        self.Tela_login.columnconfigure(4, minsize=10, weight=1)
+        self.Tela_login.grid(row=0, column=0, sticky="nsew")
+        
+        
 
     def Tela_login_frame(self):
         self.Tela_login = tk.Frame(self.root)
@@ -293,12 +321,12 @@ class Telas():
         
         self.cancelar_pedido_carona = tk.Button(self.Tela_principal)
         self.cancelar_pedido_carona.grid(row=3, column=3)
-        self.cancelar_pedido_carona.configure(text='Cancelar pedido')
+        self.cancelar_pedido_carona.configure(text='Cancelar Pedido')
         self.cancelar_pedido_carona.bind('<1>',self.cancelar_pedido)
 
         self.cancelar_oferta_carona = tk.Button(self.Tela_principal)
         self.cancelar_oferta_carona.grid(row=4, column=3)
-        self.cancelar_oferta_carona.configure(text='Cancelar oferta')
+        self.cancelar_oferta_carona.configure(text='Cancelar Oferta')
         self.cancelar_oferta_carona.bind('<1>',self.cancelar_oferta)
 
 
@@ -446,9 +474,9 @@ class Telas():
         self.label_lugares.configure(text= "Lugares Disponíveis: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever a saída
-        self.bairro_saida_oferecimento = tk.StringVar()
-        self.bairro_saida_oferecimento.set(self.bairros[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_saida_oferecimento,*self.bairros)
+        self.bairro_saida_oferta = tk.StringVar()
+        self.bairro_saida_oferta.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_saida_oferta,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_oferecer_carona)
@@ -456,9 +484,9 @@ class Telas():
         self.saida.configure(text= "Local de saída: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
-        self.bairro_chegada_oferecimento = tk.StringVar()
-        self.bairro_chegada_oferecimento.set(self.bairros[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_chegada_oferecimento,*self.bairros)
+        self.bairro_chegada_oferta = tk.StringVar()
+        self.bairro_chegada_oferta.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_chegada_oferta,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_oferecer_carona)
@@ -469,8 +497,8 @@ class Telas():
         self.confirmar = tk.Button(self.Tela_oferecer_carona)
         self.confirmar.configure(text='Confirmar')
         self.confirmar.grid(row=7, column=3,columnspan=1)
-        self.confirmar.bind('<1>',self.clicou_confirmar_oferecimento)
-        self.confirmar.bind('<Return>',self.clicou_confirmar_oferecimento)
+        self.confirmar.bind('<1>',self.clicou_confirmar_oferta)
+        self.confirmar.bind('<Return>',self.clicou_confirmar_oferta)
         
         #Botão que leva o usuário a página anterior
         self.voltar_pagina_principal = tk.Button(self.Tela_oferecer_carona)
@@ -623,7 +651,7 @@ class Telas():
 #        
 #        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
 #        pedidos = fb.get('/Pedidos', None)
-#        ofertas = fb.get('/Oferecimentos', None)
+#        ofertas = fb.get('/Ofertas', None)
         
         
         
@@ -670,7 +698,7 @@ class Telas():
     def clicou_salvar(self,event):
         if self.senha_entrada.get() == self.senha_confirma_entrada.get(): 
             
-            confirmando_cadastro = tkm.askyesno('Confirmando','Deseja confirmar as informações?')
+            confirmando_cadastro = tkm.askyesno('Confirmando','Deseja salvar as informações?')
             
             if confirmando_cadastro:
                 
@@ -689,22 +717,28 @@ class Telas():
         self.tela_principal_frame()
         
     def clicou_confirmar_pedido(self,event):
-        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get(), 'Telefone': self.telefone, 'Email': self.email}
-        fb.put('Pedidos', self.nome_completo, dicionario)
+        confirmando_pedido = tkm.askyesno('Confirmando','Deseja confirmar pedido?')
+            
+        if confirmando_pedido:
+            fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+            dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get(), 'Telefone': self.telefone, 'Email': self.email}
+            fb.put('Pedidos', self.nome_completo, dicionario)
 
-        tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+            tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
         
-        self.tela_principal_frame()
+            self.tela_principal_frame()
 
-    def clicou_confirmar_oferecimento(self,event):
-        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferecimento.get(), 'Local de Chegada': self.bairro_chegada_oferecimento.get(), 'Lugares Necessários': self.lugares_oferecer.get(), 'Telefone': self.telefone, 'Email': self.email}
-        fb.put('Oferecimentos', self.nome_completo, dicionario)
+    def clicou_confirmar_oferta(self,event):
+        confirmando_oferta = tkm.askyesno('Confirmando','Deseja confirmar oferta?')
+            
+        if confirmando_oferta:
+            fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+            dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferta.get(), 'Local de Chegada': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get(), 'Telefone': self.telefone, 'Email': self.email}
+            fb.put('Ofertas', self.nome_completo, dicionario)
 
-        tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+            tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
         
-        self.tela_principal_frame()
+            self.tela_principal_frame()
 
     #Função que leva para a tela de oferecer carona
     def clicou_oferecer(self,event):
@@ -735,12 +769,12 @@ class Telas():
     #Função que cancela a oferta de carona
     def cancelar_oferta(self,event):
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        ofertas = fb.get('/Oferecimentos', None)
+        ofertas = fb.get('/Ofertas', None)
         
         if self.nome_completo in ofertas:
             cancelamento = tkm.askyesno('Cancelamento','Deseja cancelar sua oferta?')
             if cancelamento:
-                fb.delete('Oferecimentos', self.nome_completo)
+                fb.delete('Ofertas', self.nome_completo)
                 tkm.showinfo('Cancelamento','Oferta cancelada com sucesso!')   
         else:
             tkm.showinfo('Cancelamento', 'Não existe oferta de carona')
@@ -769,10 +803,14 @@ class Telas():
     #Função que verifica caronas
     def clicou_verificar_caronas(self,event):
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-        ofertas = fb.get('Oferecimento', None)
+        ofertas = fb.get('Ofertas', None)
         pedidos = fb.get('Pedidos', None)
         
         print(ofertas, '\n', pedidos)
+        
+        
+    def clicou_sobre_nós(self,event):
+        self.tela_criadores()
 
 
 ########## iniciando o programa
