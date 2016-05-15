@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 from firebase import firebase
-
+#self.root.resizable(width=False, height=False)
 class Telas():
     
     def __init__(self):
@@ -623,6 +623,7 @@ class Telas():
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         pedidos = fb.get('/Pedidos', None)
         ofertas = fb.get('/Oferecimentos', None)
+        
         
                 
                 
