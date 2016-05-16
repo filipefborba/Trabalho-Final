@@ -726,8 +726,8 @@ class Telas():
             
         if confirmando_pedido:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-            dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get(), 'Telefone': self.telefone, 'Email': self.email}
-            fb.put('/Pedidos', self.nome_completo, dicionario)
+            dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get()}
+            fb.put('/Pedidos', self.usuarios, dicionario)
 
             tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas clique no botão verificar caronas!')
             tkm.showinfo('Observação', 'O processo não estará concluído até que a verificação de carona sejá feita')
@@ -739,8 +739,8 @@ class Telas():
             
         if confirmando_oferta:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-            dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferta.get(), 'Local de Chegada': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get(), 'Telefone': self.telefone, 'Email': self.email}
-            fb.put('/Ofertas', self.nome_completo, dicionario)
+            dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferta.get(), 'Local de Chegada': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+            fb.put('/Ofertas', self.usuarios, dicionario)
 
             tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas clique no botão verificar caronas!')
             tkm.showinfo('Observação', 'O processo não estará concluído até que a verificação de carona sejá feita')
@@ -764,10 +764,10 @@ class Telas():
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         pedidos = fb.get('/Pedidos', None)
         
-        if self.nome_completo in pedidos:
+        if self.usuarios in pedidos:
             cancelamento = tkm.askyesno('Cancelamento','Deseja cancelar seu pedido?')
             if cancelamento:
-                fb.delete('Pedidos', self.nome_completo)
+                fb.delete('Pedidos', self.usuarios)
                 tkm.showinfo('Cancelamento','Pedido cancelado com sucesso!')
        
         else:
@@ -778,10 +778,10 @@ class Telas():
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         ofertas = fb.get('/Ofertas', None)
         
-        if self.nome_completo in ofertas:
+        if self.usuarios in ofertas:
             cancelamento = tkm.askyesno('Cancelamento','Deseja cancelar sua oferta?')
             if cancelamento:
-                fb.delete('Ofertas', self.nome_completo)
+                fb.delete('Ofertas', self.usuarios)
                 tkm.showinfo('Cancelamento','Oferta cancelada com sucesso!')   
         else:
             tkm.showinfo('Cancelamento', 'Não existe oferta de carona')
@@ -815,35 +815,128 @@ class Telas():
         
         fb2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Pedidos/')
         fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
+        fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
         
-        if self.nome_completo in ofertas:
-            lugar_saida_oferta = fb3.get(self.nome_completo, 'Local de Saída')
-            lugar_chegada_oferta = fb3.get(self.nome_completo, 'Local de Chegada')
-            horario_oferta = fb3.get(self.nome_completo, 'Horário')
-            lugares_necessarios_oferta = fb3.get(self.nome_completo, 'Lugares Necessários')
+        if self.usuarios in ofertas:
+            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Saída')
+            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Chegada')
+            horario_oferta = fb3.get(self.usuarios, 'Horário')
+            lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
             
             for passageiro in pedidos:
-                lugar_saida_pedido = fb2.get(self.nome_completo, 'Local de Saída')
-                lugar_chegada_pedido = fb2.get(self.nome_completo, 'Local de Chegada')
-                horario_pedido = fb2.get(self.nome_completo, 'Horário')
-                lugares_necessarios_pedido = fb2.get(self.nome_completo, 'Lugares Necessários')
+                lugar_saida_pedido = fb2.get(passageiro, 'Local de Saída')
+                lugar_chegada_pedido = fb2.get(passageiro, 'Local de Chegada')
+                horario_pedido = fb2.get(passageiro, 'Horário')
+                lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
 
-                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta == lugares_necessarios_pedido and horario_oferta == horario_pedido:
-                    print ('passageiro com motorista, pela oferta')
+                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta >= lugares_necessarios_pedido and horario_oferta == horario_pedido:                    
+                    nome = fb4.get(passageiro,'Nome')
+                    celular = fb4.get(passageiro, 'telefone')
+                    email = fb4.get(passageiro, 'email')
+                    
+                    print(nome, '\n', celular, '\n', email)
+                    
+#                    fromaddr = 'caronas.insper@gmail.com'
+#                    toaddrs = self.email
+#
+#                    msg = '''
+#                    O seu carona é: {0}
+#                    Seu telefone é: {1}
+#                    Seu email é: {2}
+#                    
+#                    Entre em contato com seu carona para marcarem melhor!
+#                    Obrigado por escolher o Caronas Insper!
+#                    A equipe agradece!!
+#                    '''.format(nome, celular, email)
+#                    
+#                    server = smtplib.SMTP('insper.edu.br')
+#                    server.set_debuglevel(1)
+#                    server.sendmail(fromaddr, toaddrs, msg)
+#                    server.quit()
+#                    
+#                    fromaddr = 'caronas.insper@gmail.com'
+#                    toaddrs = email
+#
+#                    msg = '''
+#                    O seu carona é: {0}
+#                    Seu telefone é: {1}
+#                    Seu email é: {2}
+#                    
+#                    Entre em contato com seu carona para marcarem melhor!
+#                    Obrigado por escolher o Caronas Insper!
+#                    A equipe agradece!!
+#                    '''.format(self.nome_completo, self.telefone, self.email)
+#                    
+#                    server = smtplib.SMTP('insper.edu.br')
+#                    server.set_debuglevel(1)
+#                    server.sendmail(fromaddr, toaddrs, msg)
+#                    server.quit()
+
+                    
+                    tkm.showinfo('Carona', 'As informações de seu carona estão no seu email!')
+                    break
+#                else:
+#                    tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
                         
-        if self.nome_completo in pedidos:
-            lugar_saida_pedido = fb2.get(self.nome_completo, 'Local de Saída')
-            lugar_chegada_pedido = fb2.get(self.nome_completo, 'Local de Chegada')
-            horario_pedido = fb2.get(self.nome_completo, 'Horário')
-            lugares_necessarios_pedido = fb2.get(self.nome_completo, 'Lugares Necessários')
+        if self.usuarios in pedidos:
+            lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Saída')
+            lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Chegada')
+            horario_pedido = fb2.get(self.usuarios, 'Horário')
+            lugares_necessarios_pedido = fb2.get(self.usuarios, 'Lugares Necessários')
             
             for motorista in ofertas:
                 lugar_saida_oferta = fb3.get(motorista, 'Local de Saída')
                 lugar_chegada_oferta = fb3.get(motorista, 'Local de Chegada')
                 horario_oferta = fb3.get(motorista, 'Horário')
                 lugares_necessarios_oferta = fb3.get(motorista, 'Lugares Necessários')
-                if lugar_saida_pedido == lugar_saida_oferta and lugar_chegada_pedido == lugar_chegada_oferta and lugares_necessarios_pedido == lugares_necessarios_oferta and horario_pedido == horario_oferta:
-                    print ('passageiro com motorista, pelos pedidos \n', motorista)
+                
+                if lugar_saida_pedido == lugar_saida_oferta and lugar_chegada_pedido == lugar_chegada_oferta and lugares_necessarios_pedido <= lugares_necessarios_oferta and horario_pedido == horario_oferta:
+                    nome = fb4.get(motorista,'Nome')
+                    celular = fb4.get(motorista, 'telefone')
+                    email = fb4.get(motorista, 'email')
+                    
+                    print(nome, '\n', celular, '\n', email)
+                    
+#                    fromaddr = 'caronas.insper@gmail.com'
+#                    toaddrs = self.email
+#
+#                    msg = '''
+#                    O seu carona é: {0}
+#                    Seu telefone é: {1}
+#                    Seu email é: {2}
+#                    
+#                    Entre em contato com seu carona para marcarem melhor!
+#                    Obrigado por escolher o Caronas Insper!
+#                    A equipe agradece!!
+#                    '''.format(nome, celular, email)
+#                    
+#                    server = smtplib.SMTP('insper.edu.br')
+#                    server.set_debuglevel(1)
+#                    server.sendmail(fromaddr, toaddrs, msg)
+#                    server.quit()
+#                    
+#                    fromaddr = 'caronas.insper@gmail.com'
+#                    toaddrs = email
+#
+#                    msg = '''
+#                    O seu carona é: {0}
+#                    Seu telefone é: {1}
+#                    Seu email é: {2}
+#                    
+#                    Entre em contato com seu carona para marcarem melhor!
+#                    Obrigado por escolher o Caronas Insper!
+#                    A equipe agradece!!
+#                    '''.format(self.nome_completo, self.telefone, self.email)
+#                    
+#                    server = smtplib.SMTP('insper.edu.br')
+#                    server.set_debuglevel(1)
+#                    server.sendmail(fromaddr, toaddrs, msg)
+#                    server.quit()
+                    
+                    tkm.showinfo('Carona','As informações de seu carona estão no seu email!')
+                    break
+                else:
+                    tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
                         
         print ('deu bom, chegou no fim!')
         
@@ -858,4 +951,4 @@ class Telas():
         self.root.mainloop()
 
 Caronas = Telas()
-Caronas.iniciar()
+Caronas.iniciar()      
