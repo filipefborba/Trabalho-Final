@@ -75,10 +75,12 @@ class Ui_MainWindow(object):
         self.senhainput.setGeometry(QtCore.QRect(170, 320, 491, 20))
         self.senhainput.setEchoMode(QtGui.QLineEdit.Password)
         self.senhainput.setObjectName(_fromUtf8("senhainput"))
+        self.senhainput.setPlaceholderText("Senha")
 
         self.usuarioinput = QtGui.QLineEdit(self.centralwidget)
         self.usuarioinput.setGeometry(QtCore.QRect(170, 260, 491, 20))
         self.usuarioinput.setObjectName(_fromUtf8("usuarioinput"))
+        self.usuarioinput.setPlaceholderText("Nome de Usuário")
 
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(160, 430, 101, 41))

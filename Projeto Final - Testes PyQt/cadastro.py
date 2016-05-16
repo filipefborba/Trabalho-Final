@@ -8,7 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 from firebase import firebase
-fb = firebase.FirebaseApplication("https://caronas.firebaseio.com/users/")
+import login
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -110,13 +110,19 @@ class Ui_MainWindow(object):
         self.nomeinput = QtGui.QLineEdit(self.centralwidget)
         self.nomeinput.setGeometry(QtCore.QRect(170, 130, 491, 20))
         self.nomeinput.setObjectName(_fromUtf8("nomeinput"))
+        reg_exp = QtCore.QRegExp("[a-z-A-Z_ ]+")
+        textvalidator = QtGui.QRegExpValidator(reg_exp, self.nomeinput)
+        self.nomeinput.setValidator(textvalidator)
 
         self.celularinput = QtGui.QLineEdit(self.centralwidget)
+        numbervalidator = QtGui.QDoubleValidator()
+        self.celularinput.setValidator(numbervalidator)
         self.celularinput.setGeometry(QtCore.QRect(170, 190, 491, 20))
         self.celularinput.setInputMask(_fromUtf8(""))
         self.celularinput.setText(_fromUtf8(""))
         self.celularinput.setMaxLength(11)
         self.celularinput.setObjectName(_fromUtf8("celularinput"))
+        self.celularinput.setPlaceholderText("Digite seguindo esse exemplo: 11912341234")
 
         self.emailinput = QtGui.QLineEdit(self.centralwidget)
         self.emailinput.setGeometry(QtCore.QRect(170, 250, 491, 20))
@@ -167,7 +173,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.nomelabel.setText(_translate("MainWindow", "Nome completo:", None))
         self.celularlabel.setText(_translate("MainWindow", "Nº de celular: ", None))
-        self.emaillabel.setText(_translate("MainWindow", "E-mail:@.com", None))
+        self.emaillabel.setText(_translate("MainWindow", "E-mail:", None))
         self.usuariolabel.setText(_translate("MainWindow", "Usuário:", None))
         self.senhalabel.setText(_translate("MainWindow", "Senha:", None))
         self.confirmarsenhalabel.setText(_translate("MainWindow", "Confirmar senha:", None))
@@ -175,8 +181,30 @@ class Ui_MainWindow(object):
         self.voltar.setText(_translate("MainWindow", "Voltar", None))
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
-    def registrarcadastro(self):
-        pass
+    def registrarcadastro(self):    
+        if self.senhainput.text() == self.confirmarsenhainput.text():    
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Confirmação")
+            dlg.setIcon(QtGui.QMessageBox.Question)
+            dlg.setText("Deseja confirmar as informações?")
+            dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+            dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+            dlg.setEscapeButton(QtGui.QMessageBox.No)
+            dlg.exec_()
+            resultado = dlg.exec_()
+
+            if resultado == QtGui.QMessageBox.Yes:
+
+                fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+                dicionario = {'Nome': self.nomeinput.text(),'email': self.emailinput.text(), 'telefone': self.celularinput.text(), 'senha': self.senhainput.text()}
+                fb.put('Users', self.usuarioinput.text(), dicionario)
+
+        else:
+            dlg2 = QtGui.QMessageBox(None)
+            dlg2.setWindowTitle("Erro")
+            dlg2.setIcon(QtGui.QMessageBox.Warning)
+            dlg2.setText("Preencha os campos corretamente, por favor.")
+            dlg2.exec_()
 
 
     def abrircaronas(self):
