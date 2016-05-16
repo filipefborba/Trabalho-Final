@@ -109,13 +109,19 @@ class Telas():
         self.deco = tk.Label(self.Tela_cadastro)
         self.deco.grid(row=3, column=0, sticky="nsw")
         self.deco.configure(text= "André Ejzenmesser",font='Bodoni 25', bg='#E10022', fg='White')
+        
         self.borba = tk.Label(self.Tela_cadastro)
         self.borba.grid(row=5, column=0, sticky="nsw")
         self.borba.configure(text= "Filipe Borba",font='Bodoni 25', bg='#E10022', fg='White')
+
         self.noto = tk.Label(self.Tela_cadastro)
         self.noto.grid(row=7, column=0, sticky="nsw")
         self.noto.configure(text= "Luca Noto",font='Bodoni 25', bg='#E10022', fg='White')
         
+        self.sair = tk.Button(self.Tela_cadastro)
+        self.sair.grid(row=9, column=2)
+        self.sair.configure(text="Sair")
+        self.sair.bind('<1>',self.clicou_voltar_tela_inicial)
         
         
 
