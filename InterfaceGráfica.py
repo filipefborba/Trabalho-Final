@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 from firebase import firebase
+import smtplib
 
 class Telas():
     
@@ -132,6 +133,7 @@ class Telas():
         
         self.entrada_usuario = tk.Entry(self.Tela_login)
         self.entrada_usuario.grid(row=4, column=2, sticky="ew")
+        self.entrada_usuario.bind('<Return>',self.clicou_continuar_tela_principal)
         
         self.Senha = tk.Label(self.Tela_login)
         self.Senha.grid(row=5, column=1,columnspan=1, sticky="nsew")
@@ -140,16 +142,19 @@ class Telas():
         self.entrada_senha = tk.Entry(self.Tela_login)
         self.entrada_senha.grid(row=5, column=2, sticky="ew")
         self.entrada_senha.configure(show='*')
+        self.entrada_senha.bind('<Return>',self.clicou_continuar_tela_principal)
         
         self.continuar_tela_principal = tk.Button(self.Tela_login)
         self.continuar_tela_principal.grid(row=6, column=3,columnspan=1)
         self.continuar_tela_principal.configure(text='Seguir')
         self.continuar_tela_principal.bind('<1>',self.clicou_continuar_tela_principal)
+        self.continuar_tela_principal.bind('<Return>',self.clicou_continuar_tela_principal)
         
         self.voltar_tela_inicial = tk.Button(self.Tela_login)
         self.voltar_tela_inicial.grid(row=6, column=1,columnspan=1)
         self.voltar_tela_inicial.configure(text='Voltar')
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar_tela_inicial)
+        self.voltar_tela_inicial.bind('<Return>',self.clicou_voltar_tela_inicial)
     
         
 #############    
@@ -722,9 +727,10 @@ class Telas():
         if confirmando_pedido:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
             dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get(), 'Telefone': self.telefone, 'Email': self.email}
-            fb.put('Pedidos', self.nome_completo, dicionario)
+            fb.put('/Pedidos', self.nome_completo, dicionario)
 
-            tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+            tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas clique no botão verificar caronas!')
+            tkm.showinfo('Observação', 'O processo não estará concluído até que a verificação de carona sejá feita')
         
             self.tela_principal_frame()
 
@@ -734,9 +740,10 @@ class Telas():
         if confirmando_oferta:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
             dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferta.get(), 'Local de Chegada': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get(), 'Telefone': self.telefone, 'Email': self.email}
-            fb.put('Ofertas', self.nome_completo, dicionario)
+            fb.put('/Ofertas', self.nome_completo, dicionario)
 
-            tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas entre na seção de verificar caronas!')
+            tkm.showinfo('Conclusão','Solicitação confirmada, para ver sua relação de caronas clique no botão verificar caronas!')
+            tkm.showinfo('Observação', 'O processo não estará concluído até que a verificação de carona sejá feita')
         
             self.tela_principal_frame()
 
@@ -806,11 +813,44 @@ class Telas():
         ofertas = fb.get('Ofertas', None)
         pedidos = fb.get('Pedidos', None)
         
-        print(ofertas, '\n', pedidos)
+        fb2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Pedidos/')
+        fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
+        
+        if self.nome_completo in ofertas:
+            lugar_saida_oferta = fb3.get(self.nome_completo, 'Local de Saída')
+            lugar_chegada_oferta = fb3.get(self.nome_completo, 'Local de Chegada')
+            horario_oferta = fb3.get(self.nome_completo, 'Horário')
+            lugares_necessarios_oferta = fb3.get(self.nome_completo, 'Lugares Necessários')
+            
+            for passageiro in pedidos:
+                lugar_saida_pedido = fb2.get(self.nome_completo, 'Local de Saída')
+                lugar_chegada_pedido = fb2.get(self.nome_completo, 'Local de Chegada')
+                horario_pedido = fb2.get(self.nome_completo, 'Horário')
+                lugares_necessarios_pedido = fb2.get(self.nome_completo, 'Lugares Necessários')
+
+                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta == lugares_necessarios_pedido and horario_oferta == horario_pedido:
+                    print ('passageiro com motorista, pela oferta')
+                        
+        if self.nome_completo in pedidos:
+            lugar_saida_pedido = fb2.get(self.nome_completo, 'Local de Saída')
+            lugar_chegada_pedido = fb2.get(self.nome_completo, 'Local de Chegada')
+            horario_pedido = fb2.get(self.nome_completo, 'Horário')
+            lugares_necessarios_pedido = fb2.get(self.nome_completo, 'Lugares Necessários')
+            
+            for motorista in ofertas:
+                lugar_saida_oferta = fb3.get(motorista, 'Local de Saída')
+                lugar_chegada_oferta = fb3.get(motorista, 'Local de Chegada')
+                horario_oferta = fb3.get(motorista, 'Horário')
+                lugares_necessarios_oferta = fb3.get(motorista, 'Lugares Necessários')
+                if lugar_saida_pedido == lugar_saida_oferta and lugar_chegada_pedido == lugar_chegada_oferta and lugares_necessarios_pedido == lugares_necessarios_oferta and horario_pedido == horario_oferta:
+                    print ('passageiro com motorista, pelos pedidos \n', motorista)
+                        
+        print ('deu bom, chegou no fim!')
         
         
     def clicou_sobre_nós(self,event):
-        self.tela_criadores()
+        tkm.showinfo('Construção', 'Tela em construção!')
+        #self.tela_criadores()
 
 
 ########## iniciando o programa
