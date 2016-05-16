@@ -182,7 +182,7 @@ class Ui_MainWindow(object):
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
     def registrarcadastro(self):    
-        if self.senhainput.text() == self.confirmarsenhainput.text():    
+        if self.senhainput.text() == self.confirmarsenhainput.text() and self.nomeinput.text() != '' and self.emailinput.text() != '' and self.celularinput.text() != '' and self.celularinput.text() != '' and self.usuarioinput.text() != '':    
             dlg = QtGui.QMessageBox(None)
             dlg.setWindowTitle("Confirmação")
             dlg.setIcon(QtGui.QMessageBox.Question)
@@ -190,7 +190,6 @@ class Ui_MainWindow(object):
             dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
             dlg.setDefaultButton(QtGui.QMessageBox.Yes)
             dlg.setEscapeButton(QtGui.QMessageBox.No)
-            dlg.exec_()
             resultado = dlg.exec_()
 
             if resultado == QtGui.QMessageBox.Yes:

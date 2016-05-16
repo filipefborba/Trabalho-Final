@@ -7,7 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import principal
+from firebase import firebase
+import principal, caronas
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -71,16 +72,18 @@ class Ui_MainWindow(object):
         self.senhalabel.setFont(font)
         self.senhalabel.setObjectName(_fromUtf8("senhalabel"))
 
+        self.usuarioinput = QtGui.QLineEdit(self.centralwidget)
+        self.usuarioinput.setGeometry(QtCore.QRect(170, 260, 491, 20))
+        self.usuarioinput.setObjectName(_fromUtf8("usuarioinput"))
+        self.usuarioinput.setPlaceholderText("Nome de Usuário")
+        self.usuarioinput.returnPressed.connect(self.abrirprincipal)
+
         self.senhainput = QtGui.QLineEdit(self.centralwidget)
         self.senhainput.setGeometry(QtCore.QRect(170, 320, 491, 20))
         self.senhainput.setEchoMode(QtGui.QLineEdit.Password)
         self.senhainput.setObjectName(_fromUtf8("senhainput"))
         self.senhainput.setPlaceholderText("Senha")
-
-        self.usuarioinput = QtGui.QLineEdit(self.centralwidget)
-        self.usuarioinput.setGeometry(QtCore.QRect(170, 260, 491, 20))
-        self.usuarioinput.setObjectName(_fromUtf8("usuarioinput"))
-        self.usuarioinput.setPlaceholderText("Nome de Usuário")
+        self.senhainput.returnPressed.connect(self.abrirprincipal)
 
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(160, 430, 101, 41))
@@ -108,6 +111,7 @@ class Ui_MainWindow(object):
         self.confirmar.setFont(font)
         self.confirmar.setObjectName(_fromUtf8("confirmar"))
         self.confirmar.clicked.connect(self.abrirprincipal)
+        self.confirmar.setAutoDefault(True)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -126,12 +130,42 @@ class Ui_MainWindow(object):
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
     def abrirprincipal(self):
-        self.MainWindow = principal.Ui_MainWindow
-        tela_principal = QtGui.QMainWindow()
-        ui = principal.Ui_MainWindow()
-        ui.setupUi(tela_principal)
-        tela_principal.show()
-        sys.exit(app.exec_())
+        self.usuario = self.usuarioinput.text()
+        
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        pessoas = fb.get('/Users', None)
+        
+        if self.usuario in pessoas:
+            
+            fb2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
+            self.senha_pra_conferir = fb2.get(self.usuario, 'senha')
+            
+            if self.senha_pra_conferir == self.senhainput.text():
+                self.nome_completo = fb2.get(self.usuario, 'Nome')
+                self.telefone = fb2.get(self.usuario, 'telefone')
+                self.email = fb2.get(self.usuario, 'email')
+
+                self.MainWindow = principal.Ui_MainWindow
+                tela_principal = QtGui.QMainWindow()
+                ui = principal.Ui_MainWindow()
+                ui.setupUi(tela_principal)
+                tela_principal.show()
+                sys.exit(app.exec_())      
+
+            else:
+                dlg = QtGui.QMessageBox(None)
+                dlg.setWindowTitle("Erro")
+                dlg.setIcon(QtGui.QMessageBox.Warning)
+                dlg.setText("Senha incorreta.")
+                dlg.exec_()
+            
+        else:
+            dlg2 = QtGui.QMessageBox(None)
+            dlg2.setWindowTitle("Erro")
+            dlg2.setIcon(QtGui.QMessageBox.Warning)
+            dlg2.setText("Usuário inexistente.")
+            dlg2.exec_()
+        
 
     def abrircaronas(self):
         self.MainWindow = caronas.Ui_MainWindow

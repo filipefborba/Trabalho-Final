@@ -102,12 +102,12 @@ class Ui_MainWindow(object):
         font.setPointSize(48)
         self.alterarperfiltitulo.setFont(font)
         self.alterarperfiltitulo.setObjectName(_fromUtf8("alterarperfiltitulo"))
-        ###################FIM DAS LABELS###################################
-
+        ###################FIM DAS LABELS##################################
 
         self.nomeinput = QtGui.QLineEdit(self.centralwidget)
         self.nomeinput.setGeometry(QtCore.QRect(170, 130, 491, 20))
         self.nomeinput.setObjectName(_fromUtf8("nomeinput"))
+        #self.nomeinput.setText(self.login.nome_completo)
 
         self.celularinput = QtGui.QLineEdit(self.centralwidget)
         self.celularinput.setGeometry(QtCore.QRect(170, 190, 491, 20))
@@ -115,10 +115,12 @@ class Ui_MainWindow(object):
         self.celularinput.setText(_fromUtf8(""))
         self.celularinput.setMaxLength(11)
         self.celularinput.setObjectName(_fromUtf8("celularinput"))
+        #self.celularinput.setText(self.telefone)
 
         self.emailinput = QtGui.QLineEdit(self.centralwidget)
         self.emailinput.setGeometry(QtCore.QRect(170, 250, 491, 20))
         self.emailinput.setObjectName(_fromUtf8("emailinput"))
+        #self.emailinput.setText(self.email)
 
         self.usuarioinput = QtGui.QLineEdit(self.centralwidget)
         self.usuarioinput.setGeometry(QtCore.QRect(170, 310, 491, 20))

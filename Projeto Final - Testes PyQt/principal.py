@@ -64,7 +64,7 @@ class Ui_MainWindow(object):
 
         #Título de boas-vindas
         self.titulo = QtGui.QLabel(self.centralwidget)
-        self.titulo.setGeometry(QtCore.QRect(140, 70, 531, 81))
+        self.titulo.setGeometry(QtCore.QRect(120, 70, 571, 81))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Bodoni MT"))
         font.setPointSize(28)
