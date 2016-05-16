@@ -620,46 +620,6 @@ class Telas():
         self.voltar_tela_inicial.grid(row=8, column=0)
         self.voltar_tela_inicial.configure(text='Voltar')
         self.voltar_tela_inicial.bind('<1>',self.clicou_voltar)
-
-
-#    def Tela_verificar_frame(self):
-#        self.tela_verificar = tk.Frame(self.root)
-#        self.tela_verificar.configure(bg='#E10022')
-#        
-#        self.tela_verificar.rowconfigure(0, minsize=2, weight=1)
-#        self.tela_verificar.rowconfigure(1, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(2, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(3, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(4, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(5, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(6, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(7, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(8, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(9, minsize=8, weight=1)
-#        self.tela_verificar.rowconfigure(10, minsize=2, weight=1)
-#
-#        self.tela_verificar.columnconfigure(0, minsize=2, weight=1)
-#        self.tela_verificar.columnconfigure(1, minsize=50, weight=1)
-#        self.tela_verificar.columnconfigure(2, minsize=50, weight=1)
-#        self.tela_verificar.columnconfigure(3, minsize=2, weight=1)
-#        
-#        
-#        self.tela_verificar.grid(row=0, column=0, sticky="nsew")
-#        
-#        pedidos = tk.Label(self.tela_verificar)
-#        pedidos.grid (row= 1, column= 1, sticky='w')
-#        pedidos.configure(text= 'Pedidos:', bg='#E10022', fg='White')
-#        
-#        ofertas = tk.Label(self.tela_verificar)
-#        ofertas.grid (row= 1, column= 2, sticky='w')
-#        ofertas.configure(text= 'Ofertas:', bg='#E10022', fg='White')
-#        
-#        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-#        pedidos = fb.get('/Pedidos', None)
-#        ofertas = fb.get('/Ofertas', None)
-        
-        
-        
                 
                 
 ####################     Função dos botões
@@ -667,14 +627,12 @@ class Telas():
     def clicou_cadastro(self,event):
         self.Tela_cadastro_frame() 
         
-        
     def clicou_login(self,event):
         self.Tela_login_frame()
 
     def clicou_continuar_tela_principal(self,event):
         self.usuarios = self.entrada_usuario.get()
         
-
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         pessoas = fb.get('/Users', None)
         
@@ -692,16 +650,14 @@ class Telas():
                tkm.showinfo('Erro','Senha inválida')
             
         else:
-            tkm.showinfo('Erro','Usuário Inexistente')
-            
+            tkm.showinfo('Erro','Usuário Inexistente')       
         
     def clicou_voltar_tela_inicial(self,event):
-        self.tela_inicial_frame()
-    
+        self.tela_inicial_frame()  
 
     #Salvar informações do cadastro    
     def clicou_salvar(self,event):
-        if self.senha_entrada.get() == self.senha_confirma_entrada.get(): 
+        if self.senha_entrada.get() == self.senha_confirma_entrada.get() and self.nome_entrada.get() != '' and self.email_entrada.get() != '' and self.celular_entrada.get() != '' and self.celular_entrada.get() != '() 9' and self.usuario_entrada.get() != '':
             
             confirmando_cadastro = tkm.askyesno('Confirmando','Deseja salvar as informações?')
             
@@ -713,7 +669,7 @@ class Telas():
                 self.Tela_login_frame()
                                     
         else:
-            tkm.showinfo('Erro','Senhas não combinadas!')
+            tkm.showinfo('Erro','Campos incompletos ou senhas não combinadas!')
         
     def clicou_pedir(self,event):
         self.Tela_pedir_carona_frame()
@@ -809,7 +765,7 @@ class Telas():
             
     #Função que verifica caronas
     def clicou_verificar_caronas(self,event):
-        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
         ofertas = fb.get('Ofertas', None)
         pedidos = fb.get('Pedidos', None)
         
@@ -833,50 +789,50 @@ class Telas():
                     nome = fb4.get(passageiro,'Nome')
                     celular = fb4.get(passageiro, 'telefone')
                     email = fb4.get(passageiro, 'email')
-                    
-                    print(nome, '\n', celular, '\n', email)
-                    
-#                    fromaddr = 'caronas.insper@gmail.com'
-#                    toaddrs = self.email
-#
-#                    msg = '''
-#                    O seu carona é: {0}
-#                    Seu telefone é: {1}
-#                    Seu email é: {2}
-#                    
-#                    Entre em contato com seu carona para marcarem melhor!
-#                    Obrigado por escolher o Caronas Insper!
-#                    A equipe agradece!!
-#                    '''.format(nome, celular, email)
-#                    
-#                    server = smtplib.SMTP('insper.edu.br')
-#                    server.set_debuglevel(1)
-#                    server.sendmail(fromaddr, toaddrs, msg)
-#                    server.quit()
-#                    
-#                    fromaddr = 'caronas.insper@gmail.com'
-#                    toaddrs = email
-#
-#                    msg = '''
-#                    O seu carona é: {0}
-#                    Seu telefone é: {1}
-#                    Seu email é: {2}
-#                    
-#                    Entre em contato com seu carona para marcarem melhor!
-#                    Obrigado por escolher o Caronas Insper!
-#                    A equipe agradece!!
-#                    '''.format(self.nome_completo, self.telefone, self.email)
-#                    
-#                    server = smtplib.SMTP('insper.edu.br')
-#                    server.set_debuglevel(1)
-#                    server.sendmail(fromaddr, toaddrs, msg)
-#                    server.quit()
+                                        
+                    fromaddr = 'caronas.insper@gmail.com'
+                    toaddrs = self.email
 
+                    msg = '''
+                    O seu carona é: {0}
+                    Seu telefone é: {1}
+                    Seu email é: {2}
+                    
+                    Entre em contato com seu carona para marcarem melhor!
+                    Obrigado por escolher o Caronas Insper!
+                    A equipe agradece!!
+                    '''.format(nome, celular, email)
+                    
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
+                    
+                    fromaddr = 'caronas.insper@gmail.com'
+                    toaddrs = email
+
+                    msg = '''
+                    O seu carona é: {0}
+                    Seu telefone é: {1}
+                    Seu email é: {2}
+                    
+                    Entre em contato com seu carona para combinarem melhor!
+                    Obrigado por escolher o Caronas Insper!
+                    A equipe agradece!!
+                    '''.format(self.nome_completo, self.telefone, self.email)
+                    
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
+                    
+                    fb.delete('/Pedidos', passageiro)
+                    fb.delete('/Ofertas', self.usuarios)
                     
                     tkm.showinfo('Carona', 'As informações de seu carona estão no seu email!')
                     break
-#                else:
-#                    tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
+                else:
+                    tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
                         
         if self.usuarios in pedidos:
             lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Saída')
@@ -894,52 +850,51 @@ class Telas():
                     nome = fb4.get(motorista,'Nome')
                     celular = fb4.get(motorista, 'telefone')
                     email = fb4.get(motorista, 'email')
+                                        
+                    fromaddr = 'caronas.insper@gmail.com'
+                    toaddrs = self.email
+
+                    msg = '''
+                    O seu carona é: {0}
+                    Seu telefone é: {1}
+                    Seu email é: {2}
                     
-                    print(nome, '\n', celular, '\n', email)
+                    Entre em contato com seu carona para combinarem melhor!
+                    Obrigado por escolher o Caronas Insper!
+                    A equipe agradece!!
+                    '''.format(nome, celular, email)
                     
-#                    fromaddr = 'caronas.insper@gmail.com'
-#                    toaddrs = self.email
-#
-#                    msg = '''
-#                    O seu carona é: {0}
-#                    Seu telefone é: {1}
-#                    Seu email é: {2}
-#                    
-#                    Entre em contato com seu carona para marcarem melhor!
-#                    Obrigado por escolher o Caronas Insper!
-#                    A equipe agradece!!
-#                    '''.format(nome, celular, email)
-#                    
-#                    server = smtplib.SMTP('insper.edu.br')
-#                    server.set_debuglevel(1)
-#                    server.sendmail(fromaddr, toaddrs, msg)
-#                    server.quit()
-#                    
-#                    fromaddr = 'caronas.insper@gmail.com'
-#                    toaddrs = email
-#
-#                    msg = '''
-#                    O seu carona é: {0}
-#                    Seu telefone é: {1}
-#                    Seu email é: {2}
-#                    
-#                    Entre em contato com seu carona para marcarem melhor!
-#                    Obrigado por escolher o Caronas Insper!
-#                    A equipe agradece!!
-#                    '''.format(self.nome_completo, self.telefone, self.email)
-#                    
-#                    server = smtplib.SMTP('insper.edu.br')
-#                    server.set_debuglevel(1)
-#                    server.sendmail(fromaddr, toaddrs, msg)
-#                    server.quit()
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
+                    
+                    fromaddr = 'caronas.insper@gmail.com'
+                    toaddrs = email
+
+                    msg = '''
+                    O seu carona é: {0}
+                    Seu telefone é: {1}
+                    Seu email é: {2}
+                    
+                    Entre em contato com seu carona para marcarem melhor!
+                    Obrigado por escolher o Caronas Insper!
+                    A equipe agradece!!
+                    '''.format(self.nome_completo, self.telefone, self.email)
+                    
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
+                    
+                    fb.delete('/Pedidos', self.usuarios)
+                    fb.delete('/Ofertas', motorista)
                     
                     tkm.showinfo('Carona','As informações de seu carona estão no seu email!')
                     break
                 else:
                     tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
-                        
-        print ('deu bom, chegou no fim!')
-        
+                                
         
     def clicou_sobre_nós(self,event):
         tkm.showinfo('Construção', 'Tela em construção!')
@@ -951,4 +906,4 @@ class Telas():
         self.root.mainloop()
 
 Caronas = Telas()
-Caronas.iniciar()      
+Caronas.iniciar()
