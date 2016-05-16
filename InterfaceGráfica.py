@@ -74,26 +74,48 @@ class Telas():
 #######
     def tela_criadores(self):
         
-        self.Tela_login = tk.Frame(self.root)
-        self.Tela_login.configure(bg='#E10022')
+        self.Tela_cadastro = tk.Frame(self.root)
+        self.Tela_cadastro.configure(bg='#E10022')
         
-        self.Tela_login.rowconfigure(0, minsize=25, weight=1)
-        self.Tela_login.rowconfigure(1, minsize=25, weight=1)
-        self.Tela_login.rowconfigure(2, minsize=50, weight=1)
-        self.Tela_login.rowconfigure(3, minsize=50, weight=1)
-        self.Tela_login.rowconfigure(4, minsize=50, weight=1)
-        self.Tela_login.rowconfigure(5, minsize=50, weight=1)
-        self.Tela_login.rowconfigure(6, minsize=50, weight=1)
-        self.Tela_login.rowconfigure(7, minsize=50, weight=1)
-        self.Tela_login.rowconfigure(8, minsize=25, weight=1)
-        self.Tela_login.rowconfigure(9, minsize=25, weight=1)
+        self.Tela_cadastro.rowconfigure(0, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(1, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(2, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(3, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(4, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(5, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(6, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(7, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(8, minsize=40, weight=1)
+        self.Tela_cadastro.rowconfigure(9, minsize=40, weight=1)
 
-        self.Tela_login.columnconfigure(0, minsize=10, weight=1)
-        self.Tela_login.columnconfigure(1, minsize=100, weight=1)
-        self.Tela_login.columnconfigure(2, minsize=100, weight=1)
-        self.Tela_login.columnconfigure(3, minsize=100, weight=1)
-        self.Tela_login.columnconfigure(4, minsize=10, weight=1)
-        self.Tela_login.grid(row=0, column=0, sticky="nsew")
+        self.Tela_cadastro.columnconfigure(0, minsize=110, weight=1)
+        self.Tela_cadastro.columnconfigure(1, minsize=100, weight=1)
+        self.Tela_cadastro.columnconfigure(2, minsize=8, weight=1)
+
+        self.Tela_cadastro.grid(row=0, column=0, sticky="nsew")
+        
+        self.projeto = tk.Label(self.Tela_cadastro)
+        self.projeto.grid(row=0, column=0, columnspan=3, sticky="nsew")
+        self.projeto.configure(text= "O Projeto",font='Bodoni 25', bg='#E10022', fg='White')
+        
+        self.descricao = tk.Label(self.Tela_cadastro)
+        self.descricao.grid(row=1, column=0, columnspan=3, sticky="nsew")
+        self.descricao.configure(text= "Descrição do projeto aqui........",font='Bodoni 10', bg='#E10022', fg='White')
+        
+        self.quemsomos = tk.Label(self.Tela_cadastro)
+        self.quemsomos.grid(row=2, column=0, columnspan=3, sticky="nsew")
+        self.quemsomos.configure(text= "Quem Somos?",font='Bodoni 25', bg='#E10022', fg='White')
+        
+        self.deco = tk.Label(self.Tela_cadastro)
+        self.deco.grid(row=3, column=0, sticky="nsw")
+        self.deco.configure(text= "André Ejzenmesser",font='Bodoni 25', bg='#E10022', fg='White')
+        self.borba = tk.Label(self.Tela_cadastro)
+        self.borba.grid(row=5, column=0, sticky="nsw")
+        self.borba.configure(text= "Filipe Borba",font='Bodoni 25', bg='#E10022', fg='White')
+        self.noto = tk.Label(self.Tela_cadastro)
+        self.noto.grid(row=7, column=0, sticky="nsw")
+        self.noto.configure(text= "Luca Noto",font='Bodoni 25', bg='#E10022', fg='White')
+        
         
         
 
@@ -897,8 +919,7 @@ class Telas():
                                 
         
     def clicou_sobre_nós(self,event):
-        tkm.showinfo('Construção', 'Tela em construção!')
-        #self.tela_criadores()
+        self.tela_criadores()
 
 
 ########## iniciando o programa
