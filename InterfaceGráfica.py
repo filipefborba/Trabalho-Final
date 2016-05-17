@@ -863,7 +863,7 @@ class Telas():
                     fromaddr = 'lucarn@al.insper.edu.br'
                     toaddrs = self.email
 
-                    msg = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para marcarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((nome, celular, email)).encode('UTF-8').strip()
+                    msg = 'O seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email).encode('UTF-8')
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
@@ -873,7 +873,7 @@ class Telas():
                     fromaddr = 'lucarn@al.insper.edu.br'
                     toaddrs = email
 
-                    msg = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para combinarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((self.nome_completo, self.telefone, self.email)).encode('UTF-8').strip()
+                    msg = 'Seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para combinarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email).encode('UTF-8')
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
@@ -906,24 +906,24 @@ class Telas():
                     email = fb4.get(motorista, 'email')
                                         
                     fromaddr = 'lucarn@al.insper.edu.br'
-                    toaddrs = 'decoejz@gmail.com' #self.email
+                    toaddrs = self.email
 
-                    msg = 'O seu carona e: {0}\n Seu telefone e: {1}\n Seu email e: {2}\n Entre em contato com seu carona para combinarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((nome, celular, email)).encode('UTF-8').strip()
+                    msg = 'Seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para combinarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email).encode('UTF-8')
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
                     
-                    fromaddr1 = 'lucarn@al.insper.edu.br'
-                    toaddrs1 = 'luca.ribeiro.noto@gmail.com' #email
+                    fromaddr = 'lucarn@al.insper.edu.br'
+                    toaddrs = email
 
-                    msg1 = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para marcarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((self.nome_completo, self.telefone, self.email)).encode('UTF-8').strip()
+                    msg = 'Seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email).encode('UTF-8')
                     
-                    server1 = smtplib.SMTP('insper.edu.br')
-                    server1.set_debuglevel(1)
-                    server1.sendmail(fromaddr1, toaddrs1, msg1)
-                    server1.quit()
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
                     
                     fb.delete('/Pedidos', self.usuarios)
                     fb.delete('/Ofertas', motorista)
