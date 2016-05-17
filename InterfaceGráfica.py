@@ -721,19 +721,25 @@ class Telas():
 
     #Salvar informações do cadastro    
     def clicou_salvar(self,event):
-        if self.senha_entrada.get() == self.senha_confirma_entrada.get() and self.nome_entrada.get() != '' and self.email_entrada.get() != '' and self.celular_entrada.get() != '' and self.celular_entrada.get() != '() 9' and self.usuario_entrada.get() != '':
-            
-            confirmando_cadastro = tkm.askyesno('Confirmando','Deseja salvar as informações?')
-            
-            if confirmando_cadastro:
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
+        cadastros = fb.get('Users', None)
+        
+        if not self.usuario_entrada.get() in cadastros:
+            if self.senha_entrada.get() == self.senha_confirma_entrada.get() and self.nome_entrada.get() != '' and self.email_entrada.get() != '' and self.celular_entrada.get() != '' and self.celular_entrada.get() != '() 9' and self.usuario_entrada.get() != '':
                 
-                fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-                dicionario = {'Nome': self.nome_entrada.get(),'email': self.email_entrada.get(), 'telefone': self.celular_entrada.get(), 'senha': self.senha_entrada.get()}
-                fb.put('Users', self.usuario_entrada.get(), dicionario)
-                self.Tela_login_frame()
-                                    
+                confirmando_cadastro = tkm.askyesno('Confirmando','Deseja salvar as informações?')
+                
+                if confirmando_cadastro:
+                    
+                    fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+                    dicionario = {'Nome': self.nome_entrada.get(),'email': self.email_entrada.get(), 'telefone': self.celular_entrada.get(), 'senha': self.senha_entrada.get()}
+                    fb.put('Users', self.usuario_entrada.get(), dicionario)
+                    self.Tela_login_frame()
+                                        
+            else:
+                tkm.showinfo('Erro','Campos incompletos ou senhas não combinadas!')
         else:
-            tkm.showinfo('Erro','Campos incompletos ou senhas não combinadas!')
+            tkm.showinfo('Erro','Usuário já existente!')
         
     def clicou_pedir(self,event):
         self.Tela_pedir_carona_frame()
@@ -857,15 +863,7 @@ class Telas():
                     fromaddr = 'lucarn@al.insper.edu.br'
                     toaddrs = self.email
 
-                    msg = '''
-                    O seu carona é: {0}
-                    Seu telefone é: {1}
-                    Seu email é: {2}
-                    
-                    Entre em contato com seu carona para marcarem melhor!
-                    Obrigado por escolher o Caronas Insper!
-                    A equipe agradece!!
-                    '''.format(nome, celular, email)
+                    msg = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para marcarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((nome, celular, email)).encode('UTF-8').strip()
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
@@ -875,15 +873,7 @@ class Telas():
                     fromaddr = 'lucarn@al.insper.edu.br'
                     toaddrs = email
 
-                    msg = '''
-                    O seu carona é: {0}
-                    Seu telefone é: {1}
-                    Seu email é: {2}
-                    
-                    Entre em contato com seu carona para combinarem melhor!
-                    Obrigado por escolher o Caronas Insper!
-                    A equipe agradece!!
-                    '''.format(self.nome_completo, self.telefone, self.email)
+                    msg = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para combinarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((self.nome_completo, self.telefone, self.email)).encode('UTF-8').strip()
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
@@ -928,7 +918,7 @@ class Telas():
                     fromaddr1 = 'lucarn@al.insper.edu.br'
                     toaddrs1 = 'luca.ribeiro.noto@gmail.com' #email
 
-                    msg1 = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para marcarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((nome, celular, email)).encode('UTF-8').strip()
+                    msg1 = 'O seu carona é: {0}\n Seu telefone é: {1}\n Seu email é: {2}\n\n Entre em contato com seu carona para marcarem melhor!\n Obrigado por escolher o Caronas Insper!\n A equipe agradece!!'.join((self.nome_completo, self.telefone, self.email)).encode('UTF-8').strip()
                     
                     server1 = smtplib.SMTP('insper.edu.br')
                     server1.set_debuglevel(1)
