@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import principal
+import principal, login
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(801, 592)
+        MainWindow.setFixedSize(801,592)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -107,7 +108,7 @@ class Ui_MainWindow(object):
         self.nomeinput = QtGui.QLineEdit(self.centralwidget)
         self.nomeinput.setGeometry(QtCore.QRect(170, 130, 491, 20))
         self.nomeinput.setObjectName(_fromUtf8("nomeinput"))
-        #self.nomeinput.setText(self.login.nome_completo)
+        self.nomeinput.setText("Kléber Bambam")
 
         self.celularinput = QtGui.QLineEdit(self.centralwidget)
         self.celularinput.setGeometry(QtCore.QRect(170, 190, 491, 20))
@@ -115,7 +116,7 @@ class Ui_MainWindow(object):
         self.celularinput.setText(_fromUtf8(""))
         self.celularinput.setMaxLength(11)
         self.celularinput.setObjectName(_fromUtf8("celularinput"))
-        #self.celularinput.setText(self.telefone)
+        #self.celularinput.setText(self)
 
         self.emailinput = QtGui.QLineEdit(self.centralwidget)
         self.emailinput.setGeometry(QtCore.QRect(170, 250, 491, 20))

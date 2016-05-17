@@ -29,6 +29,7 @@ class Ui_MainWindow(object):
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(796, 553)
+        MainWindow.setFixedSize(796, 553)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -141,16 +142,16 @@ class Ui_MainWindow(object):
             self.senha_pra_conferir = fb2.get(self.usuario, 'senha')
             
             if self.senha_pra_conferir == self.senhainput.text():
-                self.nome_completo = fb2.get(self.usuario, 'Nome')
-                self.telefone = fb2.get(self.usuario, 'telefone')
-                self.email = fb2.get(self.usuario, 'email')
-
                 self.MainWindow = principal.Ui_MainWindow
                 tela_principal = QtGui.QMainWindow()
                 ui = principal.Ui_MainWindow()
                 ui.setupUi(tela_principal)
                 tela_principal.show()
-                sys.exit(app.exec_())      
+                sys.exit(app.exec_())
+
+                self.nome_completo = fb2.get(self.usuario, 'Nome')
+                self.telefone = fb2.get(self.usuario, 'telefone')
+                self.email = fb2.get(self.usuario, 'email')
 
             else:
                 dlg = QtGui.QMessageBox(None)

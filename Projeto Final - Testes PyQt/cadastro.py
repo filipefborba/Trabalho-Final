@@ -197,6 +197,12 @@ class Ui_MainWindow(object):
                 fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
                 dicionario = {'Nome': self.nomeinput.text(),'email': self.emailinput.text(), 'telefone': self.celularinput.text(), 'senha': self.senhainput.text()}
                 fb.put('Users', self.usuarioinput.text(), dicionario)
+                self.MainWindow = login.Ui_MainWindow
+                tela_login = QtGui.QMainWindow()
+                ui = login.Ui_MainWindow()
+                ui.setupUi(tela_login)
+                tela_login.show()
+                sys.exit(app.exec_())
 
         else:
             dlg2 = QtGui.QMessageBox(None)

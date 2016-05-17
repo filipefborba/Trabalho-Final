@@ -28,6 +28,7 @@ class Ui_MainWindow(object):
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(844, 559)
+        MainWindow.setFixedSize(844,559)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 

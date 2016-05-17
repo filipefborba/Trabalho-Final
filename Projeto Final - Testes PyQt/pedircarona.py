@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from firebase import firebase
 import principal
 
 try:
@@ -132,6 +133,7 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.confirmar.setFont(font)
         self.confirmar.setObjectName(_fromUtf8("confirmar"))
+        self.confirmar.clicked.connect(self.registrarpedido)
 
         self.datalabel = QtGui.QLabel(self.centralwidget)
         self.datalabel.setGeometry(QtCore.QRect(110, 320, 51, 41))
@@ -186,6 +188,36 @@ class Ui_MainWindow(object):
         self.lugares.setItemText(3, _translate("MainWindow", "4", None))
         self.lugareslabel.setText(_translate("MainWindow", "Lugares disponíveis:", None))
 
+
+
+    def registrarpedido(self):
+        dlg = QtGui.QMessageBox(None)
+        dlg.setWindowTitle("Confirmação")
+        dlg.setIcon(QtGui.QMessageBox.Question)
+        dlg.setText("Deseja confirmar o pedido?")
+        dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+        dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+        dlg.setEscapeButton(QtGui.QMessageBox.No)
+        resultado = dlg.exec_()
+            
+        if resultado == QtGui.QMessageBox.Yes:
+            fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+            dicionario = {'Horário': self.dataehora,'Local de Saída': self.partida, 'Local de Chegada': self.destino, 'Lugares Necessários': self.lugares}
+            fb.put('/Pedidos', self.usuarios, dicionario)
+
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Conclusão")
+            dlg.setIcon(QtGui.QMessageBox.Information)
+            dlg.setText("Solicitação confirmada, para ver sua relação de caronas clique no botão verificar caronas!")
+            dlg.setInformativeText("OBS: O processo não estará concluído até que a verificação de carona seja feita")
+            dlg.exec_()
+        
+            self.MainWindow = principal.Ui_MainWindow
+            tela_principal = QtGui.QMainWindow()
+            ui = principal.Ui_MainWindow()
+            ui.setupUi(tela_principal)
+            tela_principal.show()
+            sys.exit(app.exec_())
 
     def abrirprincipal(self):
         self.MainWindow = principal.Ui_MainWindow
