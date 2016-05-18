@@ -8,7 +8,7 @@ class Telas():
     
     def __init__(self):
         #Listas com bairros disponiveis para carona, horários de saída e lugares disponiveis no carro
-        self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso'])
+        self.bairros = sorted(['','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes'])
         self.horarios = ['','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00']
         self.lugares = ['','1','2','3','4']        
         
@@ -797,8 +797,8 @@ class Telas():
                     
                     tkm.showinfo('Carona','As informações de seu carona estão no seu email!')
                     break
-#                else:
-#                    tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
+            else:
+                tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
                                 
             self.tela_principal_frame()
 
@@ -858,8 +858,8 @@ class Telas():
                     
                     tkm.showinfo('Carona', 'As informações de seu carona estão no seu email!')
                     break
-#                else:
-#                    tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
+            else:
+                tkm.showinfo('Carona', 'Não existem caronas no momento. Quando exister alguém, você será notificado por email!')
         
             self.tela_principal_frame()
 
