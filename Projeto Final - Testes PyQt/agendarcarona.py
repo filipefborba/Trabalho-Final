@@ -8,6 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 import principal
+from firebase import firebase
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -126,6 +127,7 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.confirmar.setFont(font)
         self.confirmar.setObjectName(_fromUtf8("confirmar"))
+        self.confirmar.clicked.connect(self.registraroferta)
 
         self.lugareslabel = QtGui.QLabel(self.centralwidget)
         self.lugareslabel.setGeometry(QtCore.QRect(40, 400, 141, 41))
@@ -177,6 +179,89 @@ class Ui_MainWindow(object):
         ui.setupUi(tela_principal)
         tela_principal.show()
         sys.exit(app.exec_())
+
+    def registraroferta(self):
+        dlg = QtGui.QMessageBox(None)
+        dlg.setWindowTitle("Confirmação")
+        dlg.setIcon(QtGui.QMessageBox.Question)
+        dlg.setText("Deseja confirmar a oferta?")
+        dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+        dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+        dlg.setEscapeButton(QtGui.QMessageBox.No)
+        resultado = dlg.exec_()
+
+        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
+            
+        if resultado == QtGui.QMessageBox.Yes:
+            fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
+            dicionario = {'Horário': self.horario.toPyTime(), 'Data': self.data.toPyDate(), 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
+            fb.put('/Ofertas', self.usuarios, dicionario)
+
+            pedidos = fb.get('Pedidos', None)
+            
+            fb2 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Pedidos/')
+            fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
+            fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
+
+
+            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Saída')
+            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Chegada')
+            horario_oferta = fb3.get(self.usuarios, 'Horário')
+            lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
+            
+            for passageiro in pedidos:
+                lugar_saida_pedido = fb2.get(passageiro, 'Local de Saída')
+                lugar_chegada_pedido = fb2.get(passageiro, 'Local de Chegada')
+                horario_pedido = fb2.get(passageiro, 'Horário')
+                lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
+
+                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta >= lugares_necessarios_pedido and horario_oferta == horario_pedido:                    
+                    nome = fb4.get(passageiro,'Nome')
+                    celular = fb4.get(passageiro, 'telefone')
+                    email = fb4.get(passageiro, 'email')
+                                        
+                    fromaddr = 'lucarn@al.insper.edu.br'
+                    toaddrs = self.email
+
+                    msg = 'O seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email).encode('UTF-8')
+                    
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
+                    
+                    fromaddr = 'lucarn@al.insper.edu.br'
+                    toaddrs = email
+
+                    msg = 'Seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para combinarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email).encode('UTF-8')
+                    
+                    server = smtplib.SMTP('insper.edu.br')
+                    server.set_debuglevel(1)
+                    server.sendmail(fromaddr, toaddrs, msg)
+                    server.quit()
+                    
+                    fb.delete('/Pedidos', passageiro)
+                    fb.delete('/Ofertas', self.usuarios)
+                    
+                    dlg = QtGui.QMessageBox(None)
+                    dlg.setWindowTitle("Carona")
+                    dlg.setIcon(QtGui.QMessageBox.Information)
+                    dlg.setText("As informações de quem te dará carona estão no seu e-mail!")
+                    dlg.exec_()
+                    break
+            else:
+                dlg = QtGui.QMessageBox(None)
+                dlg.setWindowTitle("Carona")
+                dlg.setIcon(QtGui.QMessageBox.Information)
+                dlg.setText("Não existem pedidos de carona no momento. Quando existir alguém, você será notificado por e-mail!")
+                dlg.exec_()
+
+            self.MainWindow = principal.Ui_MainWindow
+            tela_principal = QtGui.QMainWindow()
+            ui = principal.Ui_MainWindow()
+            ui.setupUi(tela_principal)
+            tela_principal.show()
+            sys.exit(app.exec_())
 
 if __name__ == "__main__":
     import sys

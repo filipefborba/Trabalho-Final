@@ -132,6 +132,7 @@ class Ui_MainWindow(object):
 
     def abrirprincipal(self):
         self.usuario = self.usuarioinput.text()
+        self.usuarios = self.usuario
         
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         pessoas = fb.get('/Users', None)

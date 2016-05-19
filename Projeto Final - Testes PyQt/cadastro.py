@@ -8,7 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 from firebase import firebase
-import login
+import login, caronas
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8

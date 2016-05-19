@@ -7,7 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import caronas, pedircarona, agendarcarona, removercarona, perfil
+import caronas, pedircarona, agendarcarona, removercarona, perfil, login
+from firebase import firebase
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -95,7 +96,7 @@ class Ui_MainWindow(object):
         self.remover = QtGui.QPushButton(self.centralwidget)
         self.remover.setGeometry(QtCore.QRect(260, 420, 300, 50))
         self.remover.setObjectName(_fromUtf8("remover"))
-        self.remover.clicked.connect(self.abrirremover)
+        self.remover.clicked.connect(self.removercaronas)
 
         #Botão para fazer logout
         self.logout = QtGui.QPushButton(self.centralwidget)
@@ -148,14 +149,51 @@ class Ui_MainWindow(object):
         tela_agendar.show()
         sys.exit(app.exec_())
 
-    def abrirremover(self):
-        self.MainWindow = removercarona.Ui_MainWindow
-        tela_remover = QtGui.QMainWindow()
-        ui = removercarona.Ui_MainWindow()
-        ui.setupUi(tela_remover)
-        tela_remover.show()
-        sys.exit(app.exec_())
-
+    def removercaronas(self):
+        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        pedidos = fb.get('/Pedidos', None)
+        ofertas = fb.get("/Ofertas", None)
+        
+        if self.usuarios in pedidos:
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Confirmação")
+            dlg.setIcon(QtGui.QMessageBox.Question)
+            dlg.setText("Deseja cancelar seu pedido/oferta?")
+            dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+            dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+            dlg.setEscapeButton(QtGui.QMessageBox.No)
+            resultado = dlg.exec_()
+            if resultado == QtGui.QMessageBox.Yes:
+                fb.delete('Pedidos', self.usuarios)
+                dlg = QtGui.QMessageBox(None)
+                dlg.setWindowTitle("Cancelamento")
+                dlg.setIcon(QtGui.QMessageBox.Information)
+                dlg.setText("Pedido/oferta cancelado com sucesso!")
+                dlg.exec_()
+       
+        elif self.usuarios in ofertas:
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Confirmação")
+            dlg.setIcon(QtGui.QMessageBox.Question)
+            dlg.setText("Deseja cancelar seu pedido/oferta?")
+            dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+            dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+            dlg.setEscapeButton(QtGui.QMessageBox.No)
+            resultado = dlg.exec_()
+            if resultado == QtGui.QMessageBox.Yes:
+                fb.delete('Pedidos', self.usuarios)
+                dlg = QtGui.QMessageBox(None)
+                dlg.setWindowTitle("Cancelamento")
+                dlg.setIcon(QtGui.QMessageBox.Information)
+                dlg.setText("Pedido/oferta cancelado com sucesso!")
+                dlg.exec_()
+        else:
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Cancelamento")
+            dlg.setIcon(QtGui.QMessageBox.Information)
+            dlg.setText("Não existe um pedido/oferta de carona")
+            dlg.exec_()
 
     def abrirperfil(self):
         self.MainWindow = perfil.Ui_MainWindow
