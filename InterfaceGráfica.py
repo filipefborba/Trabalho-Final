@@ -3,6 +3,7 @@ import tkinter.ttk as ttk
 import tkinter.messagebox as tkm
 from firebase import firebase
 import smtplib
+from validate_email import validate_email
 
 class Telas():
     
@@ -720,7 +721,10 @@ class Telas():
         cadastros = fb.get('Users', None)
         
         if not self.usuario_entrada.get() in cadastros:
-            if self.senha_entrada.get() == self.senha_confirma_entrada.get() and self.nome_entrada.get() != '' and self.email_entrada.get() != '' and self.celular_entrada.get() != '' and self.celular_entrada.get() != '() 9' and self.usuario_entrada.get() != '':
+            
+            validando_email = validate_email(self.email_entrada.get())
+            
+            if self.senha_entrada.get() == self.senha_confirma_entrada.get() and self.nome_entrada.get() != '' and validando_email == True and self.celular_entrada.get() != '' and self.celular_entrada.get() != '() 9' and self.usuario_entrada.get() != '':
                 
                 confirmando_cadastro = tkm.askyesno('Confirmando','Deseja salvar as informações?')
                 
