@@ -78,75 +78,42 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="login">
+   <widget class="QLabel" name="oprojetolabel">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>220</y>
-      <width>300</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Login</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cadastro">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>290</y>
-      <width>300</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Cadastre-se</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="caronasinsperlabel">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>40</y>
-      <width>521</width>
-      <height>161</height>
+      <x>340</x>
+      <y>50</y>
+      <width>161</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Bodoni MT</family>
-      <pointsize>60</pointsize>
+      <pointsize>36</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>Caronas Insper</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="sobre">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>360</y>
-      <width>300</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sobre</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="contato">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>430</y>
-      <width>300</width>
-      <height>50</height>
-     </rect>
-    </property>
-    <property name="text">
      <string>Contato</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="voltar">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
     </property>
    </widget>
   </widget>

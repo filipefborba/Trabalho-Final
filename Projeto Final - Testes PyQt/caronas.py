@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import cadastro, login
+import cadastro, login, sobre, contato
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -56,13 +56,13 @@ class Ui_MainWindow(object):
 
         #Botão para entrar na página de login
         self.login = QtGui.QPushButton(self.centralwidget)
-        self.login.setGeometry(QtCore.QRect(270, 240, 300, 50))
+        self.login.setGeometry(QtCore.QRect(270, 220, 300, 50))
         self.login.setObjectName(_fromUtf8("login"))
         self.login.clicked.connect(self.abrirlogin)
 
         #Botão para entrar na página de cadastro
         self.cadastro = QtGui.QPushButton(self.centralwidget)
-        self.cadastro.setGeometry(QtCore.QRect(270, 340, 300, 50))
+        self.cadastro.setGeometry(QtCore.QRect(270, 290, 300, 50))
         self.cadastro.setObjectName(_fromUtf8("cadastro"))
         self.cadastro.clicked.connect(self.abrircadastro)
 
@@ -74,6 +74,18 @@ class Ui_MainWindow(object):
         font.setPointSize(60)
         self.caronasinsperlabel.setFont(font)
         self.caronasinsperlabel.setObjectName(_fromUtf8("caronasinsperlabel"))
+
+        #Botão para abrir na página sobre nós
+        self.sobre = QtGui.QPushButton(self.centralwidget)
+        self.sobre.setGeometry(QtCore.QRect(270, 360, 300, 50))
+        self.sobre.setObjectName(_fromUtf8("sobre"))
+        self.sobre.clicked.connect(self.abrirsobre)
+
+        #Botão para abrir a página de contato
+        self.contato = QtGui.QPushButton(self.centralwidget)
+        self.contato.setGeometry(QtCore.QRect(270, 430, 300, 50))
+        self.contato.setObjectName(_fromUtf8("contato"))
+        self.contato.clicked.connect(self.abrircontato)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -90,6 +102,8 @@ class Ui_MainWindow(object):
         self.login.setText(_translate("MainWindow", "Login", None))
         self.cadastro.setText(_translate("MainWindow", "Cadastre-se", None))
         self.caronasinsperlabel.setText(_translate("MainWindow", "Caronas Insper", None))
+        self.sobre.setText(_translate("MainWindow", "Sobre", None))
+        self.contato.setText(_translate("MainWindow", "Contato", None))
 
     #Função para o botão: abre a página de login
     def abrircadastro(self):
@@ -107,6 +121,22 @@ class Ui_MainWindow(object):
         ui = login.Ui_MainWindow()
         ui.setupUi(tela_login)
         tela_login.show()
+        sys.exit(app.exec_())
+
+    def abrirsobre(self):
+        self.MainWindow = sobre.Ui_MainWindow
+        tela_sobre = QtGui.QMainWindow()
+        ui = sobre.Ui_MainWindow()
+        ui.setupUi(tela_sobre)
+        tela_sobre.show()
+        sys.exit(app.exec_())
+
+    def abrircontato(self):
+        self.MainWindow = contato.Ui_MainWindow
+        tela_contato = QtGui.QMainWindow()
+        ui = contato.Ui_MainWindow()
+        ui.setupUi(tela_contato)
+        tela_contato.show()
         sys.exit(app.exec_())
 
 #Apenas para rodar sepadaramente
