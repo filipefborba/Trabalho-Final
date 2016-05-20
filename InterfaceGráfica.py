@@ -776,8 +776,15 @@ class Telas():
                 lugar_chegada_oferta = fb3.get(motorista, 'Local de Chegada')
                 horario_oferta = fb3.get(motorista, 'Horário')
                 lugares_necessarios_oferta = fb3.get(motorista, 'Lugares Necessários')
+
+                if lugares_necessarios_oferta != None:
+                    lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
+                else:
+                    continue
+
+                lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
                 
-                if lugar_saida_pedido == lugar_saida_oferta and lugar_chegada_pedido == lugar_chegada_oferta and lugares_necessarios_pedido <= lugares_necessarios_oferta and horario_pedido == horario_oferta:
+                if lugar_saida_pedido == lugar_saida_oferta and lugar_chegada_pedido == lugar_chegada_oferta and lgnp <= lgno and horario_pedido == horario_oferta:
                     nome = fb4.get(motorista,'Nome')
                     celular = fb4.get(motorista, 'telefone')
                     email = fb4.get(motorista, 'email')
@@ -802,16 +809,13 @@ class Telas():
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
 
-
-                    lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
-                    lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
                     lgno -= lgnp
                     
                     fb.delete('/Pedidos', self.usuarios)
 
                     if lgno > 0:
                         dicionario_motorista = {'Horário': horario_oferta,'Local de Saída': lugar_saida_oferta, 'Local de Chegada': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
-                        fb.put('/Pedidos', motorista, dicionario_motorista)
+                        fb.put('/Ofertas', motorista, dicionario_motorista)
                     else:
                         fb.delete('/Ofertas', motorista)
                     
@@ -848,7 +852,13 @@ class Telas():
                 horario_pedido = fb2.get(passageiro, 'Horário')
                 lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
 
-                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta >= lugares_necessarios_pedido and horario_oferta == horario_pedido:                    
+                lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
+                if lugares_necessarios_pedido != None:
+                    lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
+                else:
+                    continue
+
+                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lgno >= lgnp and horario_oferta == horario_pedido:                    
                     nome = fb4.get(passageiro,'Nome')
                     celular = fb4.get(passageiro, 'telefone')
                     email = fb4.get(passageiro, 'email')
@@ -873,8 +883,6 @@ class Telas():
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
 
-                    lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
-                    lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
                     lgno -= lgnp
                     
                     fb.delete('/Pedidos', passageiro)
