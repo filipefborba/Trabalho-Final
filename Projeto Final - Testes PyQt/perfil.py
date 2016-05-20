@@ -105,10 +105,13 @@ class Ui_MainWindow(object):
         self.alterarperfiltitulo.setObjectName(_fromUtf8("alterarperfiltitulo"))
         ###################FIM DAS LABELS##################################
 
+        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuario
+        dados = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
+
         self.nomeinput = QtGui.QLineEdit(self.centralwidget)
         self.nomeinput.setGeometry(QtCore.QRect(170, 130, 491, 20))
         self.nomeinput.setObjectName(_fromUtf8("nomeinput"))
-        self.nomeinput.setText("Kléber Bambam")
+        self.nomeinput.setText(dados.get(self.usuarios, 'Nome'))
 
         self.celularinput = QtGui.QLineEdit(self.centralwidget)
         self.celularinput.setGeometry(QtCore.QRect(170, 190, 491, 20))
@@ -116,26 +119,30 @@ class Ui_MainWindow(object):
         self.celularinput.setText(_fromUtf8(""))
         self.celularinput.setMaxLength(11)
         self.celularinput.setObjectName(_fromUtf8("celularinput"))
-        #self.celularinput.setText(self)
+        self.celularinput.setText(dados.get(self.usuarios, 'telefone'))
 
         self.emailinput = QtGui.QLineEdit(self.centralwidget)
         self.emailinput.setGeometry(QtCore.QRect(170, 250, 491, 20))
         self.emailinput.setObjectName(_fromUtf8("emailinput"))
-        #self.emailinput.setText(self.email)
+        self.emailinput.setText(dados.get(self.usuarios, 'email'))
 
         self.usuarioinput = QtGui.QLineEdit(self.centralwidget)
         self.usuarioinput.setGeometry(QtCore.QRect(170, 310, 491, 20))
         self.usuarioinput.setObjectName(_fromUtf8("usuarioinput"))
+        self.usuarioinput.setReadOnly(True)
+        self.usuarioinput.setText(self.usuarios)
 
         self.senhainput = QtGui.QLineEdit(self.centralwidget)
         self.senhainput.setGeometry(QtCore.QRect(170, 370, 491, 20))
         self.senhainput.setEchoMode(QtGui.QLineEdit.Password)
         self.senhainput.setObjectName(_fromUtf8("senhainput"))
+        self.senhainput.setText(dados.get(self.usuarios, 'senha'))
 
         self.confirmarsenhainput = QtGui.QLineEdit(self.centralwidget)
         self.confirmarsenhainput.setGeometry(QtCore.QRect(170, 430, 491, 20))
         self.confirmarsenhainput.setEchoMode(QtGui.QLineEdit.Password)
         self.confirmarsenhainput.setObjectName(_fromUtf8("confirmarsenhainput"))
+        self.confirmarsenhainput.setText(dados.get(self.usuarios, 'senha'))
 
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(220, 480, 101, 41))

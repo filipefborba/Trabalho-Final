@@ -26,6 +26,8 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(844, 559)
+        MainWindow.setFixedSize(844,559)
+
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -46,8 +48,11 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         MainWindow.setPalette(palette)
+
+
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+
         self.oprojetolabel = QtGui.QLabel(self.centralwidget)
         self.oprojetolabel.setGeometry(QtCore.QRect(340, 50, 161, 61))
         palette = QtGui.QPalette()
@@ -68,6 +73,9 @@ class Ui_MainWindow(object):
         self.oprojetolabel.setFont(font)
         self.oprojetolabel.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.oprojetolabel.setObjectName(_fromUtf8("oprojetolabel"))
+
+
+
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(0, 0, 101, 41))
         font = QtGui.QFont()
@@ -76,6 +84,8 @@ class Ui_MainWindow(object):
         self.voltar.setFont(font)
         self.voltar.setObjectName(_fromUtf8("voltar"))
         self.voltar.clicked.connect(self.abrircaronas)
+
+
 
         self.contato = QtGui.QPlainTextEdit(self.centralwidget)
         self.contato.setGeometry(QtCore.QRect(100, 150, 641, 91))
@@ -109,6 +119,8 @@ class Ui_MainWindow(object):
         self.contato.setTabStopWidth(80)
         self.contato.setCenterOnScroll(False)
         self.contato.setObjectName(_fromUtf8("contato"))
+
+
         self.emailinput = QtGui.QLabel(self.centralwidget)
         self.emailinput.setGeometry(QtCore.QRect(100, 270, 181, 41))
         palette = QtGui.QPalette()
@@ -127,6 +139,8 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.emailinput.setFont(font)
         self.emailinput.setObjectName(_fromUtf8("emailinput"))
+
+
         self.mensagemlabel = QtGui.QLabel(self.centralwidget)
         self.mensagemlabel.setGeometry(QtCore.QRect(100, 310, 181, 41))
         palette = QtGui.QPalette()
@@ -154,6 +168,8 @@ class Ui_MainWindow(object):
         font.setPointSize(16)
         self.mensagemlabel.setFont(font)
         self.mensagemlabel.setObjectName(_fromUtf8("mensagemlabel"))
+
+
         self.mensagem = QtGui.QPlainTextEdit(self.centralwidget)
         self.mensagem.setGeometry(QtCore.QRect(100, 350, 641, 101))
         self.mensagem.setObjectName(_fromUtf8("mensagem"))
@@ -170,6 +186,8 @@ class Ui_MainWindow(object):
         self.lineEdit = QtGui.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(210, 280, 531, 20))
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setEnabled(True)
@@ -197,6 +215,17 @@ class Ui_MainWindow(object):
         ui.setupUi(tela_caronas)
         tela_caronas.show()
         sys.exit(app.exec_())
+
+    def enviarmensagem(self):
+        fromaddr = self.lineEdit.text()
+        toaddrs = 'lucarn@al.insper.edu.br'
+
+        msg = self.mensagem.encode('UTF-8')
+                    
+        server = smtplib.SMTP('insper.edu.br')
+        server.set_debuglevel(1)
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
 
 
 

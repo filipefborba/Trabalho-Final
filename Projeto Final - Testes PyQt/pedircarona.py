@@ -8,7 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 from firebase import firebase
-import principal, login
+import principal, login, smtplib
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -216,7 +216,7 @@ class Ui_MainWindow(object):
         dlg.setEscapeButton(QtGui.QMessageBox.No)
         resultado = dlg.exec_()
 
-        #self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
+        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuario
             
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
                     email = fb4.get(motorista, 'email')
                                         
                     fromaddr = 'lucarn@al.insper.edu.br'
-                    toaddrs = self.email
+                    toaddrs = email
     
                     msg = 'Seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para combinarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email).encode('UTF-8')
                     
@@ -265,7 +265,7 @@ class Ui_MainWindow(object):
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
                     
-                    fb.delete('/Pedidos', self.usuarios)
+                    fb.delete('/Pedidos', "filipefb")
                     fb.delete('/Ofertas', motorista)
                     
                     dlg = QtGui.QMessageBox(None)

@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-import principal
+import principal, smtplib
 from firebase import firebase
 
 try:
@@ -157,9 +157,9 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.destinolabel.setText(_translate("MainWindow", "Local de Destino:", None))
-        self.destino.setItemText(0, _translate("MainWindow", "Casa", None))
+        self.destino.setItemText(0, _translate("MainWindow", "Jardins", None))
         self.destino.setItemText(1, _translate("MainWindow", "Insper", None))
-        self.partida.setItemText(0, _translate("MainWindow", "Casa", None))
+        self.partida.setItemText(0, _translate("MainWindow", "Jardins", None))
         self.partida.setItemText(1, _translate("MainWindow", "Insper", None))
         self.titulo.setText(_translate("MainWindow", "Agende a sua carona:", None))
         self.partidalabel.setText(_translate("MainWindow", "Local de Partida:", None))
@@ -190,12 +190,12 @@ class Ui_MainWindow(object):
         dlg.setEscapeButton(QtGui.QMessageBox.No)
         resultado = dlg.exec_()
 
-        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
+        #self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
             
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horario.toPyTime(), 'Data': self.data.toPyDate(), 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
-            fb.put('/Ofertas', self.usuarios, dicionario)
+            dicionario = {'Horário': "horario", 'Data': "data", 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
+            fb.put('/Ofertas', "filipefb", dicionario)
 
             pedidos = fb.get('Pedidos', None)
             
@@ -204,10 +204,10 @@ class Ui_MainWindow(object):
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
 
-            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Saída')
-            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Chegada')
-            horario_oferta = fb3.get(self.usuarios, 'Horário')
-            lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
+            lugar_saida_oferta = fb3.get("filipefb", 'Local de Saída')
+            lugar_chegada_oferta = fb3.get("filipefb", 'Local de Chegada')
+            horario_oferta = fb3.get("filipefb", 'Horário')
+            lugares_necessarios_oferta = fb3.get("filipefb", 'Lugares Necessários')
             
             for passageiro in pedidos:
                 lugar_saida_pedido = fb2.get(passageiro, 'Local de Saída')
@@ -221,7 +221,7 @@ class Ui_MainWindow(object):
                     email = fb4.get(passageiro, 'email')
                                         
                     fromaddr = 'lucarn@al.insper.edu.br'
-                    toaddrs = self.email
+                    toaddrs = email
 
                     msg = 'O seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email).encode('UTF-8')
                     
@@ -240,8 +240,8 @@ class Ui_MainWindow(object):
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
                     
-                    fb.delete('/Pedidos', passageiro)
-                    fb.delete('/Ofertas', self.usuarios)
+                    fb.delete('/Pedidos', "filipefb")
+                    fb.delete('/Ofertas', "filipefb")
                     
                     dlg = QtGui.QMessageBox(None)
                     dlg.setWindowTitle("Carona")
