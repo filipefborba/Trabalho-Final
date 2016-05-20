@@ -25,7 +25,9 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, usuario):
+        self.usuarios = usuario
+
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
@@ -137,7 +139,7 @@ class Ui_MainWindow(object):
         self.MainWindow = pedircarona.Ui_MainWindow
         telapedir = QtGui.QMainWindow()
         ui = pedircarona.Ui_MainWindow()
-        ui.setupUi(telapedir)
+        ui.setupUi(telapedir, self.usuarios)
         telapedir.show()
         sys.exit(app.exec_())
 
@@ -145,12 +147,11 @@ class Ui_MainWindow(object):
         self.MainWindow = agendarcarona.Ui_MainWindow
         tela_agendar = QtGui.QMainWindow()
         ui = agendarcarona.Ui_MainWindow()
-        ui.setupUi(tela_agendar)
+        ui.setupUi(tela_agendar, self.usuarios)
         tela_agendar.show()
         sys.exit(app.exec_())
 
     def removercaronas(self):
-        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         pedidos = fb.get('/Pedidos', None)
         ofertas = fb.get("/Ofertas", None)
@@ -199,7 +200,7 @@ class Ui_MainWindow(object):
         self.MainWindow = perfil.Ui_MainWindow
         tela_perfil = QtGui.QMainWindow()
         ui = perfil.Ui_MainWindow()
-        ui.setupUi(tela_perfil)
+        ui.setupUi(tela_perfil, self.usuarios)
         tela_perfil.show()
         sys.exit(app.exec_())
 

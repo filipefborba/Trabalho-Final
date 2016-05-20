@@ -25,7 +25,9 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, usuarios):
+        self.usuarios = usuarios
+        
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -215,13 +217,11 @@ class Ui_MainWindow(object):
         dlg.setDefaultButton(QtGui.QMessageBox.Yes)
         dlg.setEscapeButton(QtGui.QMessageBox.No)
         resultado = dlg.exec_()
-
-        self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuario
             
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
             dicionario = {'Horário': "horario", 'Data': "data", 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
-            fb.put('/Pedidos', "filipefb", dicionario)
+            fb.put('/Pedidos', self.usuarios, dicionario)
             
             ofertas = fb.get('Ofertas', None)
             
@@ -229,10 +229,10 @@ class Ui_MainWindow(object):
             fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
-            lugar_saida_pedido = fb2.get("filipefb", 'Local de Saída')
-            lugar_chegada_pedido = fb2.get("filipefb", 'Local de Chegada')
-            horario_pedido = fb2.get("filipefb", 'Horário')
-            lugares_necessarios_pedido = fb2.get("filipefb", 'Lugares Necessários')
+            lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Saída')
+            lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Chegada')
+            horario_pedido = fb2.get(self.usuarios, 'Horário')
+            lugares_necessarios_pedido = fb2.get(self.usuarios, 'Lugares Necessários')
             
             for motorista in ofertas:
                 lugar_saida_oferta = fb3.get(motorista, 'Local de Saída')
@@ -265,7 +265,7 @@ class Ui_MainWindow(object):
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
                     
-                    fb.delete('/Pedidos', "filipefb")
+                    fb.delete('/Pedidos', self.usuarios)
                     fb.delete('/Ofertas', motorista)
                     
                     dlg = QtGui.QMessageBox(None)

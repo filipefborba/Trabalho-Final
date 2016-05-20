@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import smtplib, caronas
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -77,7 +78,7 @@ class Ui_MainWindow(object):
 
 
         self.voltar = QtGui.QPushButton(self.centralwidget)
-        self.voltar.setGeometry(QtCore.QRect(0, 0, 101, 41))
+        self.voltar.setGeometry(QtCore.QRect(100, 460, 101, 41))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("MS Shell Dlg 2"))
         font.setPointSize(8)
@@ -170,7 +171,7 @@ class Ui_MainWindow(object):
         self.mensagemlabel.setObjectName(_fromUtf8("mensagemlabel"))
 
 
-        self.mensagem = QtGui.QPlainTextEdit(self.centralwidget)
+        self.mensagem = QtGui.QTextEdit(self.centralwidget)
         self.mensagem.setGeometry(QtCore.QRect(100, 350, 641, 101))
         self.mensagem.setObjectName(_fromUtf8("mensagem"))
 
@@ -181,6 +182,7 @@ class Ui_MainWindow(object):
         font.setPointSize(8)
         self.enviar.setFont(font)
         self.enviar.setObjectName(_fromUtf8("enviar"))
+        self.enviar.clicked.connect(self.enviarmensagem)
 
 
         self.lineEdit = QtGui.QLineEdit(self.centralwidget)
@@ -220,7 +222,7 @@ class Ui_MainWindow(object):
         fromaddr = self.lineEdit.text()
         toaddrs = 'lucarn@al.insper.edu.br'
 
-        msg = self.mensagem.encode('UTF-8')
+        msg = self.mensagem.toPlainText()
                     
         server = smtplib.SMTP('insper.edu.br')
         server.set_debuglevel(1)

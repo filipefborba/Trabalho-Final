@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.sobre.setText(_translate("MainWindow", "Sobre", None))
         self.contato.setText(_translate("MainWindow", "Contato", None))
 
-    #Função para o botão: abre a página de login
+    #Função para o botão: abre a página de cadastro
     def abrircadastro(self):
         self.MainWindow = cadastro.Ui_MainWindow
         tela_cadastro = QtGui.QMainWindow()
@@ -114,7 +114,7 @@ class Ui_MainWindow(object):
         tela_cadastro.show()
         sys.exit(app.exec_())
 
-    #Função para o botão: abre a página de cadastro
+    #Função para o botão: abre a página de login
     def abrirlogin(self):
         self.MainWindow = login.Ui_MainWindow
         tela_login = QtGui.QMainWindow()

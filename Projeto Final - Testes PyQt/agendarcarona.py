@@ -25,7 +25,9 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, usuarios):
+        self.usuarios = usuarios
+        
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
@@ -195,7 +197,7 @@ class Ui_MainWindow(object):
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
             dicionario = {'Horário': "horario", 'Data': "data", 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
-            fb.put('/Ofertas', "filipefb", dicionario)
+            fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
             
@@ -204,10 +206,10 @@ class Ui_MainWindow(object):
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
 
-            lugar_saida_oferta = fb3.get("filipefb", 'Local de Saída')
-            lugar_chegada_oferta = fb3.get("filipefb", 'Local de Chegada')
-            horario_oferta = fb3.get("filipefb", 'Horário')
-            lugares_necessarios_oferta = fb3.get("filipefb", 'Lugares Necessários')
+            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Saída')
+            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Chegada')
+            horario_oferta = fb3.get(self.usuarios, 'Horário')
+            lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
             
             for passageiro in pedidos:
                 lugar_saida_pedido = fb2.get(passageiro, 'Local de Saída')
@@ -240,8 +242,8 @@ class Ui_MainWindow(object):
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
                     
-                    fb.delete('/Pedidos', "filipefb")
-                    fb.delete('/Ofertas', "filipefb")
+                    fb.delete('/Pedidos', self.usuarios)
+                    fb.delete('/Ofertas', self.usuarios)
                     
                     dlg = QtGui.QMessageBox(None)
                     dlg.setWindowTitle("Carona")

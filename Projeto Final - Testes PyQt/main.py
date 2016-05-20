@@ -1,4 +1,4 @@
-import caronas, cadastro, login, principal, pedircarona
+import caronas, cadastro, login, contato, sobre, principal, pedircarona, agendarcarona, perfil
 from PyQt4 import QtCore, QtGui
 
 if __name__ == "__main__":

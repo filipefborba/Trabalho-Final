@@ -145,7 +145,7 @@ class Ui_MainWindow(object):
                 self.MainWindow = principal.Ui_MainWindow
                 tela_principal = QtGui.QMainWindow()
                 ui = principal.Ui_MainWindow()
-                ui.setupUi(tela_principal)
+                ui.setupUi(tela_principal, self.usuario)
                 tela_principal.show()
                 sys.exit(app.exec_())
 
