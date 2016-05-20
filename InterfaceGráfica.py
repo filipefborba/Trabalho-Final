@@ -330,6 +330,12 @@ class Telas():
         self.Tela_cadastro.columnconfigure(2, minsize=8, weight=1)
 
         self.Tela_cadastro.grid(row=0, column=0, sticky="nsew")
+
+        self.sair = tk.Button(self.Tela_cadastro)
+        self.sair.grid(row=9, column=2)
+        self.sair.configure(text="Sair")
+        self.sair.bind('<1>',self.clicou_voltar_tela_inicial)
+
         
         
                
@@ -795,9 +801,19 @@ class Telas():
                     server.set_debuglevel(1)
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
+
+
+                    lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
+                    lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
+                    lgno -= lgnp
                     
                     fb.delete('/Pedidos', self.usuarios)
-                    fb.delete('/Ofertas', motorista)
+
+                    if lgno > 0:
+                        dicionario_motorista = {'Horário': horario_oferta,'Local de Saída': lugar_saida_oferta, 'Local de Chegada': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        fb.put('/Pedidos', motorista, dicionario_motorista)
+                    else:
+                        fb.delete('/Ofertas', motorista)
                     
                     tkm.showinfo('Carona','As informações de seu carona estão no seu email!')
                     break
@@ -856,9 +872,19 @@ class Telas():
                     server.set_debuglevel(1)
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
+
+                    lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
+                    lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
+                    lgno -= lgnp
                     
                     fb.delete('/Pedidos', passageiro)
-                    fb.delete('/Ofertas', self.usuarios)
+
+                    if lgno > 0:
+                        dicionario['Lugares Necessários'] = lgno
+                        fb.put('/Ofertas', self.usuarios, dicionario)
+
+                    else:
+                        fb.delete('/Ofertas', self.usuarios)
                     
                     tkm.showinfo('Carona', 'As informações de seu carona estão no seu email!')
                     break
