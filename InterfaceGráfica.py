@@ -331,8 +331,38 @@ class Telas():
 
         self.Tela_cadastro.grid(row=0, column=0, sticky="nsew")
 
+        
+        self.label_contato = tk.Label(self.Tela_cadastro)
+        self.label_contato.grid(row=0, column=0, columnspan=3, sticky="nsew")
+        self.label_contato.configure(text="Contato",font='Bodoni 40', bg='#E10022', fg='White')
+        self.label_contato.bind('<1>',self.clicou_voltar_tela_inicial)
+        
+        self.label_meu_email = tk.Label(self.Tela_cadastro)
+        self.label_meu_email.grid(row=4, column=0, sticky="nsw")
+        self.label_meu_email.configure(text="Seu E-mail: ",font='Bodoni 25', bg='#E10022', fg='White')
+        self.label_meu_email.bind('<1>',self.clicou_voltar_tela_inicial)
+        
+        self.meu_email = tk.Entry(self.Tela_cadastro)
+        self.meu_email.grid(row=4, column=1, sticky="ew")
+        
+        self.label_reclamacao = tk.Label(self.Tela_cadastro)
+        self.label_reclamacao.grid(row=5, column=0, sticky="nsw")
+        self.label_reclamacao.configure(text="Sua Mensagem:",font='Bodoni 25', bg='#E10022', fg='White')
+        self.label_reclamacao.bind('<1>',self.clicou_voltar_tela_inicial)
+        
+        self.reclamacao = tk.Text(self.Tela_cadastro)
+        self.reclamacao.configure(width = 40, height =10)
+        self.reclamacao.grid(row=6, column=1, sticky="nsew")
+        
+        
         self.sair = tk.Button(self.Tela_cadastro)
-        self.sair.grid(row=9, column=2)
+        self.sair.grid(row=8, column=2)
+        self.sair.configure(text="Enviar")
+        self.sair.bind('<1>',self.clicou_voltar_tela_inicial)
+        
+
+        self.sair = tk.Button(self.Tela_cadastro)
+        self.sair.grid(row=9, column=0)
         self.sair.configure(text="Sair")
         self.sair.bind('<1>',self.clicou_voltar_tela_inicial)
 
