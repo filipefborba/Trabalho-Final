@@ -398,7 +398,7 @@ Mande-nos um e-mail que lhe retornaremos o mais rápido possível!</string>
      <string>Mensagem:</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="mensagem">
+   <widget class="QTextEdit" name="mensagem">
     <property name="geometry">
      <rect>
       <x>100</x>

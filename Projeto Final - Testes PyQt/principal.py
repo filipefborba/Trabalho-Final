@@ -25,8 +25,11 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, usuario):
-        self.usuarios = usuario
+    def setupUi(self, MainWindow, usuarios, nome, tel, email):
+        self.usuarios = usuarios
+        self.nome_completo = nome
+        self.telefone = tel
+        self.email = email
 
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -139,7 +142,7 @@ class Ui_MainWindow(object):
         self.MainWindow = pedircarona.Ui_MainWindow
         telapedir = QtGui.QMainWindow()
         ui = pedircarona.Ui_MainWindow()
-        ui.setupUi(telapedir, self.usuarios)
+        ui.setupUi(telapedir, self.usuarios, self.nome_completo, self.telefone, self.email)
         telapedir.show()
         sys.exit(app.exec_())
 
@@ -147,7 +150,7 @@ class Ui_MainWindow(object):
         self.MainWindow = agendarcarona.Ui_MainWindow
         tela_agendar = QtGui.QMainWindow()
         ui = agendarcarona.Ui_MainWindow()
-        ui.setupUi(tela_agendar, self.usuarios)
+        ui.setupUi(tela_agendar, self.usuarios, self.nome_completo, self.telefone, self.email)
         tela_agendar.show()
         sys.exit(app.exec_())
 
@@ -200,7 +203,7 @@ class Ui_MainWindow(object):
         self.MainWindow = perfil.Ui_MainWindow
         tela_perfil = QtGui.QMainWindow()
         ui = perfil.Ui_MainWindow()
-        ui.setupUi(tela_perfil, self.usuarios)
+        ui.setupUi(tela_perfil, self.usuarios, self.nome_completo, self.telefone, self.email)
         tela_perfil.show()
         sys.exit(app.exec_())
 

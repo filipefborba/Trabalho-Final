@@ -25,8 +25,11 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, usuarios):
+    def setupUi(self, MainWindow, usuarios, nome, tel, email):
         self.usuarios = usuarios
+        self.nome_completo = nome
+        self.telefone = tel
+        self.email = email
 
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -198,14 +201,18 @@ class Ui_MainWindow(object):
             resultado = dlg.exec_()
 
             if resultado == QtGui.QMessageBox.Yes:
-                
+
                 fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
                 dicionario = {'Nome': self.nomeinput.text(),'email': self.emailinput.text(), 'telefone': self.celularinput.text(), 'senha': self.senhainput.text()}
                 fb.put('Users', self.usuarioinput.text(), dicionario)
+                self.nome_completo = self.nomeinput.text()
+                self.telefone = self.celularinput.text()
+                self.email = self.emailinput.text()
+
                 self.MainWindow = principal.Ui_MainWindow
                 tela_principal = QtGui.QMainWindow()
                 ui = principal.Ui_MainWindow()
-                ui.setupUi(tela_principal, self.usuarios)
+                ui.setupUi(tela_principal, self.usuarios, self.nome_completo, self.telefone, self.email)
                 tela_principal.show()
                 sys.exit(app.exec_())
 
@@ -221,7 +228,7 @@ class Ui_MainWindow(object):
         self.MainWindow = principal.Ui_MainWindow
         tela_principal = QtGui.QMainWindow()
         ui = principal.Ui_MainWindow()
-        ui.setupUi(tela_principal)
+        ui.setupUi(tela_principal, self.usuarios, self.nome_completo, self.telefone, self.email)
         tela_principal.show()
         sys.exit(app.exec_())
 

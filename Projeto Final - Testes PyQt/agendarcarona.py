@@ -25,9 +25,13 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, usuarios):
+    def setupUi(self, MainWindow, usuarios, nome, tel, email):
         self.usuarios = usuarios
-        
+        self.nome_completo = nome
+        self.telefone = tel
+        self.email = email
+
+
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
@@ -178,7 +182,7 @@ class Ui_MainWindow(object):
         self.MainWindow = principal.Ui_MainWindow
         tela_principal = QtGui.QMainWindow()
         ui = principal.Ui_MainWindow()
-        ui.setupUi(tela_principal)
+        ui.setupUi(tela_principal, self.usuarios, self.nome_completo, self.telefone, self.email)
         tela_principal.show()
         sys.exit(app.exec_())
 
@@ -192,8 +196,6 @@ class Ui_MainWindow(object):
         dlg.setEscapeButton(QtGui.QMessageBox.No)
         resultado = dlg.exec_()
 
-        #self.usuarios = login.Ui_MainWindow.abrirprincipal(self).usuarios
-            
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
             dicionario = {'Horário': "horario", 'Data': "data", 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
@@ -216,6 +218,12 @@ class Ui_MainWindow(object):
                 lugar_chegada_pedido = fb2.get(passageiro, 'Local de Chegada')
                 horario_pedido = fb2.get(passageiro, 'Horário')
                 lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
+
+                lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
+                if lugares_necessarios_pedido != None:
+                    lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
+                else:
+                    continue
 
                 if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta >= lugares_necessarios_pedido and horario_oferta == horario_pedido:                    
                     nome = fb4.get(passageiro,'Nome')
@@ -241,9 +249,14 @@ class Ui_MainWindow(object):
                     server.set_debuglevel(1)
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
+
+                    lgno -= lgnp
                     
-                    fb.delete('/Pedidos', self.usuarios)
-                    fb.delete('/Ofertas', self.usuarios)
+                    fb.delete('/Pedidos', passageiro)
+
+                    if lgno > 0:
+                        dicionario['Lugares Necessários'] = lgno
+                        fb.put('/Ofertas', self.usuarios, dicionario)
                     
                     dlg = QtGui.QMessageBox(None)
                     dlg.setWindowTitle("Carona")
@@ -261,7 +274,7 @@ class Ui_MainWindow(object):
             self.MainWindow = principal.Ui_MainWindow
             tela_principal = QtGui.QMainWindow()
             ui = principal.Ui_MainWindow()
-            ui.setupUi(tela_principal)
+            ui.setupUi(tela_principal, self.usuarios, self.nome_completo, self.telefone, self.email)
             tela_principal.show()
             sys.exit(app.exec_())
 

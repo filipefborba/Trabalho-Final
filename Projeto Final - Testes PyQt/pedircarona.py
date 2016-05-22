@@ -25,9 +25,12 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow, usuarios):
+    def setupUi(self, MainWindow, usuarios, nome, tel, email):
         self.usuarios = usuarios
-        
+        self.nome_completo = nome
+        self.telefone = tel
+        self.email = email
+
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -264,10 +267,17 @@ class Ui_MainWindow(object):
                     server.set_debuglevel(1)
                     server.sendmail(fromaddr, toaddrs, msg)
                     server.quit()
+
+                    lgno -= lgnp
                     
                     fb.delete('/Pedidos', self.usuarios)
-                    fb.delete('/Ofertas', motorista)
-                    
+
+                    if lgno > 0:
+                        dicionario_motorista = {'Horário': horario_oferta,'Local de Saída': lugar_saida_oferta, 'Local de Chegada': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        fb.put('/Ofertas', motorista, dicionario_motorista)
+                    else:
+                        fb.delete('/Ofertas', motorista)
+
                     dlg = QtGui.QMessageBox(None)
                     dlg.setWindowTitle("Carona")
                     dlg.setIcon(QtGui.QMessageBox.Information)
@@ -284,7 +294,7 @@ class Ui_MainWindow(object):
             self.MainWindow = principal.Ui_MainWindow
             tela_principal = QtGui.QMainWindow()
             ui = principal.Ui_MainWindow()
-            ui.setupUi(tela_principal)
+            ui.setupUi(tela_principal, self.usuarios, self.nome_completo, self.telefone, self.email)
             tela_principal.show()
             sys.exit(app.exec_())
 
@@ -292,7 +302,7 @@ class Ui_MainWindow(object):
         self.MainWindow = principal.Ui_MainWindow
         tela_principal = QtGui.QMainWindow()
         ui = principal.Ui_MainWindow()
-        ui.setupUi(tela_principal)
+        ui.setupUi(tela_principal, self.usuarios, self.nome_completo, self.telefone, self.email)
         tela_principal.show()
         sys.exit(app.exec_())
 
