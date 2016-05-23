@@ -35,6 +35,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(801, 592)
         MainWindow.setFixedSize(801,592)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 

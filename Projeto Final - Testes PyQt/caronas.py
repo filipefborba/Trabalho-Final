@@ -29,6 +29,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(844, 559)
         MainWindow.setFixedSize(844,559)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -123,6 +124,7 @@ class Ui_MainWindow(object):
         tela_login.show()
         sys.exit(app.exec_())
 
+    #Função para o botão: abre a página "sobre"
     def abrirsobre(self):
         self.MainWindow = sobre.Ui_MainWindow
         tela_sobre = QtGui.QMainWindow()
@@ -131,6 +133,7 @@ class Ui_MainWindow(object):
         tela_sobre.show()
         sys.exit(app.exec_())
 
+    #Função para o botão: abre a página de contato
     def abrircontato(self):
         self.MainWindow = contato.Ui_MainWindow
         tela_contato = QtGui.QMainWindow()

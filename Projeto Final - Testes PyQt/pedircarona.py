@@ -30,9 +30,14 @@ class Ui_MainWindow(object):
         self.nome_completo = nome
         self.telefone = tel
         self.email = email
+        bairros = sorted(['','Cerqueira César','Vila Leopoldina','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes','Campo Belo','Consolação','Aclimação','Chácara Inglesa','Chácara Klabin','Butantã'])
+        horarios = ['', '0h00','0h30','1h00','1h30','2h00','2h30','3h00','3h30','4h00','4h30','5h00','5h30','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30']
+        i = 0
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
+        MainWindow.setFixedSize(800,600)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -87,23 +92,15 @@ class Ui_MainWindow(object):
         self.partida.setGeometry(QtCore.QRect(180, 160, 411, 22))
         self.partida.setEditable(False)
         self.partida.setObjectName(_fromUtf8("partida"))
-        self.partida.addItem(_fromUtf8(""))
-        self.partida.addItem(_fromUtf8(""))
-        self.partida.addItem(_fromUtf8(""))
-        self.partida.addItem(_fromUtf8(""))
-        self.partida.addItem(_fromUtf8(""))
-        self.partida.addItem(_fromUtf8(""))
 
         self.destino = QtGui.QComboBox(self.centralwidget)
         self.destino.setGeometry(QtCore.QRect(180, 240, 411, 22))
         self.destino.setEditable(False)
         self.destino.setObjectName(_fromUtf8("destino"))
-        self.destino.addItem(_fromUtf8(""))
-        self.destino.addItem(_fromUtf8(""))
-        self.destino.addItem(_fromUtf8(""))
-        self.destino.addItem(_fromUtf8(""))
-        self.destino.addItem(_fromUtf8(""))
-        self.destino.addItem(_fromUtf8(""))
+
+        for i in range(len(bairros)):
+            self.partida.addItem(_fromUtf8(""))
+            self.destino.addItem(_fromUtf8(""))
 
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(170, 490, 101, 41))
@@ -123,13 +120,13 @@ class Ui_MainWindow(object):
         self.confirmar.setObjectName(_fromUtf8("confirmar"))
         self.confirmar.clicked.connect(self.registrarpedido)
 
-        self.datalabel = QtGui.QLabel(self.centralwidget)
-        self.datalabel.setGeometry(QtCore.QRect(30, 300, 171, 41))
-        font = QtGui.QFont()
-        font.setFamily(_fromUtf8("Bodoni MT"))
-        font.setPointSize(12)
-        self.datalabel.setFont(font)
-        self.datalabel.setObjectName(_fromUtf8("datalabel"))
+        #self.datalabel = QtGui.QLabel(self.centralwidget)
+        #self.datalabel.setGeometry(QtCore.QRect(30, 300, 171, 41))
+        #font = QtGui.QFont()
+        #font.setFamily(_fromUtf8("Bodoni MT"))
+        #font.setPointSize(12)
+        #self.datalabel.setFont(font)
+        #self.datalabel.setObjectName(_fromUtf8("datalabel"))
 
         self.lugareslabel = QtGui.QLabel(self.centralwidget)
         self.lugareslabel.setGeometry(QtCore.QRect(30, 380, 181, 41))
@@ -149,28 +146,28 @@ class Ui_MainWindow(object):
         self.lugares.addItem(_fromUtf8(""))
         self.lugares.addItem(_fromUtf8(""))
 
-        self.data = QtGui.QDateEdit(self.centralwidget)
-        self.data.setGeometry(QtCore.QRect(180, 310, 110, 22))
-        self.data.setCalendarPopup(True)
-        self.data.setObjectName(_fromUtf8("data"))
-        self.data.setDate(QtCore.QDate.currentDate())
-        self.data.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2016, 12, 31), QtCore.QTime(23, 59, 59)))
-        self.data.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate.currentDate(), QtCore.QTime(0, 0, 0)))
+        #self.data = QtGui.QDateEdit(self.centralwidget)
+        #self.data.setGeometry(QtCore.QRect(180, 310, 110, 22))
+        #self.data.setCalendarPopup(True)
+        #self.data.setObjectName(_fromUtf8("data"))
+        #self.data.setDate(QtCore.QDate.currentDate())
+        #self.data.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2016, 12, 31), QtCore.QTime(23, 59, 59)))
+        #self.data.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate.currentDate(), QtCore.QTime(0, 0, 0)))
 
         self.horariolabel = QtGui.QLabel(self.centralwidget)
-        self.horariolabel.setGeometry(QtCore.QRect(340, 300, 71, 41))
+        self.horariolabel.setGeometry(QtCore.QRect(30, 300, 171, 41))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Bodoni MT"))
         font.setPointSize(12)
         self.horariolabel.setFont(font)
         self.horariolabel.setObjectName(_fromUtf8("horariolabel"))
 
-        self.horario = QtGui.QTimeEdit(self.centralwidget)
-        self.horario.setGeometry(QtCore.QRect(470, 310, 118, 22))
-        self.horario.setMaximumTime(QtCore.QTime(23, 0, 0))
-        self.horario.setMinimumTime(QtCore.QTime(0, 0, 0))
-        self.horario.setCalendarPopup(False)
+        self.horario = QtGui.QComboBox(self.centralwidget)
+        self.horario.setGeometry(QtCore.QRect(180, 310, 110, 22))
+        self.horario.setEditable(False)
         self.horario.setObjectName(_fromUtf8("horario"))
+        for i in range(len(horarios)):
+            self.horario.addItem(_fromUtf8(""))
 
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -183,33 +180,27 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        bairros = sorted(['','Cerqueira César','Vila Leopoldina','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes','Campo Belo','Consolação','Aclimação','Chácara Inglesa','Chácara Klabin','Butantã'])
+        i = 0
+        horarios = ['', '0h00','0h30','1h00','1h30','2h00','2h30','3h00','3h30','4h00','4h30','5h00','5h30','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30']
         MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         self.titulo.setText(_translate("MainWindow", "Selecione suas localizações:", None))
         self.destinolabel.setText(_translate("MainWindow", "Local de Destino:", None))
         self.partidalabel.setText(_translate("MainWindow", "Local de Partida:", None))
-        self.partida.setItemText(0, _translate("MainWindow", "Jardins", None))
-        self.partida.setItemText(1, _translate("MainWindow", "Itaim Bibi", None))
-        self.partida.setItemText(2, _translate("MainWindow", "Aclimação", None))
-        self.partida.setItemText(3, _translate("MainWindow", "Perdizes", None))
-        self.partida.setItemText(4, _translate("MainWindow", "Morumbi", None))
-        self.partida.setItemText(5, _translate("MainWindow", "Insper", None))
-        self.destino.setItemText(0, _translate("MainWindow", "Jardins", None))
-        self.destino.setItemText(1, _translate("MainWindow", "Itaim Bibi", None))
-        self.destino.setItemText(2, _translate("MainWindow", "Aclimação", None))
-        self.destino.setItemText(3, _translate("MainWindow", "Perdizes", None))
-        self.destino.setItemText(4, _translate("MainWindow", "Morumbi", None))
-        self.destino.setItemText(5, _translate("MainWindow", "Insper", None))
+        for i in range(len(bairros)):
+            self.partida.setItemText(i, _translate("MainWindow", bairros[i], None))
+            self.destino.setItemText(i, _translate("MainWindow", bairros[i], None))
+        for i in range(len(horarios)):
+            self.horario.setItemText(i, _translate("MainWindow", horarios[i], None))
         self.voltar.setText(_translate("MainWindow", "Voltar", None))
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
-        self.datalabel.setText(_translate("MainWindow", "Data:", None))
+        #self.datalabel.setText(_translate("MainWindow", "Data:", None))
         self.lugareslabel.setText(_translate("MainWindow", "Lugares necessários:", None))
         self.lugares.setItemText(0, _translate("MainWindow", "1", None))
         self.lugares.setItemText(1, _translate("MainWindow", "2", None))
         self.lugares.setItemText(2, _translate("MainWindow", "3", None))
         self.lugares.setItemText(3, _translate("MainWindow", "4", None))
         self.horariolabel.setText(_translate("MainWindow", "Horário:", None))
-        self.horario.setDisplayFormat(_translate("MainWindow", "HH:mm", None))
-        self.data.setDisplayFormat(_translate("MainWindow","dd/MM", None))
 
     def registrarpedido(self):
         dlg = QtGui.QMessageBox(None)
@@ -223,7 +214,7 @@ class Ui_MainWindow(object):
             
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': "horario", 'Data': "data", 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
+            dicionario = {'Horário': self.horario.currentText(), 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
             fb.put('/Pedidos', self.usuarios, dicionario)
             
             ofertas = fb.get('Ofertas', None)
@@ -312,7 +303,7 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    ui.setupUi(MainWindow, "usuarios", "nome", "tel", "email")
     MainWindow.show()
     sys.exit(app.exec_())
 

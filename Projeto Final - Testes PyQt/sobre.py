@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(844, 559)
         MainWindow.setFixedSize(844,559)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
 
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))

@@ -35,6 +35,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
         MainWindow.setFixedSize(800,600)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -60,15 +61,6 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         MainWindow.setPalette(palette)
 
-        #Label do status da carona
-        self.statuslabel = QtGui.QLabel(self.centralwidget)
-        self.statuslabel.setGeometry(QtCore.QRect(80, 180, 121, 41))
-        font = QtGui.QFont()
-        font.setFamily(_fromUtf8("Bodoni MT"))
-        font.setPointSize(12)
-        self.statuslabel.setFont(font)
-        self.statuslabel.setObjectName(_fromUtf8("statuslabel"))
-
         #Título de boas-vindas
         self.titulo = QtGui.QLabel(self.centralwidget)
         self.titulo.setGeometry(QtCore.QRect(120, 70, 571, 81))
@@ -80,28 +72,34 @@ class Ui_MainWindow(object):
 
         #Botão de agendar a carona
         self.agendar = QtGui.QPushButton(self.centralwidget)
-        self.agendar.setGeometry(QtCore.QRect(260, 340, 300, 50))
+        self.agendar.setGeometry(QtCore.QRect(240, 270, 300, 50))
         self.agendar.setObjectName(_fromUtf8("agendar"))
         self.agendar.clicked.connect(self.abriragendar)
 
 
         #Botão de pedir a carona
         self.pedir = QtGui.QPushButton(self.centralwidget)
-        self.pedir.setGeometry(QtCore.QRect(260, 250, 300, 50))
+        self.pedir.setGeometry(QtCore.QRect(240, 190, 300, 50))
         self.pedir.setObjectName(_fromUtf8("pedir"))
         self.pedir.clicked.connect(self.abrirpedir)
 
         #Botão para alterar o perfil
         self.perfil = QtGui.QPushButton(self.centralwidget)
-        self.perfil.setGeometry(QtCore.QRect(260, 500, 300, 50))
+        self.perfil.setGeometry(QtCore.QRect(240, 430, 300, 50))
         self.perfil.setObjectName(_fromUtf8("perfil"))
         self.perfil.clicked.connect(self.abrirperfil)
 
-        #Botão para remover a carona
+        #Botão para remover o pedido de carona
         self.remover = QtGui.QPushButton(self.centralwidget)
-        self.remover.setGeometry(QtCore.QRect(260, 420, 300, 50))
+        self.remover.setGeometry(QtCore.QRect(240, 350, 151, 50))
         self.remover.setObjectName(_fromUtf8("remover"))
-        self.remover.clicked.connect(self.removercaronas)
+        self.remover.clicked.connect(self.removerpedido)
+
+        #Botão para remover a oferta de carona
+        self.remover2 = QtGui.QPushButton(self.centralwidget)
+        self.remover2.setGeometry(QtCore.QRect(390, 350, 151, 50))
+        self.remover2.setObjectName(_fromUtf8("remover"))
+        self.remover2.clicked.connect(self.removeroferta)
 
         #Botão para fazer logout
         self.logout = QtGui.QPushButton(self.centralwidget)
@@ -109,14 +107,6 @@ class Ui_MainWindow(object):
         self.logout.setObjectName(_fromUtf8("logout"))
         self.logout.clicked.connect(self.abrircaronas)
 
-        #Label representativa do status ##SERÁ MUDADO##
-        self.statusdacarona = QtGui.QLabel(self.centralwidget)
-        self.statusdacarona.setGeometry(QtCore.QRect(220, 180, 171, 41))
-        font = QtGui.QFont()
-        font.setFamily(_fromUtf8("Bodoni MT"))
-        font.setPointSize(12)
-        self.statusdacarona.setFont(font)
-        self.statusdacarona.setObjectName(_fromUtf8("statusdacarona"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -128,13 +118,12 @@ class Ui_MainWindow(object):
     #Função que define os textos dentro dos botões e da janela
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
-        self.statuslabel.setText(_translate("MainWindow", "Status da carona:", None))
         self.titulo.setText(_translate("MainWindow", "Seja bem-vindo! O que deseja fazer?", None))
         self.agendar.setText(_translate("MainWindow", "Agendar carona", None))
         self.pedir.setText(_translate("MainWindow", "Pedir carona", None))
         self.perfil.setText(_translate("MainWindow", "Alterar perfil", None))
-        self.statusdacarona.setText(_translate("MainWindow", "Inativo/Pendente/Ativo", None))
-        self.remover.setText(_translate("MainWindow", "Remover carona pedida/agendada", None))
+        self.remover.setText(_translate("MainWindow", "Remover carona pedida", None))
+        self.remover2.setText(_translate("MainWindow", "Remover carona pedida", None))
         self.logout.setText(_translate("MainWindow", "Log Out", None))
 
 
@@ -154,16 +143,15 @@ class Ui_MainWindow(object):
         tela_agendar.show()
         sys.exit(app.exec_())
 
-    def removercaronas(self):
+    def removerpedido(self):
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
         pedidos = fb.get('/Pedidos', None)
-        ofertas = fb.get("/Ofertas", None)
         
         if self.usuarios in pedidos:
             dlg = QtGui.QMessageBox(None)
             dlg.setWindowTitle("Confirmação")
             dlg.setIcon(QtGui.QMessageBox.Question)
-            dlg.setText("Deseja cancelar seu pedido/oferta?")
+            dlg.setText("Deseja cancelar seu pedido?")
             dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
             dlg.setDefaultButton(QtGui.QMessageBox.Yes)
             dlg.setEscapeButton(QtGui.QMessageBox.No)
@@ -173,30 +161,41 @@ class Ui_MainWindow(object):
                 dlg = QtGui.QMessageBox(None)
                 dlg.setWindowTitle("Cancelamento")
                 dlg.setIcon(QtGui.QMessageBox.Information)
-                dlg.setText("Pedido/oferta cancelado com sucesso!")
-                dlg.exec_()
-       
-        elif self.usuarios in ofertas:
-            dlg = QtGui.QMessageBox(None)
-            dlg.setWindowTitle("Confirmação")
-            dlg.setIcon(QtGui.QMessageBox.Question)
-            dlg.setText("Deseja cancelar seu pedido/oferta?")
-            dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
-            dlg.setDefaultButton(QtGui.QMessageBox.Yes)
-            dlg.setEscapeButton(QtGui.QMessageBox.No)
-            resultado = dlg.exec_()
-            if resultado == QtGui.QMessageBox.Yes:
-                fb.delete('Pedidos', self.usuarios)
-                dlg = QtGui.QMessageBox(None)
-                dlg.setWindowTitle("Cancelamento")
-                dlg.setIcon(QtGui.QMessageBox.Information)
-                dlg.setText("Pedido/oferta cancelado com sucesso!")
+                dlg.setText("Pedido cancelado com sucesso!")
                 dlg.exec_()
         else:
             dlg = QtGui.QMessageBox(None)
             dlg.setWindowTitle("Cancelamento")
             dlg.setIcon(QtGui.QMessageBox.Information)
-            dlg.setText("Não existe um pedido/oferta de carona")
+            dlg.setText("Não existe um pedido de carona.")
+            dlg.exec_()
+
+
+    def removeroferta(self):
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        ofertas = fb.get("/Ofertas", None)
+         
+        if self.usuarios in ofertas:
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Confirmação")
+            dlg.setIcon(QtGui.QMessageBox.Question)
+            dlg.setText("Deseja cancelar sua oferta?")
+            dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+            dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+            dlg.setEscapeButton(QtGui.QMessageBox.No)
+            resultado = dlg.exec_()
+            if resultado == QtGui.QMessageBox.Yes:
+                fb.delete('Pedidos', self.usuarios)
+                dlg = QtGui.QMessageBox(None)
+                dlg.setWindowTitle("Cancelamento")
+                dlg.setIcon(QtGui.QMessageBox.Information)
+                dlg.setText("Oferta cancelada com sucesso!")
+                dlg.exec_()
+        else:
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Cancelamento")
+            dlg.setIcon(QtGui.QMessageBox.Information)
+            dlg.setText("Não existe uma carona agendada.")
             dlg.exec_()
 
     def abrirperfil(self):

@@ -8,6 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 import smtplib, caronas
+#from validate_email import validate_email
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -28,6 +29,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(844, 559)
         MainWindow.setFixedSize(844,559)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
 
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
@@ -219,15 +221,17 @@ class Ui_MainWindow(object):
         sys.exit(app.exec_())
 
     def enviarmensagem(self):
-        fromaddr = self.lineEdit.text()
-        toaddrs = 'lucarn@al.insper.edu.br'
+        validando_email = validate_email(self.emailinput.text())
+        if validando_email == True:
+            fromaddr = self.lineEdit.text()
+            toaddrs = 'lucarn@al.insper.edu.br'
 
-        msg = self.mensagem.toPlainText()
-                    
-        server = smtplib.SMTP('insper.edu.br')
-        server.set_debuglevel(1)
-        server.sendmail(fromaddr, toaddrs, msg)
-        server.quit()
+            msg = self.mensagem.toPlainText()
+                        
+            server = smtplib.SMTP('insper.edu.br')
+            server.set_debuglevel(1)
+            server.sendmail(fromaddr, toaddrs, msg)
+            server.quit()
 
 
 

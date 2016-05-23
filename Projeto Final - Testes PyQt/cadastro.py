@@ -29,6 +29,7 @@ class Ui_MainWindow(object):
         #Frame da Janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.setFixedSize(801, 592)
+        MainWindow.setWindowIcon(QtGui.QIcon("Fotos/carro.jpg"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
@@ -181,35 +182,49 @@ class Ui_MainWindow(object):
         self.voltar.setText(_translate("MainWindow", "Voltar", None))
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
 
-    def registrarcadastro(self):    
-        if self.senhainput.text() == self.confirmarsenhainput.text() and self.nomeinput.text() != '' and self.emailinput.text() != '' and self.celularinput.text() != '' and self.celularinput.text() != '' and self.usuarioinput.text() != '':    
-            dlg = QtGui.QMessageBox(None)
-            dlg.setWindowTitle("Confirmação")
-            dlg.setIcon(QtGui.QMessageBox.Question)
-            dlg.setText("Deseja confirmar as informações?")
-            dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
-            dlg.setDefaultButton(QtGui.QMessageBox.Yes)
-            dlg.setEscapeButton(QtGui.QMessageBox.No)
-            resultado = dlg.exec_()
+    def registrarcadastro(self):
+        fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
+        cadastros = fb.get('Users', None)
 
-            if resultado == QtGui.QMessageBox.Yes:
+        if not self.usuarioinput.text() in cadastros:
+            
+            validando_email = validate_email(self.emailinput.text())
 
-                fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
-                dicionario = {'Nome': self.nomeinput.text(),'email': self.emailinput.text(), 'telefone': self.celularinput.text(), 'senha': self.senhainput.text()}
-                fb.put('Users', self.usuarioinput.text(), dicionario)
-                self.MainWindow = login.Ui_MainWindow
-                tela_login = QtGui.QMainWindow()
-                ui = login.Ui_MainWindow()
-                ui.setupUi(tela_login)
-                tela_login.show()
-                sys.exit(app.exec_())
+            if self.senhainput.text() == self.confirmarsenhainput.text() and self.nomeinput.text() != '' and validando_email == True and self.celularinput.text() != '' and self.celularinput.text() != '' and self.usuarioinput.text() != '':    
+                dlg = QtGui.QMessageBox(None)
+                dlg.setWindowTitle("Confirmação")
+                dlg.setIcon(QtGui.QMessageBox.Question)
+                dlg.setText("Deseja confirmar as informações?")
+                dlg.setStandardButtons(QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+                dlg.setDefaultButton(QtGui.QMessageBox.Yes)
+                dlg.setEscapeButton(QtGui.QMessageBox.No)
+                resultado = dlg.exec_()
 
+                if resultado == QtGui.QMessageBox.Yes:
+
+                    fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+                    dicionario = {'Nome': self.nomeinput.text(),'email': self.emailinput.text(), 'telefone': self.celularinput.text(), 'senha': self.senhainput.text()}
+                    fb.put('Users', self.usuarioinput.text(), dicionario)
+                    self.MainWindow = login.Ui_MainWindow
+                    tela_login = QtGui.QMainWindow()
+                    ui = login.Ui_MainWindow()
+                    ui.setupUi(tela_login)
+                    tela_login.show()
+                    sys.exit(app.exec_())
+
+            else:
+                dlg2 = QtGui.QMessageBox(None)
+                dlg2.setWindowTitle("Erro")
+                dlg2.setIcon(QtGui.QMessageBox.Warning)
+                dlg2.setText("Preencha os campos corretamente, por favor.")
+                dlg2.exec_()
         else:
             dlg2 = QtGui.QMessageBox(None)
             dlg2.setWindowTitle("Erro")
             dlg2.setIcon(QtGui.QMessageBox.Warning)
-            dlg2.setText("Preencha os campos corretamente, por favor.")
+            dlg2.setText("Usuário já existente!")
             dlg2.exec_()
+
 
 
     def abrircaronas(self):
