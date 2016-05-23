@@ -72,32 +72,32 @@ class Ui_MainWindow(object):
 
         #Botão de agendar a carona
         self.agendar = QtGui.QPushButton(self.centralwidget)
-        self.agendar.setGeometry(QtCore.QRect(240, 270, 300, 50))
+        self.agendar.setGeometry(QtCore.QRect(230, 270, 321, 50))
         self.agendar.setObjectName(_fromUtf8("agendar"))
         self.agendar.clicked.connect(self.abriragendar)
 
 
         #Botão de pedir a carona
         self.pedir = QtGui.QPushButton(self.centralwidget)
-        self.pedir.setGeometry(QtCore.QRect(240, 190, 300, 50))
+        self.pedir.setGeometry(QtCore.QRect(230, 190, 321, 50))
         self.pedir.setObjectName(_fromUtf8("pedir"))
         self.pedir.clicked.connect(self.abrirpedir)
 
         #Botão para alterar o perfil
         self.perfil = QtGui.QPushButton(self.centralwidget)
-        self.perfil.setGeometry(QtCore.QRect(240, 430, 300, 50))
+        self.perfil.setGeometry(QtCore.QRect(230, 430, 321, 50))
         self.perfil.setObjectName(_fromUtf8("perfil"))
         self.perfil.clicked.connect(self.abrirperfil)
 
         #Botão para remover o pedido de carona
         self.remover = QtGui.QPushButton(self.centralwidget)
-        self.remover.setGeometry(QtCore.QRect(240, 350, 151, 50))
+        self.remover.setGeometry(QtCore.QRect(230, 350, 161, 50))
         self.remover.setObjectName(_fromUtf8("remover"))
         self.remover.clicked.connect(self.removerpedido)
 
         #Botão para remover a oferta de carona
         self.remover2 = QtGui.QPushButton(self.centralwidget)
-        self.remover2.setGeometry(QtCore.QRect(390, 350, 151, 50))
+        self.remover2.setGeometry(QtCore.QRect(390, 350, 161, 50))
         self.remover2.setObjectName(_fromUtf8("remover"))
         self.remover2.clicked.connect(self.removeroferta)
 
@@ -185,7 +185,7 @@ class Ui_MainWindow(object):
             dlg.setEscapeButton(QtGui.QMessageBox.No)
             resultado = dlg.exec_()
             if resultado == QtGui.QMessageBox.Yes:
-                fb.delete('Pedidos', self.usuarios)
+                fb.delete('Ofertas', self.usuarios)
                 dlg = QtGui.QMessageBox(None)
                 dlg.setWindowTitle("Cancelamento")
                 dlg.setIcon(QtGui.QMessageBox.Information)

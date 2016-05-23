@@ -221,7 +221,7 @@ class Ui_MainWindow(object):
         sys.exit(app.exec_())
 
     def enviarmensagem(self):
-        validando_email = validate_email(self.emailinput.text())
+        validando_email = validate_email(self.lineEdit.text())
         if validando_email == True:
             fromaddr = self.lineEdit.text()
             toaddrs = 'lucarn@al.insper.edu.br'
@@ -233,6 +233,17 @@ class Ui_MainWindow(object):
             server.sendmail(fromaddr, toaddrs, msg)
             server.quit()
 
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Contato")
+            dlg.setIcon(QtGui.QMessageBox.Information)
+            dlg.setText("Mensagem enviada com sucesso!")
+            dlg.exec_()
+        else:
+            dlg = QtGui.QMessageBox(None)
+            dlg.setWindowTitle("Contato")
+            dlg.setIcon(QtGui.QMessageBox.Information)
+            dlg.setText("Não foi possível enviar sua mensagem. Verifique seu e-mail.")
+            dlg.exec_()
 
 
 if __name__ == "__main__":
