@@ -75,12 +75,12 @@ class Ui_MainWindow(object):
 
         self.destino = QtGui.QComboBox(self.centralwidget)
         self.destino.setGeometry(QtCore.QRect(190, 240, 411, 22))
-        self.destino.setEditable(True)
+        self.destino.setEditable(False)
         self.destino.setObjectName(_fromUtf8("destino"))
 
         self.partida = QtGui.QComboBox(self.centralwidget)
         self.partida.setGeometry(QtCore.QRect(190, 140, 411, 22))
-        self.partida.setEditable(True)
+        self.partida.setEditable(False)
         self.partida.setObjectName(_fromUtf8("partida"))
 
         for i in range(len(bairros)):
@@ -146,7 +146,7 @@ class Ui_MainWindow(object):
 
         self.lugares = QtGui.QComboBox(self.centralwidget)
         self.lugares.setGeometry(QtCore.QRect(190, 410, 411, 22))
-        self.lugares.setEditable(True)
+        self.lugares.setEditable(False)
         self.lugares.setObjectName(_fromUtf8("lugares"))
         self.lugares.addItem(_fromUtf8(""))
         self.lugares.addItem(_fromUtf8(""))

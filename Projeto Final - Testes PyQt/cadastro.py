@@ -9,6 +9,7 @@
 from PyQt4 import QtCore, QtGui
 from firebase import firebase
 import login, caronas
+from validate_email import validate_email
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8

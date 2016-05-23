@@ -8,7 +8,7 @@
 
 from PyQt4 import QtCore, QtGui
 import smtplib, caronas
-#from validate_email import validate_email
+from validate_email import validate_email
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8

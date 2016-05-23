@@ -123,7 +123,7 @@ class Ui_MainWindow(object):
         self.pedir.setText(_translate("MainWindow", "Pedir carona", None))
         self.perfil.setText(_translate("MainWindow", "Alterar perfil", None))
         self.remover.setText(_translate("MainWindow", "Remover carona pedida", None))
-        self.remover2.setText(_translate("MainWindow", "Remover carona pedida", None))
+        self.remover2.setText(_translate("MainWindow", "Remover carona oferecida", None))
         self.logout.setText(_translate("MainWindow", "Log Out", None))
 
 
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    ui.setupUi(MainWindow, "usuario", "nome", "email", "tel")
     MainWindow.show()
     sys.exit(app.exec_())
 

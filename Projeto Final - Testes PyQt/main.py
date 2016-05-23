@@ -1,5 +1,5 @@
 import caronas, cadastro, login, contato, sobre, principal, pedircarona, agendarcarona, perfil
-#from validate_email import validate_email
+from validate_email import validate_email
 from PyQt4 import QtCore, QtGui
 
 if __name__ == "__main__":
