@@ -145,6 +145,7 @@ class Ui_MainWindow(object):
         self.lugares.addItem(_fromUtf8(""))
         self.lugares.addItem(_fromUtf8(""))
         self.lugares.addItem(_fromUtf8(""))
+        self.lugares.addItem(_fromUtf8(""))
 
         #self.data = QtGui.QDateEdit(self.centralwidget)
         #self.data.setGeometry(QtCore.QRect(180, 310, 110, 22))
@@ -196,10 +197,11 @@ class Ui_MainWindow(object):
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
         #self.datalabel.setText(_translate("MainWindow", "Data:", None))
         self.lugareslabel.setText(_translate("MainWindow", "Lugares necessários:", None))
-        self.lugares.setItemText(0, _translate("MainWindow", "1", None))
-        self.lugares.setItemText(1, _translate("MainWindow", "2", None))
-        self.lugares.setItemText(2, _translate("MainWindow", "3", None))
-        self.lugares.setItemText(3, _translate("MainWindow", "4", None))
+        self.lugares.setItemText(0, _translate("MainWindow", "", None))
+        self.lugares.setItemText(1, _translate("MainWindow", "1", None))
+        self.lugares.setItemText(2, _translate("MainWindow", "2", None))
+        self.lugares.setItemText(3, _translate("MainWindow", "3", None))
+        self.lugares.setItemText(4, _translate("MainWindow", "4", None))
         self.horariolabel.setText(_translate("MainWindow", "Horário:", None))
 
     def registrarpedido(self):
@@ -214,7 +216,7 @@ class Ui_MainWindow(object):
             
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horario.currentText(), 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
+            dicionario = {'Horário': self.horario.currentText(), 'Local de Partida': self.partida.currentText(), 'Local de Destino': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
             fb.put('/Pedidos', self.usuarios, dicionario)
             
             ofertas = fb.get('Ofertas', None)
@@ -223,16 +225,22 @@ class Ui_MainWindow(object):
             fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
-            lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Saída')
-            lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Chegada')
+            lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Partida')
+            lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Destino')
             horario_pedido = fb2.get(self.usuarios, 'Horário')
             lugares_necessarios_pedido = fb2.get(self.usuarios, 'Lugares Necessários')
             
             for motorista in ofertas:
-                lugar_saida_oferta = fb3.get(motorista, 'Local de Saída')
-                lugar_chegada_oferta = fb3.get(motorista, 'Local de Chegada')
+                lugar_saida_oferta = fb3.get(motorista, 'Local de Partida')
+                lugar_chegada_oferta = fb3.get(motorista, 'Local de Destino')
                 horario_oferta = fb3.get(motorista, 'Horário')
                 lugares_necessarios_oferta = fb3.get(motorista, 'Lugares Necessários')
+
+                lgnp = int (lugares_necessarios_pedido) #lugares pedidos transformado em número inteiro
+                if lugares_necessarios_oferta != None:
+                    lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
+                else:
+                    continue
                 
                 if lugar_saida_pedido == lugar_saida_oferta and lugar_chegada_pedido == lugar_chegada_oferta and lugares_necessarios_pedido <= lugares_necessarios_oferta and horario_pedido == horario_oferta:
                     nome = fb4.get(motorista,'Nome')
@@ -264,7 +272,7 @@ class Ui_MainWindow(object):
                     fb.delete('/Pedidos', self.usuarios)
 
                     if lgno > 0:
-                        dicionario_motorista = {'Horário': horario_oferta,'Local de Saída': lugar_saida_oferta, 'Local de Chegada': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        dicionario_motorista = {'Horário': horario_oferta,'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
                         fb.put('/Ofertas', motorista, dicionario_motorista)
                     else:
                         fb.delete('/Ofertas', motorista)

@@ -152,6 +152,7 @@ class Ui_MainWindow(object):
         self.lugares.addItem(_fromUtf8(""))
         self.lugares.addItem(_fromUtf8(""))
         self.lugares.addItem(_fromUtf8(""))
+        self.lugares.addItem(_fromUtf8(""))
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -178,10 +179,11 @@ class Ui_MainWindow(object):
         #self.datalabel.setText(_translate("MainWindow", "Data:", None))
         self.voltar.setText(_translate("MainWindow", "Voltar", None))
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
-        self.lugares.setItemText(0, _translate("MainWindow", "1", None))
-        self.lugares.setItemText(1, _translate("MainWindow", "2", None))
-        self.lugares.setItemText(2, _translate("MainWindow", "3", None))
-        self.lugares.setItemText(3, _translate("MainWindow", "4", None))
+        self.lugares.setItemText(0, _translate("MainWindow", "", None))
+        self.lugares.setItemText(1, _translate("MainWindow", "1", None))
+        self.lugares.setItemText(2, _translate("MainWindow", "2", None))
+        self.lugares.setItemText(3, _translate("MainWindow", "3", None))
+        self.lugares.setItemText(4, _translate("MainWindow", "4", None))
         self.lugareslabel.setText(_translate("MainWindow", "Lugares disponíveis:", None))
 
     def abrirprincipal(self):
@@ -204,7 +206,7 @@ class Ui_MainWindow(object):
 
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horario.currentText(), 'Local de Saída': self.partida.currentText(), 'Local de Chegada': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
+            dicionario = {'Horário': self.horario.currentText(), 'Local de Partida': self.partida.currentText(), 'Local de Destino': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
             fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
@@ -214,14 +216,14 @@ class Ui_MainWindow(object):
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
 
-            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Saída')
-            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Chegada')
+            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Partida')
+            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Destino')
             horario_oferta = fb3.get(self.usuarios, 'Horário')
             lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
             
             for passageiro in pedidos:
-                lugar_saida_pedido = fb2.get(passageiro, 'Local de Saída')
-                lugar_chegada_pedido = fb2.get(passageiro, 'Local de Chegada')
+                lugar_saida_pedido = fb2.get(passageiro, 'Local de Partida')
+                lugar_chegada_pedido = fb2.get(passageiro, 'Local de Destino')
                 horario_pedido = fb2.get(passageiro, 'Horário')
                 lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
 
@@ -267,7 +269,7 @@ class Ui_MainWindow(object):
                     dlg = QtGui.QMessageBox(None)
                     dlg.setWindowTitle("Carona")
                     dlg.setIcon(QtGui.QMessageBox.Information)
-                    dlg.setText("As informações de quem te dará carona estão no seu e-mail!")
+                    dlg.setText("As informações do seu passageiro estão no seu e-mail!")
                     dlg.exec_()
                     break
             else:

@@ -499,7 +499,7 @@ class Telas():
         
         self.saida = tk.Label(self.Tela_pedir_carona)
         self.saida.grid(row=4, column=1,columnspan=1, sticky="nsew")
-        self.saida.configure(text= "Local de saída: ",font='Bodoni 12', bg='#E10022', fg='White')
+        self.saida.configure(text= "Local de Partida: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
         self.bairro_chegada_pedido = tk.StringVar()
@@ -509,7 +509,7 @@ class Telas():
         
         self.chegada = tk.Label(self.Tela_pedir_carona)
         self.chegada.grid(row=5, column=0,columnspan=2, sticky="nsew")
-        self.chegada.configure(text= "Local de chegada: ",font='Bodoni 12', bg='#E10022', fg='White')
+        self.chegada.configure(text= "Local de Destino: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         #Botão que confirma a ação do usuário
         self.confirmar = tk.Button(self.Tela_pedir_carona)
@@ -582,7 +582,7 @@ class Telas():
         
         self.saida = tk.Label(self.Tela_oferecer_carona)
         self.saida.grid(row=4, column=1,columnspan=1, sticky="nsew")
-        self.saida.configure(text= "Local de saída: ",font='Bodoni 12', bg='#E10022', fg='White')
+        self.saida.configure(text= "Local de Partida: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         #Espaço para o usuário escrever o destino
         self.bairro_chegada_oferta = tk.StringVar()
@@ -592,7 +592,7 @@ class Telas():
         
         self.chegada = tk.Label(self.Tela_oferecer_carona)
         self.chegada.grid(row=5, column=0,columnspan=2, sticky="nsew")
-        self.chegada.configure(text= "Local de chegada: ",font='Bodoni 12', bg='#E10022', fg='White')
+        self.chegada.configure(text= "Local de Destino: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         #Botão que confirma a ação do usuário
         self.confirmar = tk.Button(self.Tela_oferecer_carona)
@@ -787,7 +787,7 @@ class Telas():
             
         if confirmando_pedido:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.hora_pedido.get(),'Local de Saída': self.bairro_saida_pedido.get(), 'Local de Chegada': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get()}
+            dicionario = {'Horário': self.hora_pedido.get(),'Local de Partida': self.bairro_saida_pedido.get(), 'Local de Destino': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get()}
             fb.put('/Pedidos', self.usuarios, dicionario)
             
             ofertas = fb.get('Ofertas', None)
@@ -796,14 +796,14 @@ class Telas():
             fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
-            lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Saída')
-            lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Chegada')
+            lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Partida')
+            lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Destino')
             horario_pedido = fb2.get(self.usuarios, 'Horário')
             lugares_necessarios_pedido = fb2.get(self.usuarios, 'Lugares Necessários')
             
             for motorista in ofertas:
-                lugar_saida_oferta = fb3.get(motorista, 'Local de Saída')
-                lugar_chegada_oferta = fb3.get(motorista, 'Local de Chegada')
+                lugar_saida_oferta = fb3.get(motorista, 'Local de Partida')
+                lugar_chegada_oferta = fb3.get(motorista, 'Local de Destino')
                 horario_oferta = fb3.get(motorista, 'Horário')
                 lugares_necessarios_oferta = fb3.get(motorista, 'Lugares Necessários')
 
@@ -844,7 +844,7 @@ class Telas():
                     fb.delete('/Pedidos', self.usuarios)
 
                     if lgno > 0:
-                        dicionario_motorista = {'Horário': horario_oferta,'Local de Saída': lugar_saida_oferta, 'Local de Chegada': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        dicionario_motorista = {'Horário': horario_oferta,'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
                         fb.put('/Ofertas', motorista, dicionario_motorista)
                     else:
                         fb.delete('/Ofertas', motorista)
@@ -861,7 +861,7 @@ class Telas():
             
         if confirmando_oferta:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Saída': self.bairro_saida_oferta.get(), 'Local de Chegada': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+            dicionario = {'Horário': self.horarios_oferecer.get(),'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
             fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
@@ -871,14 +871,14 @@ class Telas():
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
 
-            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Saída')
-            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Chegada')
+            lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Partida')
+            lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Destino')
             horario_oferta = fb3.get(self.usuarios, 'Horário')
             lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
             
             for passageiro in pedidos:
-                lugar_saida_pedido = fb2.get(passageiro, 'Local de Saída')
-                lugar_chegada_pedido = fb2.get(passageiro, 'Local de Chegada')
+                lugar_saida_pedido = fb2.get(passageiro, 'Local de Partida')
+                lugar_chegada_pedido = fb2.get(passageiro, 'Local de Destino')
                 horario_pedido = fb2.get(passageiro, 'Horário')
                 lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
 
