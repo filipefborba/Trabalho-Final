@@ -850,7 +850,7 @@ class Telas():
                     fb.delete('/Pedidos', self.usuarios)
 
                     if lgno > 0:
-                        dicionario_motorista = {'Horário': horario_oferta,'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        dicionario_motorista = {'Horário': horario_oferta, 'Dia':self.dia.get(), 'Mês':self.mes.get(), 'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
                         fb.put('/Ofertas', motorista, dicionario_motorista)
                     else:
                         fb.delete('/Ofertas', motorista)
@@ -867,7 +867,7 @@ class Telas():
             
         if confirmando_oferta:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horarios_oferecer.get(), 'Dia':self.dia.get(), 'Mês':self.mes.get(), 'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+            dicionario = {'Horário': self.horarios_oferecer.get(), 'Dia':dia_oferta, 'Mês':mes_oferta, 'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
             fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
