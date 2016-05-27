@@ -9,11 +9,11 @@ class Telas():
     
     def __init__(self):
         #Listas com bairros disponiveis para carona, horários de saída e lugares disponiveis no carro
-        bairros = sorted(['','Cerqueira César','Vila Leopoldina','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes','Campo Belo','Consolação','Aclimação','Chácara Inglesa','Chácara Klabin','Butantã'])
-        lugares = ['','1','2','3','4']
-        horarios = ['', '0h00','0h30','1h00','1h30','2h00','2h30','3h00','3h30','4h00','4h30','5h00','5h30','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30']
-        dia = ['','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-        mes = ['','1','2','3','4','5','6','7','8','9','10','11','12']
+        self.bairros = sorted(['','Cerqueira César','Vila Leopoldina','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes','Campo Belo','Consolação','Aclimação','Chácara Inglesa','Chácara Klabin','Butantã'])
+        self.lugares = ['','1','2','3','4']
+        self.horarios = ['', '0h00','0h30','1h00','1h30','2h00','2h30','3h00','3h30','4h00','4h30','5h00','5h30','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30']
+        self.dia = ['','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        self.mes = ['','1','2','3','4','5','6','7','8','9','10','11','12']
         
         #Gerando a janela
         self.root = tk.Tk()
@@ -468,16 +468,16 @@ class Telas():
         
         
         self.caronas = tk.Label(self.Tela_pedir_carona)
-        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
-        self.caronas.configure(text= "Pedir",font='Bodoni 50', bg='#E10022', fg='White')
+        self.caronas.grid(row=1, column=0,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Pedir",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.Tela_pedir_carona)
-        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
-        self.Logo.configure(text= "Caronas",font='Bodoni 50', bg='#E10022', fg='White')
+        self.Logo.grid(row=1, column=2,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Caronas",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.lugares_pedido = tk.StringVar()
-        self.lugares_pedido.set(lugares[0])
-        self.Lugares = ttk.OptionMenu(self.Tela_pedir_carona,self.lugares_pedido,*lugares)
+        self.lugares_pedido.set(self.lugares[0])
+        self.Lugares = ttk.OptionMenu(self.Tela_pedir_carona,self.lugares_pedido,*self.lugares)
         self.Lugares.grid(row=6, column=2, sticky="ew")
         
         self.label_lugares = tk.Label(self.Tela_pedir_carona)
@@ -485,9 +485,23 @@ class Telas():
         self.label_lugares.configure(text= "Lugares Necessários: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         self.hora_pedido = tk.StringVar()
-        self.hora_pedido.set(horarios[0])
-        self.Horários = ttk.OptionMenu(self.Tela_pedir_carona,self.hora_pedido,*horarios)
+        self.hora_pedido.set(self.horarios[0])
+        self.Horários = ttk.OptionMenu(self.Tela_pedir_carona,self.hora_pedido,*self.horarios)
         self.Horários.grid(row=3, column=2, sticky="ew")
+
+        self.label_data = tk.Label(self.Tela_pedir_carona)
+        self.label_data.grid(row=2, column=1,columnspan=1, sticky="nsew")
+        self.label_data.configure(text= "Data: ",font='Bodoni 12', bg='#E10022', fg='White')
+
+        self.dia_pedido = tk.StringVar()
+        self.dia_pedido.set(self.dia[0])
+        self.Dias = ttk.OptionMenu(self.Tela_pedir_carona,self.dia_pedido,*self.dia)
+        self.Dias.grid(row=2, column=2, columnspan=1, sticky="ew")
+
+        self.mes_pedido = tk.StringVar()
+        self.mes_pedido.set(self.mes[0])
+        self.Meses = ttk.OptionMenu(self.Tela_pedir_carona,self.mes_pedido,*self.mes)
+        self.Meses.grid(row=2, column=3, columnspan=1, sticky="ew")
         
         self.label_horários = tk.Label(self.Tela_pedir_carona)
         self.label_horários.grid(row=3, column=1,columnspan=1, sticky="nsew")
@@ -495,8 +509,8 @@ class Telas():
         
         
         self.bairro_saida_pedido = tk.StringVar()
-        self.bairro_saida_pedido.set(bairros[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_pedir_carona,self.bairro_saida_pedido,*bairros)
+        self.bairro_saida_pedido.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_pedir_carona,self.bairro_saida_pedido,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_pedir_carona)
@@ -505,8 +519,8 @@ class Telas():
         
         #Espaço para o usuário escrever o destino
         self.bairro_chegada_pedido = tk.StringVar()
-        self.bairro_chegada_pedido.set(bairros[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_pedir_carona,self.bairro_chegada_pedido,*bairros)
+        self.bairro_chegada_pedido.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_pedir_carona,self.bairro_chegada_pedido,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_pedir_carona)
@@ -544,32 +558,46 @@ class Telas():
 
         self.Tela_oferecer_carona.columnconfigure(0, minsize=10, weight=1)
         self.Tela_oferecer_carona.columnconfigure(1, minsize=100, weight=1)
-        self.Tela_oferecer_carona.columnconfigure(2, minsize=100, weight=1)
-        self.Tela_oferecer_carona.columnconfigure(3, minsize=100, weight=1)
+        self.Tela_oferecer_carona.columnconfigure(2, minsize=50, weight=1)
+        self.Tela_oferecer_carona.columnconfigure(3, minsize=50, weight=1)
         self.Tela_oferecer_carona.columnconfigure(4, minsize=10, weight=1)
         self.Tela_oferecer_carona.grid(row=0, column=0, sticky="nsew")
         
         
         self.caronas = tk.Label(self.Tela_oferecer_carona)
-        self.caronas.grid(row=1, column=1,columnspan=3, sticky="nsew")
-        self.caronas.configure(text= "Oferecer",font='Bodoni 50', bg='#E10022', fg='White')
-        
+        self.caronas.grid(row=1, column=0,columnspan=3, sticky="nsew")
+        self.caronas.configure(text= "Oferecer",font='Bodoni 40', bg='#E10022', fg='White')
+
         self.Logo = tk.Label(self.Tela_oferecer_carona)
-        self.Logo.grid(row=2, column=1,columnspan=3, sticky="nsew")
-        self.Logo.configure(text= "Caronas",font='Bodoni 50', bg='#E10022', fg='White')
+        self.Logo.grid(row=1, column=2,columnspan=3, sticky="nsew")
+        self.Logo.configure(text= "Caronas",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.horarios_oferecer = tk.StringVar()
-        self.horarios_oferecer.set(horarios[0])
-        self.Horários = ttk.OptionMenu(self.Tela_oferecer_carona,self.horarios_oferecer,*horarios)
+        self.horarios_oferecer.set(self.horarios[0])
+        self.Horários = ttk.OptionMenu(self.Tela_oferecer_carona,self.horarios_oferecer,*self.horarios)
         self.Horários.grid(row=3, column=2, sticky="ew")
+
+        self.dia_oferta = tk.StringVar()
+        self.dia_oferta.set(self.dia[0])
+        self.Dias = ttk.OptionMenu(self.Tela_oferecer_carona,self.dia_oferta,*self.dia)
+        self.Dias.grid(row=2, column=2, sticky="ew")
+
+        self.mes_oferta = tk.StringVar()
+        self.mes_oferta.set(self.mes[0])
+        self.Meses = ttk.OptionMenu(self.Tela_oferecer_carona,self.mes_oferta,*self.mes)
+        self.Meses.grid(row=2, column=3, sticky="ew")
+
+        self.label_data = tk.Label(self.Tela_oferecer_carona)
+        self.label_data.grid(row=2, column=1,columnspan=1, sticky="nsew")
+        self.label_data.configure(text= "Data: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         self.label_horários = tk.Label(self.Tela_oferecer_carona)
         self.label_horários.grid(row=3, column=1,columnspan=1, sticky="nsew")
         self.label_horários.configure(text= "Horários: ",font='Bodoni 12', bg='#E10022', fg='White')
         
         self.lugares_oferecer = tk.StringVar()
-        self.lugares_oferecer.set(lugares[0])
-        self.Lugares = ttk.OptionMenu(self.Tela_oferecer_carona,self.lugares_oferecer,*lugares)
+        self.lugares_oferecer.set(self.lugares[0])
+        self.Lugares = ttk.OptionMenu(self.Tela_oferecer_carona,self.lugares_oferecer,*self.lugares)
         self.Lugares.grid(row=6, column=2, sticky="ew")
         
         self.label_lugares = tk.Label(self.Tela_oferecer_carona)
@@ -578,8 +606,8 @@ class Telas():
         
         #Espaço para o usuário escrever a saída
         self.bairro_saida_oferta = tk.StringVar()
-        self.bairro_saida_oferta.set(bairros[0])
-        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_saida_oferta,*bairros)
+        self.bairro_saida_oferta.set(self.bairros[0])
+        self.bairro_de_saida = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_saida_oferta,*self.bairros)
         self.bairro_de_saida.grid(row=4, column=2, sticky="ew")
         
         self.saida = tk.Label(self.Tela_oferecer_carona)
@@ -588,8 +616,8 @@ class Telas():
         
         #Espaço para o usuário escrever o destino
         self.bairro_chegada_oferta = tk.StringVar()
-        self.bairro_chegada_oferta.set(bairros[0])
-        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_chegada_oferta,*bairros)
+        self.bairro_chegada_oferta.set(self.bairros[0])
+        self.bairro_de_chegada = ttk.OptionMenu(self.Tela_oferecer_carona,self.bairro_chegada_oferta,*self.bairros)
         self.bairro_de_chegada.grid(row=5, column=2, sticky="ew")
         
         self.chegada = tk.Label(self.Tela_oferecer_carona)
@@ -789,7 +817,7 @@ class Telas():
             
         if confirmando_pedido:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.hora_pedido.get(), 'Dia':self.dia.get(), 'Mês':self.mes.get(), 'Local de Partida': self.bairro_saida_pedido.get(), 'Local de Destino': self.bairro_chegada_pedido.get(), 'Lugares Necessários': lugares_pedido.get()}
+            dicionario = {'Horário': self.hora_pedido.get(), 'Dia':self.dia_pedido.get(), 'Mês':self.mes_pedido.get(), 'Local de Partida': self.bairro_saida_pedido.get(), 'Local de Destino': self.bairro_chegada_pedido.get(), 'Lugares Necessários': lugares_pedido.get()}
             fb.put('/Pedidos', self.usuarios, dicionario)
             
             ofertas = fb.get('Ofertas', None)
@@ -838,7 +866,7 @@ class Telas():
                     fromaddr = 'lucarn@al.insper.edu.br'
                     toaddrs = email
     
-                   msg = 'Seu passageiro é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\nData: {3}/{4}\nHorário: {5}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email, dia_pedido, mes_pedido, horario_pedido).encode('UTF-8')
+                    msg = 'Seu passageiro é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\nData: {3}/{4}\nHorário: {5}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email, dia_pedido, mes_pedido, horario_pedido).encode('UTF-8')
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
@@ -850,7 +878,7 @@ class Telas():
                     fb.delete('/Pedidos', self.usuarios)
 
                     if lgno > 0:
-                        dicionario_motorista = {'Horário': horario_oferta, 'Dia':self.dia.get(), 'Mês':self.mes.get(), 'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        dicionario_motorista = {'Horário': horario_oferta, 'Dia':dia_oferta, 'Mês':mes_oferta, 'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
                         fb.put('/Ofertas', motorista, dicionario_motorista)
                     else:
                         fb.delete('/Ofertas', motorista)
@@ -867,7 +895,7 @@ class Telas():
             
         if confirmando_oferta:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horarios_oferecer.get(), 'Dia':dia_oferta, 'Mês':mes_oferta, 'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+            dicionario = {'Horário': self.horarios_oferecer.get(), 'Dia':self.dia_oferta.get(), 'Mês':self.mes_oferta.get(), 'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
             fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
