@@ -411,22 +411,22 @@ class Telas():
         self.pedir_carona.bind('<1>',self.clicou_pedir)
         
         self.oferecer_carona = tk.Button(self.Tela_principal)
-        self.oferecer_carona.grid(row=3, column=2,columnspan=1)
+        self.oferecer_carona.grid(row=4, column=1,columnspan=1)
         self.oferecer_carona.configure(text= "Oferecer Carona ")
         self.oferecer_carona.bind('<1>',self.clicou_oferecer)
         
         self.alterar_perfil = tk.Button(self.Tela_principal)
-        self.alterar_perfil.grid(row=4, column=1,columnspan=1)
+        self.alterar_perfil.grid(row=3, column=3,columnspan=1)
         self.alterar_perfil.configure(text= "Alterar meu Perfil ")
         self.alterar_perfil.bind('<1>',self.clicou_alterar)
                 
         self.cancelar_pedido_carona = tk.Button(self.Tela_principal)
-        self.cancelar_pedido_carona.grid(row=3, column=3)
+        self.cancelar_pedido_carona.grid(row=3, column=2)
         self.cancelar_pedido_carona.configure(text='Cancelar Pedido')
         self.cancelar_pedido_carona.bind('<1>',self.cancelar_pedido)
 
         self.cancelar_oferta_carona = tk.Button(self.Tela_principal)
-        self.cancelar_oferta_carona.grid(row=4, column=3)
+        self.cancelar_oferta_carona.grid(row=4, column=2)
         self.cancelar_oferta_carona.configure(text='Cancelar Oferta')
         self.cancelar_oferta_carona.bind('<1>',self.cancelar_oferta)
 
@@ -435,7 +435,7 @@ class Telas():
         #Botão que leva o usuário a página anterior
         self.voltar_pagina_principal = tk.Button(self.Tela_principal)
         self.voltar_pagina_principal.configure(text='Log Out')
-        self.voltar_pagina_principal.grid(row=5, column=1,columnspan=1)
+        self.voltar_pagina_principal.grid(row=4, column=3,columnspan=1)
         self.voltar_pagina_principal.bind('<1>',self.clicou_voltar_tela_inicial)
 
 
