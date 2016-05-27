@@ -78,14 +78,14 @@ class Ui_MainWindow(object):
         self.usuarioinput.setGeometry(QtCore.QRect(170, 260, 491, 20))
         self.usuarioinput.setObjectName(_fromUtf8("usuarioinput"))
         self.usuarioinput.setPlaceholderText("Nome de Usuário")
-        self.usuarioinput.returnPressed.connect(self.abrirprincipal)
+        #self.usuarioinput.returnPressed.connect(self.abrirprincipal) #BUG - Python has stopped working - ????????
 
         self.senhainput = QtGui.QLineEdit(self.centralwidget)
         self.senhainput.setGeometry(QtCore.QRect(170, 320, 491, 20))
         self.senhainput.setEchoMode(QtGui.QLineEdit.Password)
         self.senhainput.setObjectName(_fromUtf8("senhainput"))
         self.senhainput.setPlaceholderText("Senha")
-        self.senhainput.returnPressed.connect(self.abrirprincipal)
+        #self.senhainput.returnPressed.connect(self.abrirprincipal) #BUG - Python has stopped working - ????????
 
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(160, 430, 101, 41))

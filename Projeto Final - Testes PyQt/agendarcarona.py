@@ -33,7 +33,9 @@ class Ui_MainWindow(object):
         bairros = sorted(['','Cerqueira César','Vila Leopoldina','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes','Campo Belo','Consolação','Aclimação','Chácara Inglesa','Chácara Klabin','Butantã'])
         i = 0
         horarios = ['', '0h00','0h30','1h00','1h30','2h00','2h30','3h00','3h30','4h00','4h30','5h00','5h30','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30']
-
+        dia = ['','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        mes = ['','1','2','3','4','5','6','7','8','9','10','11','12']
+        i=0
 
         #Frame da janela
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -118,6 +120,28 @@ class Ui_MainWindow(object):
         for i in range(len(horarios)):
             self.horario.addItem(_fromUtf8(""))
 
+        self.datalabel = QtGui.QLabel(self.centralwidget)
+        self.datalabel.setGeometry(QtCore.QRect(390, 320, 171, 41))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Bodoni MT"))
+        font.setPointSize(12)
+        self.datalabel.setFont(font)
+        self.datalabel.setObjectName(_fromUtf8("datalabel"))
+
+        self.dia = QtGui.QComboBox(self.centralwidget)
+        self.dia.setGeometry(QtCore.QRect(440, 330, 50, 22))
+        self.dia.setEditable(False)
+        self.dia.setObjectName(_fromUtf8("dia"))
+        for i in range(len(dia)):
+            self.dia.addItem(_fromUtf8(""))
+
+        self.mes = QtGui.QComboBox(self.centralwidget)
+        self.mes.setGeometry(QtCore.QRect(500, 330, 50, 22))
+        self.mes.setEditable(False)
+        self.mes.setObjectName(_fromUtf8("mes"))
+        for i in range(len(mes)):
+            self.mes.addItem(_fromUtf8(""))
+
         self.voltar = QtGui.QPushButton(self.centralwidget)
         self.voltar.setGeometry(QtCore.QRect(150, 490, 101, 41))
         font = QtGui.QFont()
@@ -166,17 +190,24 @@ class Ui_MainWindow(object):
         bairros = sorted(['','Cerqueira César','Vila Leopoldina','Vila Olímpia','Higienópolis','Morumbi','Jardins','Itaim','Jardim Paulista','Moema','Osasco','Itaquera','Alphaville','Pinheiros', 'Alto de Pinheiros', 'Jardim Paulistano', 'Jardim Europa', 'Paraíso','Perdizes','Campo Belo','Consolação','Aclimação','Chácara Inglesa','Chácara Klabin','Butantã'])
         i = 0
         horarios = ['', '0h00','0h30','1h00','1h30','2h00','2h30','3h00','3h30','4h00','4h30','5h00','5h30','6h00','6h30','7h00','7h30','8h00','8h30','9h00','9h30','10h00','10h30','11h00','11h30','12h00','12h30','13h00','13h30','14h00','14h30','15h00','16h00','16h30','17h00','17h30','18h00','18h30','19h00','19h30','20h00','20h30','21h00','21h30','22h00','22h30','23h00','23h30']
+        dia = ['','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+        mes = ['','1','2','3','4','5','6','7','8','9','10','11','12']
+
         MainWindow.setWindowTitle(_translate("MainWindow", "Caronas Insper", None))
         for i in range(len(bairros)):
             self.partida.setItemText(i, _translate("MainWindow", bairros[i], None))
             self.destino.setItemText(i, _translate("MainWindow", bairros[i], None))
         for i in range(len(horarios)):
             self.horario.setItemText(i, _translate("MainWindow", horarios[i], None))
+        for i in range(len(dia)):
+            self.dia.setItemText(i, _translate("MainWindow", dia[i], None))
+        for i in range(len(mes)):
+            self.mes.setItemText(i, _translate("MainWindow", mes[i], None))
         self.titulo.setText(_translate("MainWindow", "Agende a sua carona:", None))
         self.destinolabel.setText(_translate("MainWindow", "Local de Destino:", None))
         self.partidalabel.setText(_translate("MainWindow", "Local de Partida:", None))
         self.horariolabel.setText(_translate("MainWindow", "Horário:", None))
-        #self.datalabel.setText(_translate("MainWindow", "Data:", None))
+        self.datalabel.setText(_translate("MainWindow", "Data:", None))
         self.voltar.setText(_translate("MainWindow", "Voltar", None))
         self.confirmar.setText(_translate("MainWindow", "Confirmar", None))
         self.lugares.setItemText(0, _translate("MainWindow", "", None))
@@ -206,7 +237,7 @@ class Ui_MainWindow(object):
 
         if resultado == QtGui.QMessageBox.Yes:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horario.currentText(), 'Local de Partida': self.partida.currentText(), 'Local de Destino': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
+            dicionario = {'Horário': self.horario.currentText(), 'Dia':self.dia.currentText(), 'Mês':self.mes.currentText() ,'Local de Partida': self.partida.currentText(), 'Local de Destino': self.destino.currentText(), 'Lugares Necessários': self.lugares.currentText()}
             fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
@@ -219,12 +250,16 @@ class Ui_MainWindow(object):
             lugar_saida_oferta = fb3.get(self.usuarios, 'Local de Partida')
             lugar_chegada_oferta = fb3.get(self.usuarios, 'Local de Destino')
             horario_oferta = fb3.get(self.usuarios, 'Horário')
+            dia_oferta = fb3.get(self.usuarios, 'Dia')
+            mes_oferta = fb3.get(self.usuarios, 'Mês')
             lugares_necessarios_oferta = fb3.get(self.usuarios, 'Lugares Necessários')
             
             for passageiro in pedidos:
                 lugar_saida_pedido = fb2.get(passageiro, 'Local de Partida')
                 lugar_chegada_pedido = fb2.get(passageiro, 'Local de Destino')
                 horario_pedido = fb2.get(passageiro, 'Horário')
+                dia_pedido = fb2.get(passageiro, 'Dia')
+                mes_pedido = fb2.get(passageiro, 'Mês')
                 lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
 
                 lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
@@ -233,7 +268,7 @@ class Ui_MainWindow(object):
                 else:
                     continue
 
-                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta >= lugares_necessarios_pedido and horario_oferta == horario_pedido:                    
+                if lugar_saida_oferta == lugar_saida_pedido and lugar_chegada_oferta == lugar_chegada_pedido and lugares_necessarios_oferta >= lugares_necessarios_pedido and horario_oferta == horario_pedido and dia_oferta == dia_pedido and mes_oferta == mes_pedido:                    
                     nome = fb4.get(passageiro,'Nome')
                     celular = fb4.get(passageiro, 'telefone')
                     email = fb4.get(passageiro, 'email')
@@ -241,7 +276,7 @@ class Ui_MainWindow(object):
                     fromaddr = 'lucarn@al.insper.edu.br'
                     toaddrs = email
 
-                    msg = 'O seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email).encode('UTF-8')
+                    msg = 'Seu passageiro é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\nData: {3}/{4}\nHorário: {5}\n\nEntre em contato com seu carona para marcarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(nome, celular, email, dia_pedido, mes_pedido, horario_pedido).encode('UTF-8')
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
@@ -249,9 +284,9 @@ class Ui_MainWindow(object):
                     server.quit()
                     
                     fromaddr = 'lucarn@al.insper.edu.br'
-                    toaddrs = email
+                    toaddrs = self.email
 
-                    msg = 'Seu carona é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\n\nEntre em contato com seu carona para combinarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email).encode('UTF-8')
+                    msg = 'Seu motorista é: {0}\nSeu telefone é: {1}\nSeu email é: {2}\nData: {3}/{4}\nHorário: {5}\n\nEntre em contato com seu carona para combinarem melhor!\nObrigado por escolher o Caronas Insper!\nA equipe agradece!!'.format(self.nome_completo, self.telefone, self.email, dia_oferta, mes_oferta, horario_oferta).encode('UTF-8')
                     
                     server = smtplib.SMTP('insper.edu.br')
                     server.set_debuglevel(1)
