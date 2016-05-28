@@ -496,12 +496,12 @@ class Telas():
         self.dia_pedido = tk.StringVar()
         self.dia_pedido.set(self.dia[0])
         self.Dias = ttk.OptionMenu(self.Tela_pedir_carona,self.dia_pedido,*self.dia)
-        self.Dias.grid(row=2, column=2, columnspan=1, sticky="ew")
+        self.Dias.grid(row=2, column=2, columnspan=1, sticky="w")
 
         self.mes_pedido = tk.StringVar()
         self.mes_pedido.set(self.mes[0])
         self.Meses = ttk.OptionMenu(self.Tela_pedir_carona,self.mes_pedido,*self.mes)
-        self.Meses.grid(row=2, column=3, columnspan=1, sticky="ew")
+        self.Meses.grid(row=2, column=2, columnspan=1)
         
         self.label_horários = tk.Label(self.Tela_pedir_carona)
         self.label_horários.grid(row=3, column=1,columnspan=1, sticky="nsew")
@@ -569,7 +569,7 @@ class Telas():
         self.caronas.configure(text= "Oferecer",font='Bodoni 40', bg='#E10022', fg='White')
 
         self.Logo = tk.Label(self.Tela_oferecer_carona)
-        self.Logo.grid(row=1, column=2,columnspan=3, sticky="nsew")
+        self.Logo.grid(row=1, column=2,columnspan=3)
         self.Logo.configure(text= "Caronas",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.horarios_oferecer = tk.StringVar()
@@ -580,12 +580,12 @@ class Telas():
         self.dia_oferta = tk.StringVar()
         self.dia_oferta.set(self.dia[0])
         self.Dias = ttk.OptionMenu(self.Tela_oferecer_carona,self.dia_oferta,*self.dia)
-        self.Dias.grid(row=2, column=2, sticky="ew")
+        self.Dias.grid(row=2, column=2, sticky="w")
 
         self.mes_oferta = tk.StringVar()
         self.mes_oferta.set(self.mes[0])
         self.Meses = ttk.OptionMenu(self.Tela_oferecer_carona,self.mes_oferta,*self.mes)
-        self.Meses.grid(row=2, column=3, sticky="ew")
+        self.Meses.grid(row=2, column=2)
 
         self.label_data = tk.Label(self.Tela_oferecer_carona)
         self.label_data.grid(row=2, column=1,columnspan=1, sticky="nsew")
@@ -817,7 +817,7 @@ class Telas():
             
         if confirmando_pedido:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.hora_pedido.get(), 'Dia':self.dia_pedido.get(), 'Mês':self.mes_pedido.get(), 'Local de Partida': self.bairro_saida_pedido.get(), 'Local de Destino': self.bairro_chegada_pedido.get(), 'Lugares Necessários': lugares_pedido.get()}
+            dicionario = {'Usuários':self.usuarios, 'Horário': self.hora_pedido.get(), 'Dia':self.dia_pedido.get(), 'Mês':self.mes_pedido.get(), 'Local de Partida': self.bairro_saida_pedido.get(), 'Local de Destino': self.bairro_chegada_pedido.get(), 'Lugares Necessários': self.lugares_pedido.get()}
             fb.put('/Pedidos', self.usuarios, dicionario)
             
             ofertas = fb.get('Ofertas', None)
@@ -826,6 +826,7 @@ class Telas():
             fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
             fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
 
+            usuario_pedido = fb2.get(self.usuarios, 'Usuários')
             lugar_saida_pedido = fb2.get(self.usuarios, 'Local de Partida')
             lugar_chegada_pedido = fb2.get(self.usuarios, 'Local de Destino')
             horario_pedido = fb2.get(self.usuarios, 'Horário')
@@ -834,6 +835,7 @@ class Telas():
             lugares_necessarios_pedido = fb2.get(self.usuarios, 'Lugares Necessários')
             
             for motorista in ofertas:
+                motorista_usuario = fb3.get(motorista, 'Usuários')
                 lugar_saida_oferta = fb3.get(motorista, 'Local de Partida')
                 lugar_chegada_oferta = fb3.get(motorista, 'Local de Destino')
                 horario_oferta = fb3.get(motorista, 'Horário')
@@ -878,7 +880,7 @@ class Telas():
                     fb.delete('/Pedidos', self.usuarios)
 
                     if lgno > 0:
-                        dicionario_motorista = {'Horário': horario_oferta, 'Dia':dia_oferta, 'Mês':mes_oferta, 'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
+                        dicionario_motorista = {'Usuários': usuario_pedido, 'Horário': horario_oferta, 'Dia':dia_oferta, 'Mês':mes_oferta, 'Local de Partida': lugar_saida_oferta, 'Local de Destino': lugar_chegada_pedido, 'Lugares Necessários': int(lugares_necessarios_oferta)}
                         fb.put('/Ofertas', motorista, dicionario_motorista)
                     else:
                         fb.delete('/Ofertas', motorista)
@@ -895,7 +897,7 @@ class Telas():
             
         if confirmando_oferta:
             fb = firebase.FirebaseApplication('https://caronas.firebaseio.com', None)
-            dicionario = {'Horário': self.horarios_oferecer.get(), 'Dia':self.dia_oferta.get(), 'Mês':self.mes_oferta.get(), 'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
+            dicionario = {'Usuários': [],'Horário': self.horarios_oferecer.get(), 'Dia':self.dia_oferta.get(), 'Mês':self.mes_oferta.get(), 'Local de Partida': self.bairro_saida_oferta.get(), 'Local de Destino': self.bairro_chegada_oferta.get(), 'Lugares Necessários': self.lugares_oferecer.get()}
             fb.put('/Ofertas', self.usuarios, dicionario)
 
             pedidos = fb.get('Pedidos', None)
@@ -919,6 +921,7 @@ class Telas():
                 dia_pedido = fb2.get(passageiro, 'Dia')
                 mes_pedido = fb2.get(passageiro, 'Mês')
                 lugares_necessarios_pedido = fb2.get(passageiro, 'Lugares Necessários')
+                usuario_pedido = fb2.get(passageiro, 'Usuários')
 
                 lgno = int (lugares_necessarios_oferta) #lugares ofertados transformado em número inteiro
                 if lugares_necessarios_pedido != None:
@@ -957,16 +960,16 @@ class Telas():
 
                     if lgno > 0:
                         dicionario['Lugares Necessários'] = lgno
+                        dicionario['Usuários'].append(usuario_pedido)
                         fb.put('/Ofertas', self.usuarios, dicionario)
 
                     else:
                         fb.delete('/Ofertas', self.usuarios)
                     
-                    tkm.showinfo('Carona', 'As informações do seu passageiro estão no seu e-mail!')
-                    break
+                    tkm.showinfo('Carona', 'As informações do seu passageiro estão no seu e-mail! Aguarde alguns instantes para verificarmos se não há outro usuário.')
             else:
                 tkm.showinfo('Carona', 'Não existem pedidos de carona no momento. Quando existir alguém, você será notificado por e-mail!')
-        
+
             self.tela_principal_frame()
 
     #Função que leva para a tela de oferecer carona
@@ -998,11 +1001,29 @@ class Telas():
     #Função que cancela a oferta de carona
     def cancelar_oferta(self,event):
         fb = firebase.FirebaseApplication('https://caronas.firebaseio.com')
+        fb3 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Ofertas/')
+        fb4 = firebase.FirebaseApplication('https://caronas.firebaseio.com/Users/')
         ofertas = fb.get('/Ofertas', None)
+        usuarios = fb3.get(self.usuarios, 'Usuários')
         
         if self.usuarios in ofertas:
-            cancelamento = tkm.askyesno('Cancelamento','Deseja cancelar sua oferta?')
+            cancelamento = tkm.askyesno('Cancelamento','Deseja cancelar sua oferta? Isso pode demorar alguns instantes')
             if cancelamento:
+                for i in range(len(usuarios)):
+                    for passageiro in usuarios:
+                        nome = fb4.get(passageiro,'Nome')
+                        email = fb4.get(passageiro, 'email')
+
+                        fromaddr = 'lucarn@al.insper.edu.br'
+                        toaddrs = email
+
+                        msg = 'Olá {0},\n\nInfelizmente, o motorista que lhe daria carona cancelou a oferta.\nCaso ainda queira uma carona, pedimos que, por favor, peça novamente utilizando o aplicativo.\nPedimos desculpas pelo transtorno.\n\n\nObrigado por escolher o Caronas Insper.\nA equipe agradece.'.format(nome).encode('UTF-8')
+                        
+                        #server = smtplib.SMTP('insper.edu.br')
+                        #server.set_debuglevel(1)
+                        #server.sendmail(fromaddr, toaddrs, msg)
+                        #server.quit()
+
                 fb.delete('Ofertas', self.usuarios)
                 tkm.showinfo('Cancelamento','Oferta cancelada com sucesso!')   
         else:
@@ -1027,7 +1048,7 @@ class Telas():
                 self.tela_principal_frame()
                                     
         else:
-            tkm.showinfo('Erro','Senhas não combinadas!')
+            tkm.showinfo('Erro','Preencha os campos corretamente, por favor.')
         
     def clicou_sobre_nós(self,event):
         self.tela_criadores()
