@@ -472,7 +472,7 @@ class Telas():
         self.caronas.configure(text= "Pedir",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.Logo = tk.Label(self.Tela_pedir_carona)
-        self.Logo.grid(row=1, column=2,columnspan=3, sticky="nsew")
+        self.Logo.grid(row=1, column=3,columnspan=3, sticky="nsew")
         self.Logo.configure(text= "Caronas",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.lugares_pedido = tk.StringVar()
@@ -569,7 +569,7 @@ class Telas():
         self.caronas.configure(text= "Oferecer",font='Bodoni 40', bg='#E10022', fg='White')
 
         self.Logo = tk.Label(self.Tela_oferecer_carona)
-        self.Logo.grid(row=1, column=2,columnspan=3)
+        self.Logo.grid(row=1, column=3,columnspan=3)
         self.Logo.configure(text= "Caronas",font='Bodoni 40', bg='#E10022', fg='White')
         
         self.horarios_oferecer = tk.StringVar()
