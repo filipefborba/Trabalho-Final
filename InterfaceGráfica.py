@@ -664,7 +664,8 @@ class Telas():
         
 
 #######################################################
-
+#Dados da tela do perfil
+#######################################################
         #Nome Completo
 
         nome = tk.StringVar()
@@ -735,6 +736,8 @@ class Telas():
         self.nota_label.grid(row=8, column=1, sticky="nsew")
         self.nota_label.configure(text= "*Mais importante do cadastro, digite apenas 9xxxx-xxxx",font='Bodoni 12', bg='#E10022', fg='White')
 
+#######################################################
+#Fim dos Dados da tela de perfil
 #######################################################
         
         self.salvar_cadastro = tk.Button(self.tela_ler_perfil)
